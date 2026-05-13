@@ -43,9 +43,6 @@
     </mask>
   </defs>
 
-  <!-- Background -->
-  <rect width="700" height="900" fill="#080808"/>
-
   <!-- Ambient background glow -->
   <ellipse cx="350" cy="460" rx="340" ry="260" fill="url(#bgGlow)"/>
 
@@ -57,13 +54,13 @@
     opacity="0.08" filter="url(#glow-strong)"/>
 
   <!-- Shadow beneath bracelet -->
-  <ellipse cx="350" cy="478" rx="256" ry="76" fill="black" opacity="0.6"/>
+  <ellipse cx="350" cy="478" rx="256" ry="76" fill="black" opacity="0.2"/>
 
   <!-- Main silicone band body -->
   <!-- Outer shape -->
   <ellipse cx="350" cy="460" rx="268" ry="93" fill="url(#bandGrad)"/>
   <!-- Inner hole cutout -->
-  <ellipse cx="350" cy="460" rx="208" ry="70" fill="#090909"/>
+  <ellipse cx="350" cy="460" rx="208" ry="70" fill="transparent"/>
 
   <!-- Band sheen highlight (top reflection) -->
   <ellipse cx="350" cy="445" rx="230" ry="52" fill="url(#bandSheen)" opacity="0.5"/>
