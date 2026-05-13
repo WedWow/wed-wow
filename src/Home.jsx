@@ -295,11 +295,19 @@ export default function Home() {
               key={typeof product.title === 'string' ? product.title : product.tag}
             >
               {product.featured ? (
-                <div className="featured-product-art" aria-hidden="true">
-                  <div className="mini-ring ring-a" />
-                  <div className="mini-ring ring-b" />
-                  <div className="mini-core">LED</div>
-                </div>
+                <>
+                  <img
+                    className="featured-bracelet-img"
+                    src="/led-bracelet.svg"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <div className="featured-product-art" aria-hidden="true">
+                    <div className="mini-ring ring-a" />
+                    <div className="mini-ring ring-b" />
+                    <div className="mini-core">LED</div>
+                  </div>
+                </>
               ) : (
                 <div className="card-bg">{product.icon}</div>
               )}

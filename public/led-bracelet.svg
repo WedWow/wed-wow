@@ -1,0 +1,161 @@
+<svg viewBox="0 0 700 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow-soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-med" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-strong" x="-120%" y="-120%" width="340%" height="340%">
+      <feGaussianBlur stdDeviation="24" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="bgGlow" cx="50%" cy="52%" r="50%">
+      <stop offset="0%" stop-color="#d4ff47" stop-opacity="0.12"/>
+      <stop offset="60%" stop-color="#d4ff47" stop-opacity="0.03"/>
+      <stop offset="100%" stop-color="#d4ff47" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bandGrad" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#252525"/>
+      <stop offset="50%" stop-color="#181818"/>
+      <stop offset="100%" stop-color="#0d0d0d"/>
+    </radialGradient>
+    <radialGradient id="bandSheen" cx="50%" cy="20%" r="55%">
+      <stop offset="0%" stop-color="#3a3a3a" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#0a0a0a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ledLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d4ff47" stop-opacity="0.3"/>
+      <stop offset="30%" stop-color="#d4ff47" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#d4ff47" stop-opacity="1"/>
+      <stop offset="70%" stop-color="#d4ff47" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#d4ff47" stop-opacity="0.3"/>
+    </linearGradient>
+    <mask id="braceletMask">
+      <ellipse cx="350" cy="460" rx="270" ry="95" fill="white"/>
+    </mask>
+    <mask id="bandMask">
+      <!-- Band area = outer ellipse minus inner hole -->
+      <ellipse cx="350" cy="460" rx="270" ry="95" fill="white"/>
+      <ellipse cx="350" cy="460" rx="205" ry="68" fill="black"/>
+    </mask>
+  </defs>
+
+  <!-- Background -->
+  <rect width="700" height="900" fill="#080808"/>
+
+  <!-- Ambient background glow -->
+  <ellipse cx="350" cy="460" rx="340" ry="260" fill="url(#bgGlow)"/>
+
+  <!-- ===== BRACELET ===== -->
+
+  <!-- Outer ambient glow ring -->
+  <ellipse cx="350" cy="460" rx="272" ry="97"
+    fill="none" stroke="#d4ff47" stroke-width="1"
+    opacity="0.08" filter="url(#glow-strong)"/>
+
+  <!-- Shadow beneath bracelet -->
+  <ellipse cx="350" cy="478" rx="256" ry="76" fill="black" opacity="0.6"/>
+
+  <!-- Main silicone band body -->
+  <!-- Outer shape -->
+  <ellipse cx="350" cy="460" rx="268" ry="93" fill="url(#bandGrad)"/>
+  <!-- Inner hole cutout -->
+  <ellipse cx="350" cy="460" rx="208" ry="70" fill="#090909"/>
+
+  <!-- Band sheen highlight (top reflection) -->
+  <ellipse cx="350" cy="445" rx="230" ry="52" fill="url(#bandSheen)" opacity="0.5"/>
+
+  <!-- Inner rim shadow -->
+  <ellipse cx="350" cy="460" rx="208" ry="70"
+    fill="none" stroke="#050505" stroke-width="6"/>
+
+  <!-- Outer rim -->
+  <ellipse cx="350" cy="460" rx="268" ry="93"
+    fill="none" stroke="#2a2a2a" stroke-width="2"/>
+
+  <!-- ===== LED STRIP ===== -->
+
+  <!-- LED glow halo (outermost soft glow) -->
+  <ellipse cx="350" cy="460" rx="268" ry="93"
+    fill="none" stroke="#d4ff47" stroke-width="14"
+    opacity="0.06" filter="url(#glow-strong)"/>
+
+  <!-- LED glow medium -->
+  <ellipse cx="350" cy="460" rx="268" ry="93"
+    fill="none" stroke="#d4ff47" stroke-width="7"
+    opacity="0.18" filter="url(#glow-med)"/>
+
+  <!-- LED strip line (the actual LED track) -->
+  <ellipse cx="350" cy="460" rx="268" ry="93"
+    fill="none" stroke="#d4ff47" stroke-width="2.5"
+    stroke-dasharray="14 8" opacity="0.85"
+    filter="url(#glow-soft)"/>
+
+  <!-- Bright LED dots at intervals (top arc) -->
+  <circle cx="197" cy="421" r="5" fill="#d4ff47" filter="url(#glow-med)" opacity="0.95"/>
+  <circle cx="232" cy="394" r="5" fill="#d4ff47" filter="url(#glow-med)" opacity="0.95"/>
+  <circle cx="278" cy="376" r="5" fill="#d4ff47" filter="url(#glow-med)" opacity="0.95"/>
+  <circle cx="330" cy="368" r="5" fill="#d4ff47" filter="url(#glow-med)" opacity="0.95"/>
+  <circle cx="350" cy="367" r="6" fill="#d4ff47" filter="url(#glow-strong)" opacity="1"/>
+  <circle cx="370" cy="368" r="5" fill="#d4ff47" filter="url(#glow-med)" opacity="0.95"/>
+  <circle cx="422" cy="376" r="5" fill="#d4ff47" filter="url(#glow-med)" opacity="0.95"/>
+  <circle cx="468" cy="394" r="5" fill="#d4ff47" filter="url(#glow-med)" opacity="0.95"/>
+  <circle cx="503" cy="421" r="5" fill="#d4ff47" filter="url(#glow-med)" opacity="0.95"/>
+
+  <!-- Bright LED dots (bottom arc, dimmer due to perspective) -->
+  <circle cx="197" cy="499" r="4" fill="#d4ff47" filter="url(#glow-soft)" opacity="0.5"/>
+  <circle cx="278" cy="544" r="4" fill="#d4ff47" filter="url(#glow-soft)" opacity="0.5"/>
+  <circle cx="350" cy="553" r="4" fill="#d4ff47" filter="url(#glow-soft)" opacity="0.5"/>
+  <circle cx="422" cy="544" r="4" fill="#d4ff47" filter="url(#glow-soft)" opacity="0.5"/>
+  <circle cx="503" cy="499" r="4" fill="#d4ff47" filter="url(#glow-soft)" opacity="0.5"/>
+
+  <!-- Inner edge LED highlight -->
+  <ellipse cx="350" cy="460" rx="208" ry="70"
+    fill="none" stroke="#d4ff47" stroke-width="1.5"
+    opacity="0.2" filter="url(#glow-soft)"/>
+
+  <!-- ===== ENGRAVED TEXT ON BAND ===== -->
+  <text x="350" y="467"
+    font-family="'Bebas Neue', 'Arial Black', sans-serif"
+    font-size="18" letter-spacing="10"
+    fill="#d4ff47" text-anchor="middle" opacity="0.38"
+    filter="url(#glow-soft)">WEDWOW</text>
+
+  <!-- ===== DECORATIVE ELEMENTS ===== -->
+
+  <!-- Sparkle top-left -->
+  <g transform="translate(105, 290)" opacity="0.5">
+    <line x1="0" y1="-8" x2="0" y2="8" stroke="#d4ff47" stroke-width="1.5"/>
+    <line x1="-8" y1="0" x2="8" y2="0" stroke="#d4ff47" stroke-width="1.5"/>
+    <line x1="-5" y1="-5" x2="5" y2="5" stroke="#d4ff47" stroke-width="1" opacity="0.5"/>
+    <line x1="5" y1="-5" x2="-5" y2="5" stroke="#d4ff47" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  <!-- Sparkle top-right -->
+  <g transform="translate(585, 310)" opacity="0.4">
+    <line x1="0" y1="-6" x2="0" y2="6" stroke="#d4ff47" stroke-width="1.5"/>
+    <line x1="-6" y1="0" x2="6" y2="0" stroke="#d4ff47" stroke-width="1.5"/>
+  </g>
+
+  <!-- Sparkle bottom-left -->
+  <g transform="translate(90, 620)" opacity="0.35">
+    <line x1="0" y1="-5" x2="0" y2="5" stroke="#d4ff47" stroke-width="1"/>
+    <line x1="-5" y1="0" x2="5" y2="0" stroke="#d4ff47" stroke-width="1"/>
+  </g>
+
+  <!-- Floating accent dots -->
+  <circle cx="140" cy="350" r="3" fill="#d4ff47" opacity="0.25"/>
+  <circle cx="560" cy="580" r="3" fill="#d4ff47" opacity="0.2"/>
+  <circle cx="600" cy="390" r="2" fill="#d4ff47" opacity="0.3"/>
+  <circle cx="80" cy="510" r="2" fill="#d4ff47" opacity="0.2"/>
+  <circle cx="350" cy="250" r="2" fill="#d4ff47" opacity="0.15"/>
+
+  <!-- Fine orbit rings (matching site aesthetic) -->
+  <ellipse cx="350" cy="460" rx="310" ry="130"
+    fill="none" stroke="#d4ff47" stroke-width="0.8" opacity="0.07"/>
+  <ellipse cx="350" cy="460" rx="338" ry="150"
+    fill="none" stroke="#d4ff47" stroke-width="0.5" opacity="0.05"/>
+</svg>
