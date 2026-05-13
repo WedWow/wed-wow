@@ -1,8 +1,16 @@
-import { useState } from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import Home from './Home.jsx';
 import Gallery from './Gallery.jsx';
 import Products from './Products.jsx';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -69,6 +77,7 @@ function Nav() {
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Nav />
 
       <Routes>
