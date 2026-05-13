@@ -999,35 +999,6 @@ footer {
     font-size: 0.58rem;
   }
 }
-  .nav-cta {
-    padding: 0.55rem 1rem;
-  }
-
-  .occasions-grid,
-  .how-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .form-wrap {
-    padding: 2rem 1.25rem;
-  }
-
-  .footer-links {
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-  .page-wrap {
-    background: var(--black);
-    min-height: 100vh;
-    padding-top: 80px;
-  }
-  
-  .page-hero {
-    min-height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
