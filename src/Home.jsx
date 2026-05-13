@@ -26,7 +26,7 @@ const products = [
       </>
     ),
     description:
-      'Our flagship product. Fully customisable LED wristbands in any colour, with your logo, name or message printed or engraved. Available in flash, pulse and solid modes.',
+      'Fully customisable LED wristbands in any colour, with your logo, name or message printed.',
     arrow: 'Enquire for pricing →',
     featured: true,
   },
