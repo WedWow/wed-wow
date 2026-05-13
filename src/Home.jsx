@@ -209,7 +209,7 @@ export default function Home() {
       setForm(initialForm);
     } catch (error) {
       console.error(error);
-      window.alert('Sorry, something went wrong. Please email wedwow26@gmail.com directly.');
+      window.alert('Sorry, something went wrong. Please email sales@wedwow.com directly.');
     } finally {
       setIsSending(false);
     }
@@ -366,7 +366,7 @@ export default function Home() {
               <div className="contact-line">
                 <span className="contact-icon">✉</span>
                 <span>
-                  <strong>wedwow26@gmail.com</strong>
+                  <strong>sales@wedwow.com</strong>
                 </span>
               </div>
               <div className="contact-line">
@@ -527,7 +527,7 @@ export default function Home() {
           <a href="#products">Products</a>
           <a href="#occasions">Occasions</a>
           <a href="#enquiry">Bulk Pricing</a>
-          <a href="mailto:wedwow26@gmail.com">Contact</a>
+          <a href="mailto:sales@wedwow.com">Contact</a>
         </div>
         <p className="footer-copy">© 2026 Wedwow. All rights reserved.</p>
       </footer>
