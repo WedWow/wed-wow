@@ -345,15 +345,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="gallery">
-        <p className="section-label">Gallery</p>
-        <h2>READY FOR REAL EVENTS</h2>
-        <p className="gallery-copy">
-          Add your product/event photos here once you have them. This section replaces
-          the Shopify-only gallery link so the page works as a standalone Vercel site.
-        </p>
-      </section>
-
       <section id="enquiry">
         <div className="enquiry-wrap">
           <div className="enquiry-left">

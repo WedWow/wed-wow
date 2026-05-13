@@ -409,8 +409,7 @@ h2 {
   margin-bottom: 4rem;
 }
 
-.products-header p,
-.gallery-copy {
+.products-header p {
   color: rgba(245, 240, 235, 0.6);
   font-size: 1rem;
   font-weight: 300;
@@ -687,8 +686,7 @@ h2 {
 }
 
 #occasions,
-#enquiry,
-#gallery {
+#enquiry {
   background: var(--black);
 }
 
