@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import braceletImg from '../Asset/bracelet.png';
 
 const tickerItems = [
   'Weddings',
@@ -295,11 +296,12 @@ export default function Home() {
               key={typeof product.title === 'string' ? product.title : product.tag}
             >
               {product.featured ? (
-                <div className="featured-product-art" aria-hidden="true">
-                  <div className="mini-ring ring-a" />
-                  <div className="mini-ring ring-b" />
-                  <div className="mini-core">LED</div>
-                </div>
+                <img
+                  src={braceletImg}
+                  alt=""
+                  className="featured-bracelet-img"
+                  aria-hidden="true"
+                />
               ) : (
                 <div className="card-bg">{product.icon}</div>
               )}
