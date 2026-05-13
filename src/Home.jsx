@@ -295,12 +295,90 @@ export default function Home() {
               key={typeof product.title === 'string' ? product.title : product.tag}
             >
               {product.featured ? (
-                <img
+                <svg
                   className="featured-bracelet-img"
-                  src="/led-bracelet.svg"
-                  alt=""
+                  viewBox="0 0 600 800"
+                  preserveAspectRatio="xMidYMin slice"
+                  xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true"
-                />
+                >
+                  <defs>
+                    <filter id="glow-soft" x="-50%" y="-50%" width="200%" height="200%">
+                      <feGaussianBlur stdDeviation="6" result="blur"/>
+                      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                    <filter id="glow-med" x="-80%" y="-80%" width="260%" height="260%">
+                      <feGaussianBlur stdDeviation="14" result="blur"/>
+                      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                    <filter id="glow-strong" x="-100%" y="-100%" width="300%" height="300%">
+                      <feGaussianBlur stdDeviation="26" result="blur"/>
+                      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                    <radialGradient id="bgGlow" cx="50%" cy="42%" r="55%">
+                      <stop offset="0%" stopColor="#d4ff47" stopOpacity="0.22"/>
+                      <stop offset="55%" stopColor="#d4ff47" stopOpacity="0.07"/>
+                      <stop offset="100%" stopColor="#d4ff47" stopOpacity="0"/>
+                    </radialGradient>
+                    <radialGradient id="bandGrad" cx="50%" cy="25%" r="65%">
+                      <stop offset="0%" stopColor="#6a6a6a"/>
+                      <stop offset="45%" stopColor="#484848"/>
+                      <stop offset="100%" stopColor="#2e2e2e"/>
+                    </radialGradient>
+                    <radialGradient id="bandSheen" cx="50%" cy="15%" r="60%">
+                      <stop offset="0%" stopColor="#909090" stopOpacity="0.9"/>
+                      <stop offset="100%" stopColor="#1a1a1a" stopOpacity="0"/>
+                    </radialGradient>
+                  </defs>
+                  <ellipse cx="300" cy="340" rx="350" ry="240" fill="url(#bgGlow)"/>
+                  <ellipse cx="300" cy="340" rx="270" ry="98" fill="none" stroke="#d4ff47" strokeWidth="30" opacity="0.12" filter="url(#glow-strong)"/>
+                  <ellipse cx="300" cy="362" rx="252" ry="76" fill="#000" opacity="0.5"/>
+                  <ellipse cx="300" cy="340" rx="264" ry="94" fill="url(#bandGrad)"/>
+                  <ellipse cx="300" cy="340" rx="196" ry="64" fill="#0a0a0a"/>
+                  <ellipse cx="300" cy="320" rx="220" ry="52" fill="url(#bandSheen)" opacity="0.65"/>
+                  <ellipse cx="300" cy="340" rx="264" ry="94" fill="none" stroke="#484848" strokeWidth="2"/>
+                  <ellipse cx="300" cy="340" rx="196" ry="64" fill="none" stroke="#060606" strokeWidth="5"/>
+                  <ellipse cx="300" cy="340" rx="264" ry="94" fill="none" stroke="#d4ff47" strokeWidth="26" opacity="0.16" filter="url(#glow-strong)"/>
+                  <ellipse cx="300" cy="340" rx="264" ry="94" fill="none" stroke="#d4ff47" strokeWidth="11" opacity="0.48" filter="url(#glow-med)"/>
+                  <ellipse cx="300" cy="340" rx="264" ry="94" fill="none" stroke="#d4ff47" strokeWidth="5.5" opacity="0.78" filter="url(#glow-soft)"/>
+                  <ellipse cx="300" cy="340" rx="264" ry="94" fill="none" stroke="#d4ff47" strokeWidth="3" strokeDasharray="14 8" opacity="1" filter="url(#glow-soft)"/>
+                  <circle cx="300" cy="246" r="8" fill="#d4ff47" filter="url(#glow-strong)" opacity="1"/>
+                  <circle cx="370" cy="250" r="6" fill="#d4ff47" filter="url(#glow-med)" opacity="0.96"/>
+                  <circle cx="230" cy="250" r="6" fill="#d4ff47" filter="url(#glow-med)" opacity="0.96"/>
+                  <circle cx="436" cy="263" r="5.5" fill="#d4ff47" filter="url(#glow-med)" opacity="0.94"/>
+                  <circle cx="164" cy="263" r="5.5" fill="#d4ff47" filter="url(#glow-med)" opacity="0.94"/>
+                  <circle cx="492" cy="282" r="5" fill="#d4ff47" filter="url(#glow-med)" opacity="0.90"/>
+                  <circle cx="108" cy="282" r="5" fill="#d4ff47" filter="url(#glow-med)" opacity="0.90"/>
+                  <circle cx="536" cy="308" r="4.5" fill="#d4ff47" filter="url(#glow-soft)" opacity="0.82"/>
+                  <circle cx="64" cy="308" r="4.5" fill="#d4ff47" filter="url(#glow-soft)" opacity="0.82"/>
+                  <circle cx="555" cy="340" r="4" fill="#d4ff47" filter="url(#glow-soft)" opacity="0.70"/>
+                  <circle cx="45" cy="340" r="4" fill="#d4ff47" filter="url(#glow-soft)" opacity="0.70"/>
+                  <circle cx="300" cy="434" r="5" fill="#d4ff47" filter="url(#glow-soft)" opacity="0.42"/>
+                  <circle cx="370" cy="430" r="4" fill="#d4ff47" filter="url(#glow-soft)" opacity="0.36"/>
+                  <circle cx="230" cy="430" r="4" fill="#d4ff47" filter="url(#glow-soft)" opacity="0.36"/>
+                  <circle cx="436" cy="417" r="3.5" fill="#d4ff47" filter="url(#glow-soft)" opacity="0.30"/>
+                  <circle cx="164" cy="417" r="3.5" fill="#d4ff47" filter="url(#glow-soft)" opacity="0.30"/>
+                  <ellipse cx="300" cy="340" rx="196" ry="64" fill="none" stroke="#d4ff47" strokeWidth="2.5" opacity="0.36" filter="url(#glow-soft)"/>
+                  <text x="300" y="347" fontFamily="'Bebas Neue', 'Arial Black', sans-serif" fontSize="18" letterSpacing="10" fill="#d4ff47" textAnchor="middle" opacity="0.52" filter="url(#glow-soft)">WEDWOW</text>
+                  <g transform="translate(76, 180)" opacity="0.6">
+                    <line x1="0" y1="-11" x2="0" y2="11" stroke="#d4ff47" strokeWidth="1.5"/>
+                    <line x1="-11" y1="0" x2="11" y2="0" stroke="#d4ff47" strokeWidth="1.5"/>
+                    <line x1="-6" y1="-6" x2="6" y2="6" stroke="#d4ff47" strokeWidth="0.8" opacity="0.5"/>
+                    <line x1="6" y1="-6" x2="-6" y2="6" stroke="#d4ff47" strokeWidth="0.8" opacity="0.5"/>
+                  </g>
+                  <g transform="translate(516, 192)" opacity="0.45">
+                    <line x1="0" y1="-9" x2="0" y2="9" stroke="#d4ff47" strokeWidth="1.5"/>
+                    <line x1="-9" y1="0" x2="9" y2="0" stroke="#d4ff47" strokeWidth="1.5"/>
+                  </g>
+                  <circle cx="88" cy="215" r="3.5" fill="#d4ff47" opacity="0.30"/>
+                  <circle cx="510" cy="455" r="3" fill="#d4ff47" opacity="0.24"/>
+                  <circle cx="550" cy="264" r="2.5" fill="#d4ff47" opacity="0.38"/>
+                  <circle cx="38" cy="416" r="2" fill="#d4ff47" opacity="0.24"/>
+                  <circle cx="300" cy="115" r="2.5" fill="#d4ff47" opacity="0.20"/>
+                  <circle cx="562" cy="360" r="2" fill="#d4ff47" opacity="0.16"/>
+                  <ellipse cx="300" cy="340" rx="300" ry="124" fill="none" stroke="#d4ff47" strokeWidth="0.8" opacity="0.10"/>
+                  <ellipse cx="300" cy="340" rx="328" ry="144" fill="none" stroke="#d4ff47" strokeWidth="0.5" opacity="0.06"/>
+                </svg>
               ) : (
                 <div className="card-bg">{product.icon}</div>
               )}
