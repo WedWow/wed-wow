@@ -18,7 +18,7 @@ function Nav() {
       </Link>
 
       <div className="desktop-nav">
-  <a href="/#products">Products</a>
+  <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Home</Link>
   <a href="/#occasions">Occasions</a>
   <a href="/#how">How It Works</a>
   <a href="/#enquiry">Bulk Pricing</a>
@@ -42,9 +42,9 @@ function Nav() {
 
       {menuOpen && (
         <div className="mobile-nav-menu">
-          <a href="/#products" onClick={closeMenu}>
-            Products
-          </a>
+          <Link to="/" onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); closeMenu(); }}>
+            Home
+          </Link>
           <a href="/#occasions" onClick={closeMenu}>
             Occasions
           </a>
