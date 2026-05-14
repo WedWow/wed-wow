@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import braceletImg from '../Asset/bracelet.png';
 
 const tickerItems = [
@@ -517,10 +518,9 @@ export default function Home() {
           WED<span>WOW</span>
         </div>
         <div className="footer-links">
-          <a href="#products">Products</a>
-          <a href="#occasions">Occasions</a>
-          <a href="#enquiry">Bulk Pricing</a>
-          <a href="mailto:sales@wedwow.com">Contact</a>
+          <Link to="/">Home</Link>
+          <Link to="/gallery">Gallery</Link>
+          <Link to="/products">Products</Link>
         </div>
         <p className="footer-copy">© 2026 Wedwow. All rights reserved.</p>
       </footer>
