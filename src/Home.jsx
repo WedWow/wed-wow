@@ -518,7 +518,7 @@ export default function Home() {
           WED<span>WOW</span>
         </div>
         <div className="footer-links">
-          <Link to="/">Home</Link>
+          <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Home</Link>
           <Link to="/gallery">Gallery</Link>
           <Link to="/products">Products</Link>
         </div>
