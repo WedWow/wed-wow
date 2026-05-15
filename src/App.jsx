@@ -66,7 +66,7 @@ function Nav() {
             Gallery
           </Link>
           <Link to="/products" onClick={closeMenu}>
-            Products Page
+            Products
           </Link>
         </div>
       )}
