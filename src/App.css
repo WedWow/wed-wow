@@ -1303,6 +1303,7 @@ footer {
     padding: 0.5rem 0.75rem;
     font-size: 0.62rem;
     letter-spacing: 0.05em;
+    order: 2;
   }
 
   .mobile-menu-button {
@@ -1310,6 +1311,7 @@ footer {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    order: 1;
   }
 
   .mobile-nav-menu {
