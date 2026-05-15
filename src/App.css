@@ -1347,6 +1347,8 @@ footer {
 
   .page-hero {
     padding-top: 1.5rem;
+    min-height: auto;
+    justify-content: flex-start;
   }
 }
 
