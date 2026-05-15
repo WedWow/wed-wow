@@ -1338,11 +1338,15 @@ footer {
   }
 
   .hero {
-    padding-top: 120px !important;
+    padding-top: 72px !important;
   }
 
   .page-wrap {
-    padding-top: 100px !important;
+    padding-top: 68px !important;
+  }
+
+  .page-hero {
+    padding-top: 1.5rem;
   }
 }
 
@@ -1576,7 +1580,7 @@ footer {
 @media (max-width: 900px) {
   .products-page-hero {
     min-height: auto;
-    padding-top: 120px;
+    padding-top: 2rem;
   }
 
   .product-detail-card {
