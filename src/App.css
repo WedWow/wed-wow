@@ -975,6 +975,23 @@ footer {
   color: var(--white);
 }
 
+.footer-social {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.footer-social a {
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.footer-social a:hover {
+  color: var(--neon);
+}
+
 .footer-copy {
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.2);
