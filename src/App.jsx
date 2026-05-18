@@ -30,7 +30,7 @@ function Nav() {
   <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Home</Link>
   <a href="/#occasions">Occasions</a>
   <a href="/#how">How It Works</a>
-  <a href="/#enquiry">Bulk Pricing</a>
+  <a href="/#enquiry">Enquiry Form</a>
   <span className="nav-divider">|</span>
   <Link to="/gallery">Gallery</Link>
   <Link to="/products">Products</Link>
@@ -61,7 +61,7 @@ function Nav() {
             How It Works
           </a>
           <a href="/#enquiry" onClick={closeMenu}>
-            Bulk Pricing
+            Enquiry Form
           </a>
           <Link to="/gallery" onClick={closeMenu}>
             Gallery

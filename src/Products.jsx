@@ -81,7 +81,7 @@ const products = [
               View Products
             </a>
             <a href="/#enquiry" className="btn-outline">
-              Get Bulk Pricing
+              Enquiry Form
             </a>
           </div>
         </section>
