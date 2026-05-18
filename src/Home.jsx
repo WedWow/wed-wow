@@ -349,7 +349,7 @@ export default function Home() {
         <div className="enquiry-wrap">
           <div className="enquiry-left">
             <p className="section-label">Get a Quote</p>
-            <h2>BULK PRICING ENQUIRY</h2>
+            <h2>ENQUIRY FORM</h2>
             <p>
               Whether you need 100 or 10,000 units, we've got you covered. Prices scale
               with quantity — tell us what you need and we'll put together a custom quote.
