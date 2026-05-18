@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-do
 import Home from './Home.jsx';
 import Gallery from './Gallery.jsx';
 import Products from './Products.jsx';
+import Footer from './Footer.jsx';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -85,6 +86,8 @@ export default function App() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/products" element={<Products />} />
       </Routes>
+
+      <Footer />
     </BrowserRouter>
   );
 }
