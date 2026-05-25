@@ -1434,6 +1434,12 @@ footer {
     height: auto;
   }
 }
+/* PAGE WRAP */
+.page-wrap {
+  background: var(--black);
+  min-height: 100vh;
+}
+
 /* PRODUCTS PAGE */
 .products-page {
   background: var(--black);
