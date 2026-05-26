@@ -10,6 +10,7 @@ export default function Footer() {
         <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Home</Link>
         <Link to="/gallery">Gallery</Link>
         <Link to="/products">Products</Link>
+        <Link to="/terms">Terms &amp; Conditions</Link>
       </div>
       <div className="footer-social">
         <a href="https://www.instagram.com/wedwowofficial" target="_blank" rel="noopener noreferrer" aria-label="Instagram">

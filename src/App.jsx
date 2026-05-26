@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-do
 import Home from './Home.jsx';
 import Gallery from './Gallery.jsx';
 import Products from './Products.jsx';
+import TermsAndConditions from './TermsAndConditions.jsx';
 import Footer from './Footer.jsx';
 
 function ScrollToTop() {
@@ -85,6 +86,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/terms" element={<TermsAndConditions />} />
       </Routes>
 
       <Footer />
