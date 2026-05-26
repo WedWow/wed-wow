@@ -1,19 +1,6 @@
 export default function TermsAndConditions() {
   return (
     <main className="page-wrap terms-page">
-      <section className="terms-hero">
-        <p className="section-label">Legal</p>
-        <h1>
-          TERMS &amp;
-          <br />
-          CONDITIONS
-        </h1>
-        <p className="hero-sub">
-          Please read these terms carefully before placing an order or using the WedWow website.
-          By using our site or placing an order, you agree to the terms set out below.
-        </p>
-      </section>
-
       <section className="terms-content-section">
         <div className="terms-grid">
           <aside className="terms-sidebar">
