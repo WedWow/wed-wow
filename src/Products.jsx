@@ -1,3 +1,7 @@
+import mendhiglassesImg from '../Asset/mendhiglasses.png';
+import groombrideImg from '../Asset/groombride.png';
+import wristbandsImg from '../Asset/wristbands.png';
+
 const products = [
     {
       tag: 'Bestseller',
@@ -28,6 +32,7 @@ const products = [
       icon: '🕶',
       className: 'product-detail-glasses',
       enquiryProduct: 'Yellow Festival Sunglasses',
+      image: mendhiglassesImg,
     },
     {
       tag: 'Wedding',
@@ -43,6 +48,7 @@ const products = [
       icon: '💍',
       className: 'product-detail-groom',
       enquiryProduct: 'Team Bride / Team Groom Wristbands',
+      image: groombrideImg,
     },
     {
       tag: 'Nightclub',
@@ -58,6 +64,7 @@ const products = [
       icon: '🔴',
       className: 'product-detail-party',
       enquiryProduct: 'Red / Green Nightclub Wristbands',
+      image: wristbandsImg,
     },
   ];
   
@@ -100,7 +107,15 @@ const products = [
           <div className="product-detail-grid">
             {products.map((product) => (
               <article className={`product-detail-card ${product.className}`} key={product.title}>
-                <div className="product-detail-art">
+                <div
+                  className="product-detail-art"
+                  style={product.image ? {
+                    backgroundImage: `url(${product.image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                  } : undefined}
+                >
                   <span>{product.icon}</span>
                 </div>
   
