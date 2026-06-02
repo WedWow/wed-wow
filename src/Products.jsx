@@ -107,16 +107,23 @@ const products = [
           <div className="product-detail-grid">
             {products.map((product) => (
               <article className={`product-detail-card ${product.className}`} key={product.title}>
-                <div
-                  className="product-detail-art"
-                  style={product.image ? {
-                    backgroundImage: `url(${product.image})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                  } : undefined}
-                >
-                  <span>{product.icon}</span>
+                <div className="product-detail-art">
+                  {product.image && (
+                    <img
+                      src={product.image}
+                      alt=""
+                      style={{
+                        position: 'absolute',
+                        inset: 0,
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                        opacity: 0.4,
+                      }}
+                    />
+                  )}
+                  <span style={{ position: 'relative', zIndex: 1 }}>{product.icon}</span>
                 </div>
   
                 <div className="product-detail-content">
