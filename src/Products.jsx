@@ -1,3 +1,7 @@
+import mendhiglassesImg from '../Asset/mendhiglasses.png';
+import groombrideImg from '../Asset/groombride.png';
+import wristbandsImg from '../Asset/wristbands.png';
+
 const products = [
     {
       tag: 'Bestseller',
@@ -28,6 +32,7 @@ const products = [
       icon: '🕶',
       className: 'product-detail-glasses',
       enquiryProduct: 'Yellow Festival Sunglasses',
+      image: mendhiglassesImg,
     },
     {
       tag: 'Wedding',
@@ -43,6 +48,7 @@ const products = [
       icon: '💍',
       className: 'product-detail-groom',
       enquiryProduct: 'Team Bride / Team Groom Wristbands',
+      image: groombrideImg,
     },
     {
       tag: 'Nightclub',
@@ -58,6 +64,7 @@ const products = [
       icon: '🔴',
       className: 'product-detail-party',
       enquiryProduct: 'Red / Green Nightclub Wristbands',
+      image: wristbandsImg,
     },
   ];
   
@@ -101,7 +108,22 @@ const products = [
             {products.map((product) => (
               <article className={`product-detail-card ${product.className}`} key={product.title}>
                 <div className="product-detail-art">
-                  <span>{product.icon}</span>
+                  {product.image && (
+                    <img
+                      src={product.image}
+                      alt=""
+                      style={{
+                        position: 'absolute',
+                        inset: 0,
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                        opacity: 0.4,
+                      }}
+                    />
+                  )}
+                  <span style={{ position: 'relative', zIndex: 1 }}>{product.icon}</span>
                 </div>
   
                 <div className="product-detail-content">
