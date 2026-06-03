@@ -1113,6 +1113,7 @@ footer {
 
   .hero-left {
     padding: 2rem 0;
+    justify-content: flex-start;
   }
 
   .products-grid {
