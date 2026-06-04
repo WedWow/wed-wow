@@ -1,7 +1,13 @@
+import braceletImg from '../Asset/bracelet.png';
+import glassesImg from '../Asset/mendhiglasses.png';
+import groomBrideImg from '../Asset/groombride.png';
+import wristbandsImg from '../Asset/wristbands.png';
+
 const products = [
     {
       tag: 'Bestseller',
       title: 'Custom LED Silicone Bracelet',
+      image: braceletImg,
       description:
         'Our flagship light-up wristband for weddings, festivals, brand activations, concerts and nightlife events. Customise the colour, print, logo, message and packaging.',
       details: [
@@ -17,6 +23,7 @@ const products = [
     {
       tag: 'Party Essential',
       title: 'Yellow Festival Sunglasses',
+      image: glassesImg,
       description:
         'Bold yellow festival sunglasses that instantly lift the vibe. Great for photo moments, dancefloors, wedding favours, hen parties and festival packs.',
       details: [
@@ -32,6 +39,7 @@ const products = [
     {
       tag: 'Wedding',
       title: 'Team Bride / Team Groom Wristbands',
+      image: groomBrideImg,
       description:
         'Fun wristbands for bridal parties, stag dos, hen parties and wedding guests. A simple way to bring everyone together and make the celebration feel personal.',
       details: [
@@ -47,6 +55,7 @@ const products = [
     {
       tag: 'Nightclub',
       title: 'Red / Green Nightclub Wristbands',
+      image: wristbandsImg,
       description:
         'Simple, clear and stylish wristbands for nightlife events. Use them for entry, VIP access, bar access, age checks, sections, groups or visual crowd control.',
       details: [
@@ -101,7 +110,11 @@ const products = [
             {products.map((product) => (
               <article className={`product-detail-card ${product.className}`} key={product.title}>
                 <div className="product-detail-art">
-                  <span>{product.icon}</span>
+                  {product.image ? (
+                    <img src={product.image} alt={product.title} className="product-detail-img" />
+                  ) : (
+                    <span>{product.icon}</span>
+                  )}
                 </div>
   
                 <div className="product-detail-content">

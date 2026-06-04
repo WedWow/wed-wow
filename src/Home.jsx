@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import braceletImg from '../Asset/bracelet.png';
+import glassesImg from '../Asset/mendhiglasses.png';
+import groomBrideImg from '../Asset/groombride.png';
+import wristbandsImg from '../Asset/wristbands.png';
 
 const tickerItems = [
   'Weddings',
@@ -33,6 +36,7 @@ const products = [
   {
     className: 'card-glasses',
     icon: '🕶',
+    image: glassesImg,
     tag: 'Party Essential',
     title: 'YELLOW FESTIVAL SUNGLASSES',
     description:
@@ -42,6 +46,7 @@ const products = [
   {
     className: 'card-groom',
     icon: '💍',
+    image: groomBrideImg,
     tag: 'Wedding',
     title: 'TEAM BRIDE / TEAM GROOM WRISTBANDS',
     description: 'Side-your-squad wristbands for the bridal party.',
@@ -50,6 +55,7 @@ const products = [
   {
     className: 'card-party',
     icon: '🔴',
+    image: wristbandsImg,
     tag: 'Nightclub',
     title: 'RED / GREEN NIGHTCLUB WRISTBANDS',
     description:
@@ -300,6 +306,13 @@ export default function Home() {
                   src={braceletImg}
                   alt=""
                   className="featured-bracelet-img"
+                  aria-hidden="true"
+                />
+              ) : product.image ? (
+                <img
+                  src={product.image}
+                  alt=""
+                  className="card-product-img"
                   aria-hidden="true"
                 />
               ) : (
