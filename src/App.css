@@ -586,10 +586,11 @@ h2 {
 
 .card-desc {
   font-size: 0.85rem;
-  color: rgba(245, 240, 235, 0.55);
+  color: rgba(245, 240, 235, 0.88);
   line-height: 1.5;
   font-weight: 300;
   max-width: 260px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
 .card-arrow {
@@ -1536,7 +1537,7 @@ footer {
 }
 
 .product-detail-content p {
-  color: rgba(245, 240, 235, 0.62);
+  color: rgba(245, 240, 235, 0.9);
   line-height: 1.7;
   font-weight: 300;
   max-width: 620px;
@@ -1551,7 +1552,7 @@ footer {
 }
 
 .product-detail-content li {
-  color: rgba(245, 240, 235, 0.72);
+  color: rgba(245, 240, 235, 0.9);
   font-size: 0.9rem;
   line-height: 1.5;
 }
