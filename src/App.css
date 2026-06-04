@@ -410,7 +410,7 @@ h2 {
 }
 
 .products-header p {
-  color: rgba(245, 240, 235, 0.6);
+  color: var(--white);
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.6;
@@ -1538,7 +1538,7 @@ footer {
 .product-detail-content p {
   color: var(--white);
   line-height: 1.7;
-  font-weight: 300;
+  font-weight: 400;
   max-width: 620px;
   margin-bottom: 1.5rem;
 }
@@ -1632,7 +1632,7 @@ footer {
 }
 
 .product-custom-section p {
-  color: rgba(245, 240, 235, 0.62);
+  color: var(--white);
   line-height: 1.7;
   font-weight: 300;
 }
