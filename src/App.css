@@ -1538,7 +1538,7 @@ footer {
 .product-detail-content p {
   color: #ffffff;
   line-height: 1.7;
-  font-weight: 300;
+  font-weight: 400;
   max-width: 620px;
   margin-bottom: 1.5rem;
 }
@@ -1553,6 +1553,7 @@ footer {
 .product-detail-content li {
   color: #ffffff;
   font-size: 0.9rem;
+  font-weight: 400;
   line-height: 1.5;
 }
 
