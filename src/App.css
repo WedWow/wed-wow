@@ -373,7 +373,7 @@ h1 .accent {
 }
 
 section {
-  padding: 7rem 5rem;
+  padding: 6rem 5rem;
 }
 
 .section-label {
@@ -396,7 +396,7 @@ h2 {
   font-size: clamp(2.5rem, 4vw, 3.8rem);
   letter-spacing: 0.04em;
   line-height: 1;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 #products,
@@ -1116,7 +1116,7 @@ footer {
   }
 
   section {
-    padding: 5rem 1.5rem;
+    padding: 4.5rem 1.5rem;
   }
 
   .hero {
@@ -1456,6 +1456,11 @@ footer {
 .page-wrap {
   background: var(--black);
   min-height: 100vh;
+  padding-top: 74px;
+}
+
+.page-hero {
+  padding-top: 3rem;
 }
 
 /* PRODUCTS PAGE */
@@ -1655,7 +1660,7 @@ footer {
 
 /* TERMS PAGE */
 .terms-hero {
-  padding: 7rem 5rem 4rem;
+  padding: 3rem 5rem 4rem;
 }
 
 .terms-content-section {
@@ -1690,7 +1695,7 @@ footer {
 
 @media (max-width: 900px) {
   .terms-hero {
-    padding: 5rem 1.5rem 3rem;
+    padding: 2rem 1.5rem 3rem;
   }
 
   .terms-content-section {
