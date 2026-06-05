@@ -246,27 +246,114 @@ h1 .accent {
   transform: scale(1.03);
 }
 
-.hero-orb {
-  width: 280px;
-  height: 280px;
+.bracelet-showcase {
+  position: relative;
+  width: 340px;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bracelet-ring {
+  position: absolute;
   border-radius: 50%;
-  background: radial-gradient(circle at 40% 40%, rgba(212, 255, 71, 0.22) 0%, rgba(212, 255, 71, 0.06) 50%, transparent 75%);
+  border: 1px solid rgba(212, 255, 71, 0.3);
+}
+
+.bracelet-ring.ring-1 {
+  width: 340px;
+  height: 340px;
+  border-color: rgba(212, 255, 71, 0.15);
+  animation: ring-spin 18s linear infinite;
+}
+
+.bracelet-ring.ring-2 {
+  width: 260px;
+  height: 260px;
+  border-color: rgba(212, 255, 71, 0.25);
+  animation: ring-spin 12s linear infinite reverse;
+}
+
+.bracelet-ring.ring-3 {
+  width: 180px;
+  height: 180px;
+  border-color: rgba(212, 255, 71, 0.4);
+  animation: ring-spin 8s linear infinite;
+  box-shadow: 0 0 24px rgba(212, 255, 71, 0.12);
+}
+
+.bracelet-core {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, rgba(212, 255, 71, 0.18) 0%, rgba(212, 255, 71, 0.04) 70%, transparent 100%);
+  border: 1px solid rgba(212, 255, 71, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-shadow:
-    0 0 60px rgba(212, 255, 71, 0.18),
-    0 0 120px rgba(212, 255, 71, 0.08),
-    inset 0 0 40px rgba(212, 255, 71, 0.06);
-  animation: orb-float 5s ease-in-out infinite, orb-pulse 3s ease-in-out infinite;
-  border: 1px solid rgba(212, 255, 71, 0.12);
+    0 0 30px rgba(212, 255, 71, 0.2),
+    inset 0 0 20px rgba(212, 255, 71, 0.08);
+  animation: core-pulse 3s ease-in-out infinite;
+  z-index: 2;
 }
 
-@keyframes orb-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-18px); }
+.bracelet-text {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  color: var(--neon);
+  text-align: center;
+  line-height: 1.2;
 }
 
-@keyframes orb-pulse {
-  0%, 100% { box-shadow: 0 0 60px rgba(212, 255, 71, 0.18), 0 0 120px rgba(212, 255, 71, 0.08), inset 0 0 40px rgba(212, 255, 71, 0.06); }
-  50% { box-shadow: 0 0 90px rgba(212, 255, 71, 0.32), 0 0 180px rgba(212, 255, 71, 0.14), inset 0 0 60px rgba(212, 255, 71, 0.1); }
+.bracelet-text small {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  opacity: 0.7;
+}
+
+.floating-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--neon);
+  box-shadow: 0 0 8px rgba(212, 255, 71, 0.8);
+}
+
+.floating-dot.dot-1 {
+  top: 12%;
+  left: 50%;
+  animation: dot-orbit 8s linear infinite;
+}
+
+.floating-dot.dot-2 {
+  top: 50%;
+  right: 8%;
+  animation: dot-orbit 12s linear infinite reverse;
+}
+
+.floating-dot.dot-3 {
+  bottom: 16%;
+  left: 20%;
+  animation: dot-orbit 10s linear infinite;
+}
+
+@keyframes ring-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes core-pulse {
+  0%, 100% { box-shadow: 0 0 30px rgba(212, 255, 71, 0.2), inset 0 0 20px rgba(212, 255, 71, 0.08); }
+  50% { box-shadow: 0 0 50px rgba(212, 255, 71, 0.38), inset 0 0 30px rgba(212, 255, 71, 0.15); }
+}
+
+@keyframes dot-orbit {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
+  50% { transform: translateY(-12px) scale(1.3); opacity: 0.5; }
 }
 
 .ticker-wrap {

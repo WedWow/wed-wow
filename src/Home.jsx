@@ -252,8 +252,22 @@ export default function Home() {
         </div>
 
         <div className="hero-right">
-          <div className="hero-product-visual">
-            <div className="hero-orb" />
+          <div className="bracelet-showcase" aria-label="LED silicone bracelet visual">
+            <div className="bracelet-ring ring-1" />
+            <div className="bracelet-ring ring-2" />
+            <div className="bracelet-ring ring-3" />
+            <div className="bracelet-core">
+              <div className="bracelet-text">
+                LED
+                <br />
+                SILICONE
+                <br />
+                <small>BRACELET</small>
+              </div>
+            </div>
+            <div className="floating-dot dot-1" />
+            <div className="floating-dot dot-2" />
+            <div className="floating-dot dot-3" />
           </div>
         </div>
       </section>
