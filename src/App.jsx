@@ -4,6 +4,7 @@ import Home from './Home.jsx';
 import Gallery from './Gallery.jsx';
 import Products from './Products.jsx';
 import TermsAndConditions from './TermsAndConditions.jsx';
+import PrivacyPolicy from './PrivacyPolicy.jsx';
 import Footer from './Footer.jsx';
 
 function ScrollToTop() {
@@ -87,6 +88,7 @@ export default function App() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/products" element={<Products />} />
         <Route path="/terms" element={<TermsAndConditions />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
       </Routes>
 
       <Footer />
