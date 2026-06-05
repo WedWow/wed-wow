@@ -251,6 +251,11 @@ export default function Home() {
           </div>
         </div>
 
+        <div className="hero-right">
+          <div className="hero-product-visual">
+            <div className="hero-orb" />
+          </div>
+        </div>
       </section>
 
       <div className="ticker-wrap" aria-label="Use cases">
