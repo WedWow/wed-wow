@@ -11,6 +11,7 @@ export default function Footer() {
         <Link to="/gallery">Gallery</Link>
         <Link to="/products">Products</Link>
         <Link to="/terms">Terms &amp; Conditions</Link>
+        <Link to="/privacy">Privacy Policy</Link>
       </div>
       <div className="footer-social">
         <a href="https://www.instagram.com/wedwowofficial" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
