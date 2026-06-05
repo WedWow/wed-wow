@@ -251,15 +251,6 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="hero-right">
-          <div className="hero-product-visual">
-            <img
-              src={braceletImg}
-              alt="Custom LED Silicone Bracelet"
-              className="hero-product-img"
-            />
-          </div>
-        </div>
       </section>
 
       <div className="ticker-wrap" aria-label="Use cases">
