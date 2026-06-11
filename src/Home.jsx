@@ -183,14 +183,14 @@ export default function Home() {
     setIsSending(true);
   
     try {
-      const response = await fetch('https://api.staticforms.dev/submit', {
+      const response = await fetch('https://api.staticforms.xyz/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           apiKey: import.meta.env.VITE_STATIC_FORMS_API_KEY,
-  
+
           name: `${form.fname} ${form.lname}`.trim(),
           firstName: form.fname,
           lastName: form.lname,
@@ -200,15 +200,17 @@ export default function Home() {
           quantity: form.quantity,
           occasion: form.occasion,
           message: form.message,
-  
+
           subject: `New Wedwow enquiry from ${form.fname}`,
         }),
       });
-  
-      if (!response.ok) {
-        throw new Error('Static Forms rejected the submission.');
+
+      const data = await response.json();
+
+      if (!response.ok || data.success === false) {
+        throw new Error(data.message || 'StaticForms rejected the submission.');
       }
-  
+
       setSubmitted(true);
       setForm(initialForm);
     } catch (error) {
