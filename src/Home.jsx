@@ -183,14 +183,13 @@ export default function Home() {
     setIsSending(true);
   
     try {
-      const response = await fetch('https://api.staticforms.dev/submit', {
+      const response = await fetch('https://formsubmit.co/ajax/wedwow26@gmail.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify({
-          apiKey: import.meta.env.VITE_STATIC_FORMS_API_KEY,
-  
           name: `${form.fname} ${form.lname}`.trim(),
           firstName: form.fname,
           lastName: form.lname,
@@ -200,20 +199,22 @@ export default function Home() {
           quantity: form.quantity,
           occasion: form.occasion,
           message: form.message,
-  
-          subject: `New Wedwow enquiry from ${form.fname}`,
+          _subject: `New Wedwow enquiry from ${form.fname}`,
+          _captcha: 'false',
         }),
       });
-  
-      if (!response.ok) {
-        throw new Error('Static Forms rejected the submission.');
+
+      const data = await response.json();
+
+      if (!response.ok || data.success !== 'true') {
+        throw new Error('Form submission failed.');
       }
-  
+
       setSubmitted(true);
       setForm(initialForm);
     } catch (error) {
       console.error(error);
-      window.alert('Sorry, something went wrong. Please email sales@wedwow.com directly.');
+      window.alert('Sorry, something went wrong. Please email wedwow26@gmail.com directly.');
     } finally {
       setIsSending(false);
     }
