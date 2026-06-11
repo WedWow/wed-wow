@@ -164,50 +164,52 @@ export default function Home() {
 
   const submitForm = async (event) => {
     event.preventDefault();
-  
+
     const fname = form.fname.trim();
     const email = form.email.trim();
     const product = form.product;
     const quantity = form.quantity.trim();
-  
+
     if (!fname || !email || !product || !quantity) {
       window.alert('Please fill in your name, email, product and quantity to continue.');
       return;
     }
-  
+
     if (!/\S+@\S+\.\S+/.test(email)) {
       window.alert('Please enter a valid email address.');
       return;
     }
-  
+
     setIsSending(true);
-  
+
     try {
-      const response = await fetch('https://formsubmit.co/ajax/wedwow26@gmail.com', {
+      const messageLines = [
+        `Product: ${form.product}`,
+        `Quantity: ${form.quantity}`,
+        form.company ? `Company / Event: ${form.company}` : null,
+        form.occasion ? `Occasion: ${form.occasion}` : null,
+        form.lname ? `Last Name: ${form.lname}` : null,
+        form.message ? `\nDetails:\n${form.message}` : null,
+      ].filter(Boolean);
+
+      const response = await fetch('https://api.staticforms.xyz/submit', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          accessKey: import.meta.env.VITE_STATICFORMS_KEY,
           name: `${form.fname} ${form.lname}`.trim(),
-          firstName: form.fname,
-          lastName: form.lname,
           email: form.email,
-          company: form.company,
-          product: form.product,
-          quantity: form.quantity,
-          occasion: form.occasion,
-          message: form.message,
-          _subject: `New Wedwow enquiry from ${form.fname}`,
-          _captcha: 'false',
+          subject: `New Wedwow enquiry from ${form.fname}`,
+          message: messageLines.join('\n'),
+          replyTo: form.email,
+          $honeypot: '',
         }),
       });
 
       const data = await response.json();
 
-      if (!response.ok || data.success !== 'true') {
-        throw new Error('Form submission failed.');
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'Form submission failed.');
       }
 
       setSubmitted(true);
