@@ -130,7 +130,7 @@ const products = [
   
                   <a
                     className="product-detail-link"
-                    href={`/#enquiry?product=${encodeURIComponent(product.enquiryProduct)}`}
+                    href={`/?product=${encodeURIComponent(product.enquiryProduct)}#enquiry`}
                   >
                     Enquire for pricing →
                   </a>

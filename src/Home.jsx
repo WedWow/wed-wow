@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import braceletImg from '../Asset/bracelet.png';
 import glassesImg from '../Asset/mendhiglasses.png';
 import groombrideImg from '../Asset/groombride.png';
@@ -131,11 +132,20 @@ const initialForm = {
 };
 
 export default function Home() {
-  const [form, setForm] = useState(initialForm);
+  const [searchParams] = useSearchParams();
+  const [form, setForm] = useState(() => ({
+    ...initialForm,
+    product: searchParams.get('product') || '',
+  }));
   const [submitted, setSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
 
   useEffect(() => {
+    if (searchParams.get('product')) {
+      const el = document.getElementById('enquiry');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
     const animatedElements = document.querySelectorAll(
       '.product-card, .occasion-item, .how-step'
     );
@@ -183,7 +193,7 @@ export default function Home() {
     setIsSending(true);
   
     try {
-      const response = await fetch('https://api.staticforms.dev/submit', {
+      const response = await fetch('https://api.staticforms.xyz/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
