@@ -1489,6 +1489,17 @@ footer {
 
 .products-page-hero {
   padding-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 2rem;
+}
+
+.products-hero-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .product-catalogue-section {
@@ -1657,6 +1668,11 @@ footer {
   .products-page-hero {
     min-height: auto;
     padding-top: 2rem;
+    grid-template-columns: 1fr;
+  }
+
+  .products-hero-right {
+    display: none;
   }
 
   .product-detail-card {
