@@ -74,24 +74,52 @@ const products = [
     return (
       <main className="page-wrap products-page">
         <section className="page-hero products-page-hero">
-          <p className="section-label">Products</p>
-          <h1>
-            WEDWOW
-            <br />
-            PRODUCTS
-          </h1>
-          <p className="hero-sub">
-            Light-up wearables, wedding accessories and event products made for moments
-            people actually remember. Every product can be ordered in bulk for weddings,
-            festivals, nightclubs, private parties and branded events.
-          </p>
-          <div className="hero-actions">
-            <a href="#product-catalogue" className="btn-primary">
-              View Products
-            </a>
-            <a href="/#enquiry" className="btn-outline">
-              Enquiry Form
-            </a>
+          <div className="products-hero-left">
+            <p className="section-label">Products</p>
+            <h1>
+              WEDWOW
+              <br />
+              PRODUCTS
+            </h1>
+            <p className="hero-sub">
+              Light-up wearables, wedding accessories and event products made for moments
+              people actually remember. Every product can be ordered in bulk for weddings,
+              festivals, nightclubs, private parties and branded events.
+            </p>
+            <div className="hero-actions">
+              <a href="#product-catalogue" className="btn-primary">
+                View Products
+              </a>
+              <a href="/#enquiry" className="btn-outline">
+                Enquiry Form
+              </a>
+            </div>
+          </div>
+
+          <div className="products-hero-right">
+            <div className="product-showcase">
+              <div className="showcase-glow" />
+              <img
+                src={braceletImg}
+                alt="Custom LED silicone bracelet"
+                className="showcase-img showcase-bracelet"
+              />
+              <img
+                src={glassesImg}
+                alt="Yellow festival sunglasses"
+                className="showcase-img showcase-glasses"
+              />
+              <img
+                src={groombrideImg}
+                alt="Team Bride and Team Groom wristbands"
+                className="showcase-img showcase-groom"
+              />
+              <img
+                src={wristbandsImg}
+                alt="Red and green nightclub wristbands"
+                className="showcase-img showcase-wristbands"
+              />
+            </div>
           </div>
         </section>
   
