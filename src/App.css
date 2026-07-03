@@ -246,44 +246,61 @@ h1 .accent {
   transform: scale(1.03);
 }
 
-.bracelet-showcase {
+.light-burst {
   position: relative;
-  width: 340px;
-  height: 340px;
+  width: 380px;
+  height: 380px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.bracelet-ring {
+.light-ray-wrap {
   position: absolute;
-  border-radius: 50%;
-  border: 1px solid rgba(212, 255, 71, 0.3);
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
 }
 
-.bracelet-ring.ring-1 {
-  width: 340px;
-  height: 340px;
-  border-color: rgba(212, 255, 71, 0.15);
-  animation: ring-spin 18s linear infinite;
+.light-ray {
+  position: absolute;
+  top: -160px;
+  left: -1.5px;
+  width: 3px;
+  height: 130px;
+  border-radius: 3px;
+  transform-origin: 50% 100%;
+  animation: ray-pulse 2.6s ease-in-out infinite;
 }
 
-.bracelet-ring.ring-2 {
-  width: 260px;
-  height: 260px;
-  border-color: rgba(212, 255, 71, 0.25);
-  animation: ring-spin 12s linear infinite reverse;
+.light-ray.ray-neon {
+  background: linear-gradient(to bottom, var(--neon) 0%, transparent 88%);
+  box-shadow: 0 0 14px rgba(212, 255, 71, 0.65);
 }
 
-.bracelet-ring.ring-3 {
-  width: 180px;
-  height: 180px;
-  border-color: rgba(212, 255, 71, 0.4);
-  animation: ring-spin 8s linear infinite;
-  box-shadow: 0 0 24px rgba(212, 255, 71, 0.12);
+.light-ray.ray-coral {
+  background: linear-gradient(to bottom, var(--coral) 0%, transparent 88%);
+  box-shadow: 0 0 14px rgba(255, 92, 58, 0.65);
 }
 
-.bracelet-core {
+.light-ray.ray-gold {
+  background: linear-gradient(to bottom, var(--gold) 0%, transparent 88%);
+  box-shadow: 0 0 14px rgba(240, 192, 64, 0.65);
+}
+
+.light-ray.ray-teal {
+  background: linear-gradient(to bottom, var(--teal) 0%, transparent 88%);
+  box-shadow: 0 0 14px rgba(0, 212, 180, 0.65);
+}
+
+.light-ray.ray-purple {
+  background: linear-gradient(to bottom, var(--purple) 0%, transparent 88%);
+  box-shadow: 0 0 14px rgba(139, 92, 246, 0.65);
+}
+
+.light-burst-core {
+  position: relative;
   width: 110px;
   height: 110px;
   border-radius: 50%;
@@ -299,19 +316,10 @@ h1 .accent {
   z-index: 2;
 }
 
-.bracelet-text {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 0.85rem;
-  letter-spacing: 0.12em;
+.light-burst-icon {
+  font-size: 2rem;
   color: var(--neon);
-  text-align: center;
-  line-height: 1.2;
-}
-
-.bracelet-text small {
-  font-size: 0.6rem;
-  letter-spacing: 0.18em;
-  opacity: 0.7;
+  text-shadow: 0 0 16px rgba(212, 255, 71, 0.7);
 }
 
 .floating-dot {
@@ -341,9 +349,24 @@ h1 .accent {
   animation: dot-orbit 10s linear infinite;
 }
 
-@keyframes ring-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.floating-dot.dot-coral {
+  background: var(--coral);
+  box-shadow: 0 0 8px rgba(255, 92, 58, 0.8);
+}
+
+.floating-dot.dot-teal {
+  background: var(--teal);
+  box-shadow: 0 0 8px rgba(0, 212, 180, 0.8);
+}
+
+.floating-dot.dot-gold {
+  background: var(--gold);
+  box-shadow: 0 0 8px rgba(240, 192, 64, 0.8);
+}
+
+@keyframes ray-pulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+  50% { opacity: 1; transform: scaleY(1); }
 }
 
 @keyframes core-pulse {
