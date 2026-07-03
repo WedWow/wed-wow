@@ -97,16 +97,23 @@ const products = [
           </div>
 
           <div className="products-hero-right">
-            <div className="hero-product-visual">
-              <img
-                src={braceletImg}
-                alt="Glowing custom LED silicone bracelet, WedWow's bestselling event product"
-                className="hero-product-img"
-              />
+            <div className="bracelet-showcase" aria-label="LED silicone bracelet visual">
+              <div className="bracelet-ring ring-1" />
+              <div className="bracelet-ring ring-2" />
+              <div className="bracelet-ring ring-3" />
+              <div className="bracelet-core">
+                <div className="bracelet-text">
+                  4
+                  <br />
+                  PRODUCT
+                  <br />
+                  <small>RANGES</small>
+                </div>
+              </div>
+              <div className="floating-dot dot-1" />
+              <div className="floating-dot dot-2" />
+              <div className="floating-dot dot-3" />
             </div>
-            <div className="floating-dot dot-1" />
-            <div className="floating-dot dot-2" />
-            <div className="floating-dot dot-3" />
           </div>
         </section>
   
