@@ -4,8 +4,6 @@ import glassesImg from '../Asset/mendhiglasses.png';
 import groombrideImg from '../Asset/groombride.png';
 import wristbandsImg from '../Asset/wristbands.png';
 
-const glowRays = ['neon', 'coral', 'gold', 'teal', 'purple', 'neon', 'coral', 'gold', 'teal', 'purple'];
-
 const tickerItems = [
   'Weddings',
   'Music Festivals',
@@ -254,25 +252,22 @@ export default function Home() {
         </div>
 
         <div className="hero-right">
-          <div className="light-burst" aria-label="Colourful light-up glow animation">
-            {glowRays.map((color, index) => (
-              <div
-                className="light-ray-wrap"
-                key={`ray-${index}`}
-                style={{ transform: `rotate(${index * 36}deg)` }}
-              >
-                <div
-                  className={`light-ray ray-${color}`}
-                  style={{ animationDelay: `${index * 0.15}s` }}
-                />
+          <div className="bracelet-showcase" aria-label="LED silicone bracelet visual">
+            <div className="bracelet-ring ring-1" />
+            <div className="bracelet-ring ring-2" />
+            <div className="bracelet-ring ring-3" />
+            <div className="bracelet-core">
+              <div className="bracelet-text">
+                LED
+                <br />
+                SILICONE
+                <br />
+                <small>BRACELET</small>
               </div>
-            ))}
-            <div className="light-burst-core">
-              <span className="light-burst-icon">✦</span>
             </div>
-            <div className="floating-dot dot-1 dot-coral" />
-            <div className="floating-dot dot-2 dot-teal" />
-            <div className="floating-dot dot-3 dot-gold" />
+            <div className="floating-dot dot-1" />
+            <div className="floating-dot dot-2" />
+            <div className="floating-dot dot-3" />
           </div>
         </div>
       </section>
