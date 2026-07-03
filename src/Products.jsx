@@ -74,24 +74,46 @@ const products = [
     return (
       <main className="page-wrap products-page">
         <section className="page-hero products-page-hero">
-          <p className="section-label">Products</p>
-          <h1>
-            WEDWOW
-            <br />
-            PRODUCTS
-          </h1>
-          <p className="hero-sub">
-            Light-up wearables, wedding accessories and event products made for moments
-            people actually remember. Every product can be ordered in bulk for weddings,
-            festivals, nightclubs, private parties and branded events.
-          </p>
-          <div className="hero-actions">
-            <a href="#product-catalogue" className="btn-primary">
-              View Products
-            </a>
-            <a href="/#enquiry" className="btn-outline">
-              Enquiry Form
-            </a>
+          <div className="products-hero-left">
+            <p className="section-label">Products</p>
+            <h1>
+              WEDWOW
+              <br />
+              PRODUCTS
+            </h1>
+            <p className="hero-sub">
+              Light-up wearables, wedding accessories and event products made for moments
+              people actually remember. Every product can be ordered in bulk for weddings,
+              festivals, nightclubs, private parties and branded events.
+            </p>
+            <div className="hero-actions">
+              <a href="#product-catalogue" className="btn-primary">
+                View Products
+              </a>
+              <a href="/#enquiry" className="btn-outline">
+                Enquiry Form
+              </a>
+            </div>
+          </div>
+
+          <div className="products-hero-right">
+            <div className="bracelet-showcase" aria-label="LED silicone bracelet visual">
+              <div className="bracelet-ring ring-1" />
+              <div className="bracelet-ring ring-2" />
+              <div className="bracelet-ring ring-3" />
+              <div className="bracelet-core">
+                <div className="bracelet-text">
+                  4
+                  <br />
+                  PRODUCT
+                  <br />
+                  <small>RANGES</small>
+                </div>
+              </div>
+              <div className="floating-dot dot-1" />
+              <div className="floating-dot dot-2" />
+              <div className="floating-dot dot-3" />
+            </div>
           </div>
         </section>
   
