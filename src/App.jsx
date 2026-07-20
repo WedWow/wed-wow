@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import Home from './Home.jsx';
 import Gallery from './Gallery.jsx';
 import Products from './Products.jsx';
@@ -92,6 +93,7 @@ export default function App() {
       </Routes>
 
       <Footer />
+      <Analytics />
     </BrowserRouter>
   );
 }
