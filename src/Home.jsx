@@ -123,6 +123,7 @@ const initialForm = {
   fname: '',
   lname: '',
   email: '',
+  phone: '',
   company: '',
   product: '',
   quantity: '',
@@ -167,11 +168,12 @@ export default function Home() {
   
     const fname = form.fname.trim();
     const email = form.email.trim();
+    const phone = form.phone.trim();
     const product = form.product;
     const quantity = form.quantity.trim();
   
-    if (!fname || !email || !product || !quantity) {
-      window.alert('Please fill in your name, email, product and quantity to continue.');
+    if (!fname || !email || !phone || !product || !quantity) {
+      window.alert('Please fill in your name, email, phone number, product and quantity to continue.');
       return;
     }
   
@@ -195,6 +197,7 @@ export default function Home() {
           firstName: form.fname,
           lastName: form.lname,
           email: form.email,
+          phone: form.phone,
           company: form.company,
           product: form.product,
           quantity: form.quantity,
@@ -426,6 +429,17 @@ export default function Home() {
                     onChange={updateField}
                   />
                 </div>
+                <div className="form-group">
+                  <label htmlFor="phone">Phone Number</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      placeholder="+44 7123 456789"
+                      value={form.phone}
+                      onChange={updateField}
+                    />
+                    </div>
 
                 <div className="form-group">
                   <label htmlFor="company">Company / Event Name (optional)</label>
