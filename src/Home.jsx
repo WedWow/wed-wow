@@ -172,7 +172,7 @@ export default function Home() {
     const product = form.product;
     const quantity = form.quantity.trim();
   
-    if (!fname || !email || !phone || !product || !quantity) {
+    if (!fname || !email || !product || !quantity) {
       window.alert('Please fill in your name, email, phone number, product and quantity to continue.');
       return;
     }
@@ -430,7 +430,7 @@ export default function Home() {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="phone">Phone Number</label>
+                  <label htmlFor="phone">Phone Number (Optional)</label>
                     <input
                       type="tel"
                       id="phone"
