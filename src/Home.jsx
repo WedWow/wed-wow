@@ -128,6 +128,7 @@ const initialForm = {
   product: '',
   quantity: '',
   occasion: '',
+  requiredDate: '',
   message: '',
 };
 
@@ -171,11 +172,14 @@ export default function Home() {
     const phone = form.phone.trim();
     const product = form.product;
     const quantity = form.quantity.trim();
+    const requiredDate = form.requiredDate;
   
-    if (!fname || !email || !product || !quantity) {
-      window.alert('Please fill in your name, email, phone number, product and quantity to continue.');
-      return;
-    }
+    if (!fname || !email || !product || !quantity || !requiredDate) {
+  window.alert(
+    'Please fill in your name, email, product, quantity and required date to continue.'
+  );
+  return;
+}
   
     if (!/\S+@\S+\.\S+/.test(email)) {
       window.alert('Please enter a valid email address.');
@@ -202,6 +206,7 @@ export default function Home() {
           product: form.product,
           quantity: form.quantity,
           occasion: form.occasion,
+          requiredDate: form.requiredDate,
           message: form.message,
   
           subject: `New Wedwow enquiry from ${form.fname}`,
@@ -504,6 +509,21 @@ export default function Home() {
                     <option>Other</option>
                   </select>
                 </div>
+
+                <div className="form-group">
+                  <label htmlFor="requiredDate">
+                          Date Product Is Required
+                    </label>
+                  
+                    <input
+                      type="date"
+                      id="requiredDate"
+                      name="requiredDate"
+                      value={form.requiredDate}
+                      onChange={updateField}
+                      min={new Date().toISOString().split('T')[0]}
+                    />
+                  </div>
 
                 <div className="form-group">
                   <label htmlFor="message">Tell us more (branding, colours, deadline…)</label>
