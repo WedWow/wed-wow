@@ -186,8 +186,18 @@ export default function Home() {
       return;
     }
   
+    const apiKey = import.meta.env.VITE_STATIC_FORMS_API_KEY;
+
+    if (!apiKey) {
+      console.error(
+        'VITE_STATIC_FORMS_API_KEY is not set — the enquiry form cannot send email. Add it to the Vercel project environment variables.'
+      );
+      window.alert('Sorry, something went wrong. Please email sales@wedwow.co.uk directly.');
+      return;
+    }
+
     setIsSending(true);
-  
+
     try {
       const response = await fetch('https://api.staticforms.dev/submit', {
         method: 'POST',
@@ -195,8 +205,8 @@ export default function Home() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          apiKey: import.meta.env.VITE_STATIC_FORMS_API_KEY,
-  
+          apiKey,
+
           name: `${form.fname} ${form.lname}`.trim(),
           firstName: form.fname,
           lastName: form.lname,
@@ -208,19 +218,23 @@ export default function Home() {
           occasion: form.occasion,
           requiredDate: form.requiredDate,
           message: form.message,
-  
+
           subject: `New Wedwow enquiry from ${form.fname}`,
         }),
       });
-  
-      if (!response.ok) {
-        throw new Error('Static Forms rejected the submission.');
+
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok || result?.success === false || result?.error) {
+        throw new Error(
+          result?.message || result?.error || 'Static Forms rejected the submission.'
+        );
       }
-  
+
       setSubmitted(true);
       setForm(initialForm);
     } catch (error) {
-      console.error(error);
+      console.error('Enquiry form submission failed:', error);
       window.alert('Sorry, something went wrong. Please email sales@wedwow.co.uk directly.');
     } finally {
       setIsSending(false);
@@ -377,7 +391,9 @@ export default function Home() {
               <div className="contact-line">
                 <span className="contact-icon">✉</span>
                 <span>
-                  <strong>sales@wedwow.co.uk</strong>
+                  <strong>
+                    <a href="mailto:sales@wedwow.co.uk">sales@wedwow.co.uk</a>
+                  </strong>
                 </span>
               </div>
               <div className="contact-line">
