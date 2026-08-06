@@ -26,8 +26,8 @@ export default function PrivacyPolicy() {
             </p>
             <p>
               Our website is <strong>wedwow.co.uk</strong> and you can contact us at{' '}
-              <a href="mailto:sales@wedwow.com" style={{ color: 'var(--neon)' }}>
-                sales@wedwow.com
+              <a href="mailto:sales@wedwow.co.uk" style={{ color: 'var(--neon)' }}>
+                sales@wedwow.co.uk
               </a>
               .
             </p>
@@ -78,8 +78,8 @@ export default function PrivacyPolicy() {
             </p>
             <p>
               You may withdraw your consent at any time by contacting us at{' '}
-              <a href="mailto:sales@wedwow.com" style={{ color: 'var(--neon)' }}>
-                sales@wedwow.com
+              <a href="mailto:sales@wedwow.co.uk" style={{ color: 'var(--neon)' }}>
+                sales@wedwow.co.uk
               </a>
               . This will not affect the lawfulness of any processing already carried out.
             </p>
@@ -144,8 +144,8 @@ export default function PrivacyPolicy() {
             </p>
             <p>
               To exercise any of these rights, please contact us at{' '}
-              <a href="mailto:sales@wedwow.com" style={{ color: 'var(--neon)' }}>
-                sales@wedwow.com
+              <a href="mailto:sales@wedwow.co.uk" style={{ color: 'var(--neon)' }}>
+                sales@wedwow.co.uk
               </a>
               . We will respond within 30 days. If you are not satisfied with our response, you
               have the right to lodge a complaint with the{' '}
@@ -184,8 +184,8 @@ export default function PrivacyPolicy() {
             <p>
               If you have any questions about this Privacy Policy or how we handle your data,
               please get in touch via our enquiry form or email us directly at{' '}
-              <a href="mailto:sales@wedwow.com" style={{ color: 'var(--neon)' }}>
-                sales@wedwow.com
+              <a href="mailto:sales@wedwow.co.uk" style={{ color: 'var(--neon)' }}>
+                sales@wedwow.co.uk
               </a>
               .
             </p>
