@@ -221,7 +221,7 @@ export default function Home() {
       setForm(initialForm);
     } catch (error) {
       console.error(error);
-      window.alert('Sorry, something went wrong. Please email sales@wedwow.com directly.');
+      window.alert('Sorry, something went wrong. Please email sales@wedwow.co.uk directly.');
     } finally {
       setIsSending(false);
     }
@@ -377,7 +377,7 @@ export default function Home() {
               <div className="contact-line">
                 <span className="contact-icon">✉</span>
                 <span>
-                  <strong>sales@wedwow.com</strong>
+                  <strong>sales@wedwow.co.uk</strong>
                 </span>
               </div>
               <div className="contact-line">
