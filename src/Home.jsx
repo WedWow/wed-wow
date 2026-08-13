@@ -125,6 +125,7 @@ const initialForm = {
   email: '',
   phone: '',
   company: '',
+  country:'',
   product: '',
   quantity: '',
   occasion: '',
@@ -203,6 +204,7 @@ export default function Home() {
           email: form.email,
           phone: form.phone,
           company: form.company,
+          country: form.country,
           product: form.product,
           quantity: form.quantity,
           occasion: form.occasion,
@@ -454,6 +456,17 @@ export default function Home() {
                     name="company"
                     placeholder="Smith & Jones Wedding"
                     value={form.company}
+                    onChange={updateField}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="country">Country</label>
+                  <input
+                    type="text"
+                    id="country"
+                    name="country"
+                    placeholder="United Kingdom"
+                    value={form.country}
                     onChange={updateField}
                   />
                 </div>
