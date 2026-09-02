@@ -419,15 +419,16 @@ const submitForm = async (event) => {
                 <form id="enquiryForm" onSubmit={submitForm}>
                   <div className="form-row">
                     <div className="form-group">
-                    <label htmlFor="fullName">Full Name</label>
-                    <input
-                      type="text"
-                      id="fullName"
-                      name="fullName"
-                      placeholder="Jane Smith"
-                      value={form.fullName}
-                      onChange={updateField}
-                    />
+                      <label htmlFor="fullName">Full Name</label>
+                      <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        placeholder="Jane Smith"
+                        value={form.fullName}
+                        onChange={updateField}
+                      />
+                    </div>
                   </div>
                   </div>
 
