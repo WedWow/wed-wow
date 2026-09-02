@@ -119,22 +119,21 @@
     },
   ];
 
-  const initialForm = {
-    fname: '',
-    lname: '',
-    email: '',
-    phone: '',
-    company: '',
-    country:'',
-    product: '',
-    quantity: '',
-    occasion: '',
-    requiredDay: '',
-    requiredMonth: '',
-    requiredYear: '',
-    heardAboutUs: '',
-    message: '',
-  };
+    const initialForm = {
+      fullName: '',
+      email: '',
+      phone: '',
+      company: '',
+      country: '',
+      product: '',
+      quantity: '',
+      occasion: '',
+      requiredDay: '',
+      requiredMonth: '',
+      requiredYear: '',
+      heardAboutUs: '',
+      message: '',
+    };
 
   export default function Home() {
     const [form, setForm] = useState(initialForm);
@@ -171,7 +170,7 @@
 const submitForm = async (event) => {
   event.preventDefault();
 
-  const fname = form.fname.trim();
+  const fullName = form.fullName.trim();
   const email = form.email.trim();
   const phone = form.phone.trim();
   const product = form.product;
@@ -182,7 +181,7 @@ const submitForm = async (event) => {
   const requiredYear = form.requiredYear;
 
   if (
-    !fname ||
+    !fullName ||
     !email ||
     !product ||
     !quantity ||
@@ -213,9 +212,7 @@ const submitForm = async (event) => {
       body: JSON.stringify({
         apiKey: import.meta.env.VITE_STATIC_FORMS_API_KEY,
 
-        name: `${form.fname} ${form.lname}`.trim(),
-        firstName: form.fname,
-        lastName: form.lname,
+        name: form.fullName,
         email: form.email,
         phone: form.phone,
         company: form.company,
@@ -229,7 +226,7 @@ const submitForm = async (event) => {
         heardAboutUs: form.heardAboutUs,
         message: form.message,
 
-        subject: `New Wedwow enquiry from ${form.fname}`,
+        subject: `New Wedwow enquiry from ${form.fullName}`,
       }),
     });
 
@@ -422,27 +419,16 @@ const submitForm = async (event) => {
                 <form id="enquiryForm" onSubmit={submitForm}>
                   <div className="form-row">
                     <div className="form-group">
-                      <label htmlFor="fname">First Name</label>
-                      <input
-                        type="text"
-                        id="fname"
-                        name="fname"
-                        placeholder="Jane"
-                        value={form.fname}
-                        onChange={updateField}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="lname">Last Name</label>
-                      <input
-                        type="text"
-                        id="lname"
-                        name="lname"
-                        placeholder="Smith"
-                        value={form.lname}
-                        onChange={updateField}
-                      />
-                    </div>
+                    <label htmlFor="fullName">Full Name</label>
+                    <input
+                      type="text"
+                      id="fullName"
+                      name="fullName"
+                      placeholder="Jane Smith"
+                      value={form.fullName}
+                      onChange={updateField}
+                    />
+                  </div>
                   </div>
 
                   <div className="form-group">
