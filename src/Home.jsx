@@ -1,4 +1,4 @@
-  import { useEffect, useState } from 'react';
+  import { useEffect } from 'react';
   import braceletImg from '../Asset/bracelet.png';
   import glassesImg from '../Asset/mendhiglasses.png';
   import groombrideImg from '../Asset/groombride.png';
@@ -100,7 +100,7 @@
     {
       num: '01',
       title: 'Submit Your Enquiry',
-      desc: 'Fill in the form below with your event type, quantity needed and any branding requirements.',
+      desc: 'Use our wristband designer to create your mockup, choose your light function and send us your event details.',
     },
     {
       num: '02',
@@ -119,27 +119,7 @@
     },
   ];
 
-    const initialForm = {
-      fullName: '',
-      email: '',
-      phone: '',
-      company: '',
-      country: '',
-      product: '',
-      quantity: '',
-      occasion: '',
-      requiredDay: '',
-      requiredMonth: '',
-      requiredYear: '',
-      heardAboutUs: '',
-      message: '',
-    };
-
   export default function Home() {
-    const [form, setForm] = useState(initialForm);
-    const [submitted, setSubmitted] = useState(false);
-    const [isSending, setIsSending] = useState(false);
-
     useEffect(() => {
       const animatedElements = document.querySelectorAll(
         '.product-card, .occasion-item, .how-step'
@@ -160,91 +140,6 @@
 
       return () => observer.disconnect();
     }, []);
-
-    const updateField = (event) => {
-      const { name, value } = event.target;
-      setForm((current) => ({ ...current, [name]: value }));
-    };
-
-
-const submitForm = async (event) => {
-  event.preventDefault();
-
-  const fullName = form.fullName.trim();
-  const email = form.email.trim();
-  const phone = form.phone.trim();
-  const product = form.product;
-  const quantity = form.quantity.trim();
-
-  const requiredDay = form.requiredDay;
-  const requiredMonth = form.requiredMonth;
-  const requiredYear = form.requiredYear;
-
-  if (
-    !fullName ||
-    !email ||
-    !product ||
-    !quantity ||
-    !requiredDay ||
-    !requiredMonth ||
-    !requiredYear
-  ) {
-    window.alert(
-      'Please fill in your name, email, product, quantity and required date to continue.'
-    );
-    return;
-  }
-
-  if (!/\S+@\S+\.\S+/.test(email)) {
-    window.alert('Please enter a valid email address.');
-    return;
-  }
-
-  setIsSending(true);
-
-  try {
-    const response = await fetch('https://api.staticforms.dev/submit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-
-      body: JSON.stringify({
-        apiKey: import.meta.env.VITE_STATIC_FORMS_API_KEY,
-
-        name: form.fullName,
-        email: form.email,
-        phone: form.phone,
-        company: form.company,
-        country: form.country,
-        product: form.product,
-        quantity: form.quantity,
-        occasion: form.occasion,
-
-        requiredDate: `${form.requiredDay} ${form.requiredMonth} ${form.requiredYear}`,
-
-        heardAboutUs: form.heardAboutUs,
-        message: form.message,
-
-        subject: `New Wedwow enquiry from ${form.fullName}`,
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error('Static Forms rejected the submission.');
-    }
-
-    setSubmitted(true);
-    setForm(initialForm);
-  } catch (error) {
-    console.error(error);
-    window.alert(
-      'Sorry, something went wrong. Please email sales@wedwow.co.uk directly.'
-    );
-  } finally {
-    setIsSending(false);
-  }
-};
 
     return (
       <>
@@ -272,7 +167,7 @@ const submitForm = async (event) => {
               <a href="#products" className="btn-primary">
                 See Products
               </a>
-              <a href="#enquiry" className="btn-outline">
+              <a href="/enquiry" className="btn-outline">
                 Bulk Enquiry
               </a>
             </div>
@@ -386,251 +281,38 @@ const submitForm = async (event) => {
           <div className="enquiry-wrap">
             <div className="enquiry-left">
               <p className="section-label">Get a Quote</p>
-              <h2>ENQUIRY FORM</h2>
+              <h2>DESIGN YOUR WRISTBAND</h2>
               <p>
-                Whether you need 100 or 10,000 units, we've got you covered. Prices scale
-                with quantity — tell us what you need and we'll put together a custom quote.
+                Create your own wristband mockup, choose your lighting option and send the finished
+                design straight to WedWow with your quote request.
               </p>
 
               <div className="contact-info">
                 <div className="contact-line">
+                  <span className="contact-icon">✦</span>
+                  <span><strong>Live design preview</strong></span>
+                </div>
+                <div className="contact-line">
+                  <span className="contact-icon">✨</span>
+                  <span><strong>Free design assistant</strong></span>
+                </div>
+                <div className="contact-line">
                   <span className="contact-icon">✉</span>
-                  <span>
-                    <strong>sales@wedwow.co.uk</strong>
-                  </span>
-                </div>
-                <div className="contact-line">
-                  <span className="contact-icon">⏱</span>
-                  <span>
-                    We reply within <strong>24 hours</strong>
-                  </span>
-                </div>
-                <div className="contact-line">
-                  <span className="contact-icon">📦</span>
-                  <span>
-                    Minimum order quantities apply — <strong>ask us</strong>
-                  </span>
+                  <span>Your mockup is sent directly to <strong>sales@wedwow.co.uk</strong></span>
                 </div>
               </div>
             </div>
 
-            <div className="form-wrap">
-              {!submitted ? (
-                <form id="enquiryForm" onSubmit={submitForm}>
-                <div className="form-group">
-                  <label htmlFor="fullName">Full Name</label>
-                  <input
-                    type="text"
-                    id="fullName"
-                    name="fullName"
-                    placeholder="Jane Smith"
-                    value={form.fullName}
-                    onChange={updateField}
-                  />
-                </div>
-
-                  <div className="form-group">
-                    <label htmlFor="email">Email Address</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      placeholder="jane@example.com"
-                      value={form.email}
-                      onChange={updateField}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="phone">Phone Number (Optional)</label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        placeholder="+44 7123 456789"
-                        value={form.phone}
-                        onChange={updateField}
-                      />
-                      </div>
-
-                  <div className="form-group">
-                    <label htmlFor="company">Company / Event Name (optional)</label>
-                    <input
-                      type="text"
-                      id="company"
-                      name="company"
-                      placeholder="Smith & Jones Wedding"
-                      value={form.company}
-                      onChange={updateField}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="country">Country</label>
-                    <input
-                      type="text"
-                      id="country"
-                      name="country"
-                      placeholder="United Kingdom"
-                      value={form.country}
-                      onChange={updateField}
-                    />
-                  </div>
-
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="product">Product</label>
-                      <select
-                        id="product"
-                        name="product"
-                        value={form.product}
-                        onChange={updateField}
-                      >
-                        <option value="">Select a product…</option>
-                        <option>Custom LED Silicone Bracelet</option>
-                        <option>Yellow Festival Sunglasses</option>
-                        <option>Team Bride / Team Groom Wristbands</option>
-                        <option>Red / Green Nightclub Wristbands</option>
-                        <option>Multiple Products</option>
-                        <option>Not Sure — Advise Me</option>
-                      </select>
-                    </div>
-
-                    <div className="form-group">
-                      <label htmlFor="quantity">Estimated Quantity</label>
-                      <input
-                        type="text"
-                        id="quantity"
-                        name="quantity"
-                        placeholder="100"
-                        value={form.quantity}
-                        onChange={updateField}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="occasion">Occasion / Event Type</label>
-                    <select
-                      id="occasion"
-                      name="occasion"
-                      value={form.occasion}
-                      onChange={updateField}
-                    >
-                      <option value="">Select occasion…</option>
-                      <option>Wedding</option>
-                      <option>Festival</option>
-                      <option>Corporate Event / Gifting</option>
-                      <option>Nightclub</option>
-                      <option>Hen / Stag Party</option>
-                      <option>Birthday / Private Party</option>
-                      <option>Concert / Live Event</option>
-                      <option>Other</option>
-                    </select>
-                  </div>
-
-                  <div className="form-group">
-                    <label>Date Product Is Required</label>
-
-                    <div className="form-row">
-                      <div className="form-group">
-                        <label htmlFor="requiredDay">Day</label>
-                        <input
-                          type="number"
-                          id="requiredDay"
-                          name="requiredDay"
-                          placeholder="DD"
-                          min="1"
-                          max="31"
-                          value={form.requiredDay}
-                          onChange={updateField}
-                        />
-                      </div>
-
-                      <div className="form-group">
-                        <label htmlFor="requiredMonth">Month</label>
-                        <select
-                          id="requiredMonth"
-                          name="requiredMonth"
-                          value={form.requiredMonth}
-                          onChange={updateField}
-                        >
-                          <option value="">Month…</option>
-                          <option value="January">January</option>
-                          <option value="February">February</option>
-                          <option value="March">March</option>
-                          <option value="April">April</option>
-                          <option value="May">May</option>
-                          <option value="June">June</option>
-                          <option value="July">July</option>
-                          <option value="August">August</option>
-                          <option value="September">September</option>
-                          <option value="October">October</option>
-                          <option value="November">November</option>
-                          <option value="December">December</option>
-                        </select>
-                      </div>
-
-                      <div className="form-group">
-                        <label htmlFor="requiredYear">Year</label>
-                        <input
-                          type="number"
-                          id="requiredYear"
-                          name="requiredYear"
-                          placeholder="YYYY"
-                          min="2026"
-                          max="2035"
-                          value={form.requiredYear}
-                          onChange={updateField}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                    <div className="form-group">
-                        <label htmlFor="heardAboutUs">How did you hear about us?</label>
-                        <select
-                          id="heardAboutUs"
-                          name="heardAboutUs"
-                          value={form.heardAboutUs}
-                          onChange={updateField}
-                        >
-                          <option value="">Select an option…</option>
-                          <option>Instagram</option>
-                          <option>TikTok</option>
-                          <option>Facebook</option>
-                          <option>Google search</option>
-                          <option>Wedding</option>
-                          <option>Friend / Recommendation</option>
-                          <option>At an Event</option>
-                          <option>Other</option>
-                        </select>
-                      </div>
-
-                  <div className="form-group">
-                    <label htmlFor="message">Tell us more (branding, colours, deadline…)</label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      placeholder="Any custom colours, logo details, event date or anything else we should know…"
-                      value={form.message}
-                      onChange={updateField}
-                    />
-                  </div>
-
-                  <button className="form-submit" type="submit" disabled={isSending}>
-    {isSending ? 'SENDING…' : 'SEND ENQUIRY'}
-  </button>
-                  <p className="form-note">
-                    No spam. No commitment. Just a friendly quote from the Wedwow team.
-                  </p>
-                </form>
-              ) : (
-                <div className="success-msg">
-                  <h3>WE GOT IT! ✦</h3>
-                  <p>
-                    Thanks for reaching out. A member of the Wedwow team will be in touch
-                    within 24 hours with your custom quote.
-                  </p>
-                </div>
-              )}
+            <div className="form-wrap" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <p className="section-label">Make It Yours</p>
+              <h2 style={{ marginBottom: '1rem' }}>SEE YOUR DESIGN BEFORE YOU ENQUIRE</h2>
+              <p style={{ color: 'rgba(245,240,235,0.6)', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+                Add your names, date or message, choose your fonts, preview the LEDs and submit the exact
+                mockup you want us to quote for.
+              </p>
+              <a href="/enquiry" className="form-submit" style={{ textAlign: 'center', textDecoration: 'none' }}>
+                DESIGN &amp; GET A QUOTE
+              </a>
             </div>
           </div>
         </section>
