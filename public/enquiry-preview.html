@@ -102,6 +102,9 @@ input::placeholder{color:rgba(255,255,255,.22)}
 input:focus,select:focus{border-color:var(--neon);box-shadow:0 0 0 1px rgba(212,255,71,.12)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.date-selects{display:grid;grid-template-columns:.72fr 1.28fr .9fr;gap:8px}
+.date-selects select{min-width:0}
+@media(max-width:520px){.date-selects{grid-template-columns:1fr}}
 
 .chips{display:flex;flex-wrap:wrap;gap:7px}
 .chip{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.025);color:rgba(245,240,235,.7);border-radius:2px;padding:9px 12px;font-size:11px;font-weight:500;letter-spacing:.04em}
@@ -756,7 +759,17 @@ input:focus,select:focus{border-color:var(--neon);box-shadow:0 0 0 1px rgba(212,
               <div class="grid2">
                 <div class="field quote-field">
                   <label>Required by date</label>
-                  <input id="quoteRequiredDate" type="date">
+                  <div class="date-selects">
+                    <select id="quoteRequiredDay" aria-label="Required by day">
+                      <option value="">Day</option>
+                    </select>
+                    <select id="quoteRequiredMonth" aria-label="Required by month">
+                      <option value="">Month</option>
+                    </select>
+                    <select id="quoteRequiredYear" aria-label="Required by year">
+                      <option value="">Year</option>
+                    </select>
+                  </div>
                 </div>
                 <div class="field quote-field">
                   <label>Event location <span class="optional">(optional)</span></label>
@@ -1088,6 +1101,54 @@ document.querySelectorAll('.quote-colour').forEach(btn=>{
   });
 });
 
+const requiredDay = document.getElementById('quoteRequiredDay');
+const requiredMonth = document.getElementById('quoteRequiredMonth');
+const requiredYear = document.getElementById('quoteRequiredYear');
+
+const monthNames = [
+  'January','February','March','April','May','June',
+  'July','August','September','October','November','December'
+];
+
+for(let day = 1; day <= 31; day++){
+  const option = document.createElement('option');
+  option.value = String(day);
+  option.textContent = String(day);
+  requiredDay.appendChild(option);
+}
+
+monthNames.forEach((month,index)=>{
+  const option = document.createElement('option');
+  option.value = String(index + 1);
+  option.textContent = month;
+  requiredMonth.appendChild(option);
+});
+
+const currentYear = new Date().getFullYear();
+for(let year = currentYear; year <= currentYear + 12; year++){
+  const option = document.createElement('option');
+  option.value = String(year);
+  option.textContent = String(year);
+  requiredYear.appendChild(option);
+}
+
+function getRequiredDate(){
+  const day = requiredDay?.value || '';
+  const month = requiredMonth?.value || '';
+  const year = requiredYear?.value || '';
+  if(!day || !month || !year) return '';
+  return day + ' ' + monthNames[Number(month)-1] + ' ' + year;
+}
+
+function requiredDateIsValid(){
+  const day = Number(requiredDay?.value);
+  const month = Number(requiredMonth?.value);
+  const year = Number(requiredYear?.value);
+  if(!day || !month || !year) return false;
+  const d = new Date(year, month - 1, day);
+  return d.getFullYear() === year && d.getMonth() === month - 1 && d.getDate() === day;
+}
+
 document.getElementById('demoSubmit').addEventListener('click',async ()=>{
   updateQuoteSummary();
   syncQuoteProductAndSubject();
@@ -1104,7 +1165,7 @@ document.getElementById('demoSubmit').addEventListener('click',async ()=>{
     product: document.getElementById('quoteProduct')?.value || '',
     quantity: document.getElementById('quoteQuantity')?.value || '',
     occasion: document.getElementById('quoteEventType')?.value || '',
-    requiredDate: document.getElementById('quoteRequiredDate')?.value || '',
+    requiredDate: getRequiredDate(),
     eventLocation: document.getElementById('quoteLocation')?.value?.trim() || '',
     heardAboutUs: document.getElementById('quoteHeardAboutUs')?.value || '',
     message: document.getElementById('quoteNotes')?.value?.trim() || ''
@@ -1120,6 +1181,13 @@ document.getElementById('demoSubmit').addEventListener('click',async ()=>{
 
   if(missing.length){
     msg.textContent = 'Please complete: ' + missing.join(', ') + '.';
+    msg.classList.add('show');
+    msg.scrollIntoView({behavior:'smooth',block:'nearest'});
+    return;
+  }
+
+  if(!requiredDateIsValid()){
+    msg.textContent = 'Please choose a valid required by date.';
     msg.classList.add('show');
     msg.scrollIntoView({behavior:'smooth',block:'nearest'});
     return;
