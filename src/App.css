@@ -1867,7 +1867,7 @@ footer {
       rgba(0,0,0,.00) 58%,
       rgba(0,0,0,.25) 100%
     ),
-    url('/hero-wedwow.jpg');
+    url('/hero-wedwow.webp');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -1928,7 +1928,7 @@ footer {
         rgba(0,0,0,.02) 48%,
         rgba(0,0,0,.40) 100%
       ),
-      url('/hero-wedwow.jpg');
+      url('/hero-wedwow.webp');
     background-size: cover;
     background-position: 67% center;
   }
