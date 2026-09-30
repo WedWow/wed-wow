@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Home from './Home.jsx';
@@ -18,13 +18,39 @@ function ScrollToTop() {
 
 function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const menuButtonRef = useRef(null);
+  const { pathname } = useLocation();
+  const isHome = pathname === '/';
+
+  useEffect(() => {
+    if (!isHome) return;
+
+    const updateScroll = () => setScrolled(window.scrollY > 32);
+    updateScroll();
+    window.addEventListener('scroll', updateScroll, { passive: true });
+    return () => window.removeEventListener('scroll', updateScroll);
+  }, [isHome]);
+
+  useEffect(() => {
+    if (!isHome || !menuOpen) return;
+
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [isHome, menuOpen]);
 
   const closeMenu = () => {
     setMenuOpen(false);
   };
 
   return (
-    <header className="site-nav">
+    <header className={`site-nav${isHome ? ` site-nav--home${scrolled ? ' site-nav--scrolled' : ''}${menuOpen ? ' site-nav--open' : ''}` : ''}`}>
       <Link to="/" className="site-logo" onClick={closeMenu}>
         WED<span>WOW</span>
       </Link>
@@ -39,21 +65,24 @@ function Nav() {
   <Link to="/products">Products</Link>
 </div>
 
-      <a href="/#enquiry" className="site-nav-cta">
+      <a href="/#enquiry" className="site-nav-cta" onClick={isHome ? closeMenu : undefined}>
         Get a Quote
       </a>
 
       <button
+        ref={menuButtonRef}
         className="mobile-menu-button"
         type="button"
         onClick={() => setMenuOpen((current) => !current)}
         aria-label="Toggle navigation menu"
+        aria-expanded={menuOpen}
+        aria-controls={menuOpen ? 'site-mobile-navigation' : undefined}
       >
         {menuOpen ? '✕' : '☰'}
       </button>
 
       {menuOpen && (
-        <div className="mobile-nav-menu">
+        <div className="mobile-nav-menu" id="site-mobile-navigation">
           <Link to="/" onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); closeMenu(); }}>
             Home
           </Link>

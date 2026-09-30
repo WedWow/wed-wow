@@ -1,0 +1,439 @@
+/* These styles belong only to the homepage campaign and its header. */
+@font-face {
+  font-family: 'WedWow Hero';
+  src: url('../Asset/bebas-neue-hero.woff') format('woff');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+.home-hero {
+  --hero-lime: #cfff2e;
+  --hero-white: #f5f5f2;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: max(680px, 100svh);
+  padding: 130px 5vw 76px;
+  overflow: hidden;
+  background: #050505;
+  color: var(--hero-white);
+}
+
+.home-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.home-hero__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.home-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(5, 5, 5, 0.45), rgba(5, 5, 5, 0.16) 36%, transparent 60%);
+}
+
+.home-hero__content {
+  width: min(48vw, 740px);
+}
+
+.home-hero .home-hero__title {
+  margin: 0 0 26px;
+  font-family: 'WedWow Hero', 'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
+  font-size: clamp(4rem, 6.8vw, 8.125rem);
+  font-weight: 700;
+  line-height: 0.94;
+  letter-spacing: -0.012em;
+  text-transform: uppercase;
+  color: var(--hero-white);
+}
+
+.home-hero__title > span {
+  display: block;
+}
+
+.home-hero__title .home-hero__accent {
+  margin-top: 0.08em;
+  font-size: 0.79em;
+  white-space: nowrap;
+  color: var(--hero-lime);
+}
+
+.home-hero__description {
+  max-width: 440px;
+  margin: 0 0 29px;
+  font-size: clamp(0.95rem, 1.1vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.65;
+  color: #c5c5bf;
+}
+
+.home-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.home-hero__quote,
+.home-hero__video {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  min-height: 49px;
+  padding: 0 24px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.home-hero__quote {
+  background: var(--hero-lime);
+  color: #050505;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.home-hero__quote > span {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.home-hero__quote:hover {
+  background: #dfff75;
+  transform: translateY(-2px);
+}
+
+.home-hero__quote:focus-visible,
+.site-nav--home a:focus-visible,
+.site-nav--home button:focus-visible {
+  outline: 2px solid #f5f5f2;
+  outline-offset: 5px;
+}
+
+.home-hero__video {
+  gap: 10px;
+  border-color: rgba(245, 245, 242, 0.42);
+  background: rgba(5, 5, 5, 0.28);
+  color: var(--hero-white);
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.home-hero__video-status {
+  margin: 10px 0 0;
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  color: #a5a5a0;
+}
+
+/* The shared header keeps its original appearance on every other route. */
+.site-nav.site-nav--home {
+  height: 78px;
+  min-height: 78px;
+  gap: 28px;
+  padding: 0 5vw;
+  background: rgba(5, 5, 5, 0.5);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(245, 245, 242, 0.12);
+  transition: background 180ms ease;
+}
+
+.site-nav.site-nav--home.site-nav--scrolled,
+.site-nav.site-nav--home.site-nav--open {
+  background: rgba(5, 5, 5, 0.96);
+}
+
+.site-nav--home .site-logo {
+  flex-shrink: 0;
+  font-family: 'WedWow Hero', 'Bebas Neue', sans-serif;
+  font-size: 1.9rem;
+  color: #cfff2e;
+}
+
+.site-nav--home .site-logo span {
+  color: #f5f5f2;
+}
+
+.site-nav.site-nav--home .desktop-nav {
+  gap: clamp(14px, 1.7vw, 32px);
+}
+
+.site-nav.site-nav--home .desktop-nav a,
+.site-nav.site-nav--home .desktop-nav .nav-divider {
+  color: #f5f5f2;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+  opacity: 0.88;
+}
+
+.site-nav.site-nav--home .desktop-nav .nav-divider {
+  opacity: 0.35;
+}
+
+.site-nav.site-nav--home .desktop-nav a:hover {
+  color: #cfff2e;
+  opacity: 1;
+}
+
+.site-nav--home .site-nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 23px;
+  border-radius: 999px;
+  background: #cfff2e;
+  color: #050505;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.065em;
+  transition: background 160ms ease;
+}
+
+.site-nav--home .site-nav-cta:hover {
+  background: #dfff75;
+}
+
+@media (max-width: 1100px) {
+  .site-nav.site-nav--home {
+    height: 72px;
+    min-height: 72px;
+    gap: 12px;
+    padding: 0 24px;
+  }
+
+  .site-nav--home .site-logo {
+    margin-right: auto;
+  }
+
+  .site-nav.site-nav--home .desktop-nav {
+    display: none !important;
+  }
+
+  .site-nav--home .site-nav-cta {
+    display: inline-flex !important;
+    order: 1;
+  }
+
+  .site-nav--home .mobile-menu-button {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    order: 2;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    font-size: 1.2rem;
+  }
+
+  .site-nav--home .mobile-nav-menu {
+    position: absolute;
+    inset: 100% 0 auto;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100svh - 72px);
+    overflow-y: auto;
+    background: #050505;
+    border-bottom: 1px solid rgba(245, 245, 242, 0.16);
+  }
+
+  .site-nav--home .mobile-nav-menu a {
+    padding: 16px 24px;
+    color: #f5f5f2;
+    border-top: 1px solid rgba(245, 245, 242, 0.08);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+  }
+
+  .site-nav--home .mobile-nav-menu a:hover {
+    color: #cfff2e;
+  }
+}
+
+/* Portrait layouts give the wristband its own space above the typography. */
+@media (max-width: 900px) {
+  .home-hero {
+    min-height: max(820px, 100svh);
+    align-items: flex-end;
+    padding: max(400px, 43svh) 6vw 48px;
+  }
+
+  .home-hero__media {
+    bottom: auto;
+    height: 72%;
+  }
+
+  .home-hero__media img {
+    object-position: 72% center;
+  }
+
+  .home-hero::before {
+    background: linear-gradient(180deg, rgba(5, 5, 5, 0.16) 0%, transparent 30%, rgba(5, 5, 5, 0.3) 42%, #050505 72%);
+  }
+
+  .home-hero__content {
+    width: 100%;
+    max-width: 640px;
+  }
+
+  .home-hero .home-hero__title {
+    font-size: clamp(3.1rem, 10.2vw, 5.75rem);
+    margin-bottom: 20px;
+  }
+
+  .home-hero__description {
+    max-width: 420px;
+    font-size: 1rem;
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 560px) {
+  .site-nav.site-nav--home {
+    height: 68px;
+    min-height: 68px;
+    padding: 0 20px;
+    gap: 10px;
+  }
+
+  .site-nav--home .site-logo {
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+  }
+
+  .site-nav--home .site-nav-cta {
+    min-height: 44px;
+    padding: 0 15px;
+    font-size: 0.625rem;
+  }
+
+  .site-nav--home .mobile-nav-menu {
+    max-height: calc(100svh - 68px);
+  }
+
+  .home-hero {
+    min-height: max(740px, 100svh);
+    padding: max(350px, 43svh) 24px 36px;
+  }
+
+  .home-hero__media {
+    height: 64%;
+  }
+
+  .home-hero::before {
+    background: linear-gradient(180deg, rgba(5, 5, 5, 0.08), transparent 29%, rgba(5, 5, 5, 0.16) 39%, #050505 64%);
+  }
+
+  .home-hero .home-hero__title {
+    font-size: clamp(2.75rem, 13.5vw, 4.625rem);
+    line-height: 0.96;
+    margin-bottom: 18px;
+  }
+
+  .home-hero__description {
+    max-width: 360px;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  .home-hero__actions {
+    gap: 10px;
+  }
+
+  .home-hero__quote,
+  .home-hero__video {
+    min-height: 48px;
+    padding: 0 18px;
+    font-size: 0.6875rem;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .site-nav.site-nav--home {
+    padding-inline: 16px;
+    gap: 8px;
+  }
+
+  .site-nav--home .site-nav-cta {
+    padding-inline: 11px;
+  }
+
+  .home-hero {
+    padding-inline: 20px;
+  }
+
+  .home-hero__quote,
+  .home-hero__video {
+    padding-inline: 13px;
+    font-size: 0.625rem;
+  }
+}
+
+/* Short landscape screens keep the copy beside the photograph. */
+@media (max-width: 900px) and (max-height: 560px) and (orientation: landscape) {
+  .home-hero {
+    min-height: max(520px, 100svh);
+    align-items: center;
+    padding: 104px 5vw 36px;
+  }
+
+  .home-hero__media {
+    height: 100%;
+  }
+
+  .home-hero__media img {
+    object-position: center;
+  }
+
+  .home-hero::before {
+    background: linear-gradient(90deg, rgba(5, 5, 5, 0.6), rgba(5, 5, 5, 0.2) 40%, transparent 65%);
+  }
+
+  .home-hero__content {
+    width: 50%;
+  }
+
+  .home-hero .home-hero__title {
+    font-size: clamp(3rem, 6.8vw, 4rem);
+  }
+
+  .home-hero__description {
+    font-size: 0.875rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero__quote,
+  .site-nav.site-nav--home,
+  .site-nav--home .site-nav-cta {
+    transition: none;
+  }
+
+  .home-hero__quote:hover {
+    transform: none;
+  }
+}

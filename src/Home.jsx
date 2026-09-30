@@ -1,4 +1,5 @@
   import { useEffect, useState } from 'react';
+  import HomeHero from './HomeHero.jsx';
   import braceletImg from '../Asset/bracelet.png';
   import glassesImg from '../Asset/mendhiglasses.png';
   import groombrideImg from '../Asset/groombride.png';
@@ -250,54 +251,7 @@ const submitForm = async (event) => {
       <>
 
 
-        <section className="hero" id="home">
-          <div className="hero-bg" />
-          <div className="hero-left">
-            <p className="hero-eyebrow">Custom Light-Up Accessories</p>
-            <h1>
-              LIGHT
-              <br />
-              UP
-              <br />
-              EVERY
-              <br />
-              <span className="accent">MOMENT.</span>
-            </h1>
-            <p className="hero-sub">
-              Create unforgettable moments with custom LED wearables, party accessories,
-              and branded event products. Designed for weddings, festivals, nightclubs,
-              and corporate events.
-            </p>
-            <div className="hero-actions">
-              <a href="#products" className="btn-primary">
-                See Products
-              </a>
-              <a href="#enquiry" className="btn-outline">
-                Bulk Enquiry
-              </a>
-            </div>
-          </div>
-
-          <div className="hero-right">
-            <div className="bracelet-showcase" aria-label="LED silicone bracelet visual">
-              <div className="bracelet-ring ring-1" />
-              <div className="bracelet-ring ring-2" />
-              <div className="bracelet-ring ring-3" />
-              <div className="bracelet-core">
-                <div className="bracelet-text">
-                  LED
-                  <br />
-                  SILICONE
-                  <br />
-                  <small>BRACELET</small>
-                </div>
-              </div>
-              <div className="floating-dot dot-1" />
-              <div className="floating-dot dot-2" />
-              <div className="floating-dot dot-3" />
-            </div>
-          </div>
-        </section>
+        <HomeHero />
 
         <div className="ticker-wrap" aria-label="Use cases">
           <div className="ticker">
