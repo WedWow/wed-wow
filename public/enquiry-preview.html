@@ -218,7 +218,7 @@ input:focus,select:focus{border-color:var(--neon);box-shadow:0 0 0 1px rgba(212,
 
 
 .quote{
-  display:none;
+  display:block;
   margin-top:14px;
   background:var(--black);
   border:1px solid rgba(255,255,255,.08);
@@ -480,7 +480,6 @@ input:focus,select:focus{border-color:var(--neon);box-shadow:0 0 0 1px rgba(212,
       <a href="/gallery">Gallery</a>
       <a href="/products">Products</a>
     </nav>
-    <a href="#quoteBox" class="designer-nav-cta">Get a Quote</a>
   </header>
 
   <main class="shell">
@@ -598,19 +597,18 @@ input:focus,select:focus{border-color:var(--neon);box-shadow:0 0 0 1px rgba(212,
           </div>
 
           <div class="swatches" id="swatches">
-    <span>Single colour</span>
-    <button class="swatch active" data-color="#ffffff" data-soft="rgba(255,255,255,.72)" data-strong="rgba(255,255,255,.98)" data-shadow="rgba(255,255,255,.95)" style="background:#ffffff" aria-label="White"></button>
-    <b style="font-size:11px">White only</b>
-  </div>
+            <span>Preview colour</span>
+            <button class="swatch" data-color="#ff214f" data-soft="rgba(255,33,79,.82)" data-strong="rgba(255,33,79,1)" data-shadow="rgba(255,33,79,1)" style="background:#ff214f" aria-label="Red"></button>
+            <button class="swatch" data-color="#ff9f1a" data-soft="rgba(255,159,26,.82)" data-strong="rgba(255,159,26,1)" data-shadow="rgba(255,159,26,1)" style="background:#ff9f1a" aria-label="Orange"></button>
+            <button class="swatch active" data-color="#baff24" data-soft="rgba(186,255,36,.86)" data-strong="rgba(186,255,36,1)" data-shadow="rgba(186,255,36,1)" style="background:#baff24" aria-label="Lime"></button>
+            <button class="swatch" data-color="#26d9ff" data-soft="rgba(38,217,255,.84)" data-strong="rgba(38,217,255,1)" data-shadow="rgba(38,217,255,1)" style="background:#26d9ff" aria-label="Blue"></button>
+            <button class="swatch" data-color="#8e5cff" data-soft="rgba(142,92,255,.84)" data-strong="rgba(142,92,255,1)" data-shadow="rgba(142,92,255,1)" style="background:#8e5cff" aria-label="Purple"></button>
+            <button class="swatch" data-color="#ff4fd8" data-soft="rgba(255,79,216,.84)" data-strong="rgba(255,79,216,1)" data-shadow="rgba(255,79,216,1)" style="background:#ff4fd8" aria-label="Pink"></button>
+            <button class="swatch" data-color="#ffffff" data-soft="rgba(255,255,255,.78)" data-strong="rgba(255,255,255,1)" data-shadow="rgba(255,255,255,1)" style="background:#ffffff" aria-label="White"></button>
+          </div>
         </div>
 
-        <div class="cta-row">
-          <button class="primary" id="quoteBtn">Get my quote with this design →</button>
-          <button class="secondary" id="randomBtn">Surprise me</button>
-        </div>
-
-        
-        <div class="quote" id="quoteBox">
+        <div class="quote open" id="quoteBox">
           <div class="quote-head">
             <div>
               <div class="quote-kicker">YOUR WEDWOW QUOTE</div>
@@ -655,8 +653,8 @@ input:focus,select:focus{border-color:var(--neon);box-shadow:0 0 0 1px rgba(212,
             <div class="quote-section-content">
               <div class="quote-section-title">Choose your light function</div>
               <div class="option-grid option-grid-3">
-                <label class="choice-card active" data-choice-group="light" data-value="Option 1 — Single Colour">
-                  <input type="radio" name="lightFunction" value="Option 1 — Single Colour" checked>
+                <label class="choice-card" data-choice-group="light" data-value="Option 1 — Single Colour">
+                  <input type="radio" name="lightFunction" value="Option 1 — Single Colour">
                   <div class="choice-top">
                     <span class="choice-eyebrow">OPTION 1 · ON/OFF</span>
                     <span class="choice-tick">✓</span>
@@ -667,8 +665,8 @@ input:focus,select:focus{border-color:var(--neon);box-shadow:0 0 0 1px rgba(212,
                   </div>
                 </label>
 
-                <label class="choice-card" data-choice-group="light" data-value="Option 2 — Multi Colour">
-                  <input type="radio" name="lightFunction" value="Option 2 — Multi Colour">
+                <label class="choice-card active" data-choice-group="light" data-value="Option 2 — Multi Colour">
+                  <input type="radio" name="lightFunction" value="Option 2 — Multi Colour" checked>
                   <div class="choice-top">
                     <span class="choice-eyebrow">OPTION 2 · ON/OFF</span>
                     <span class="choice-tick">✓</span>
@@ -694,7 +692,7 @@ input:focus,select:focus{border-color:var(--neon);box-shadow:0 0 0 1px rgba(212,
                 </label>
               </div>
 
-              <div class="single-colour-picker single-colour-fixed" id="singleColourPicker">
+              <div class="single-colour-picker single-colour-fixed" id="singleColourPicker" style="display:none">
     <label>Single colour LED</label>
     <div class="white-only-indicator">
       <span class="white-dot"></span>
@@ -812,10 +810,6 @@ input:focus,select:focus{border-color:var(--neon);box-shadow:0 0 0 1px rgba(212,
           </div>
 
 
-          <div class="quote-subject-preview">
-            <span>EMAIL SUBJECT</span>
-            <strong id="quoteSubjectPreview">New WedWow enquiry</strong>
-          </div>
           <div class="mockup-export">
             <div class="mockup-export-head">
               <div>
@@ -827,7 +821,7 @@ input:focus,select:focus{border-color:var(--neon);box-shadow:0 0 0 1px rgba(212,
 
             <div class="mockup-export-preview" id="mockupExportPreview">
               <div class="mockup-empty" id="mockupEmpty">
-                Your exported preview will match the top preview layout and proportions, but with the lights off.
+                Your exported PNG will be an exact capture of the live preview above.
               </div>
               <img id="generatedMockupImg" alt="Generated WedWow wristband mockup" style="display:none">
             </div>
@@ -835,7 +829,7 @@ input:focus,select:focus{border-color:var(--neon);box-shadow:0 0 0 1px rgba(212,
             <div class="mockup-export-actions" id="mockupExportActions" style="display:none">
               <div class="mockup-ready">
                 <b>✓ Mockup ready</b>
-                <span>This lights-off preview PNG would be attached to your enquiry email.</span>
+                <span>This exact preview PNG would be attached to your enquiry email.</span>
               </div>
               <a class="secondary mockup-download" id="downloadMockupBtn" download="wedwow-wristband-mockup.png">Download PNG</a>
             </div>
@@ -860,6 +854,7 @@ input:focus,select:focus{border-color:var(--neon);box-shadow:0 0 0 1px rgba(212,
   </main>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script>
 const line1in = document.getElementById('line1in');
 const line2in = document.getElementById('line2in');
@@ -1006,15 +1001,12 @@ function applyLedColor(button){
   }
 }
 
-document.querySelectorAll('.swatch').forEach(s=>s.addEventListener('click',()=>applyLedColor(s)));
+document.querySelectorAll('.swatch').forEach(s=>s.addEventListener('click',()=>{
+  const selectedLight = document.querySelector('input[name="lightFunction"]:checked')?.value || '';
+  if(selectedLight.includes('Single Colour')) return;
+  applyLedColor(s);
+}));
 
-
-document.getElementById('quoteBtn').addEventListener('click',()=>{
-  const q=document.getElementById('quoteBox');
-  q.classList.add('open');
-  updateQuoteSummary();
-  q.scrollIntoView({behavior:'smooth',block:'start'});
-});
 
 let selectedQuoteColour = 'White';
 
@@ -1047,13 +1039,20 @@ document.querySelectorAll('.choice-card').forEach(card=>{
     if(group === 'light'){
       const selected = input?.value || '';
       const single = selected.includes('Single Colour');
+      const previewColours = document.getElementById('swatches');
       document.getElementById('singleColourPicker').style.display = single ? 'block' : 'none';
+      if(previewColours) previewColours.style.display = single ? 'none' : 'flex';
+
+      // Single Colour is a real product constraint: white only.
       if(single){
         bandWrap.classList.remove('multicolor');
-        const white = document.querySelector('.swatch.active');
+        const white = [...document.querySelectorAll('.swatch')].find(s=>s.dataset.color === '#ffffff');
         if(white) applyLedColor(white);
       }else{
-        bandWrap.classList.add('multicolor');
+        // Multi-colour products can be previewed in any representative colour.
+        bandWrap.classList.remove('multicolor');
+        const active = document.querySelector('.swatch.active');
+        if(active) applyLedColor(active);
         bandWrap.classList.add('on');
         document.getElementById('lightToggle')?.classList.add('on');
       }
@@ -1284,113 +1283,23 @@ function drawMultiColourGlow(ctx, x, y, w, h){
 }
 
 async function generateMockupPng(){
-  const img = document.querySelector('.band-img');
   const stage = document.querySelector('.stage');
-  const line1El = document.getElementById('line1');
-  const line2El = document.getElementById('line2');
-
-  if(!img || !stage) throw new Error('Preview stage not found.');
-
-  if(!img.complete){
-    await new Promise((resolve,reject)=>{
-      img.onload = resolve;
-      img.onerror = reject;
-    });
-  }
+  if(!stage) throw new Error('Preview stage not found.');
+  if(typeof html2canvas !== 'function') throw new Error('Preview capture library did not load.');
 
   if(document.fonts?.ready){
     try{ await document.fonts.ready; }catch(e){}
   }
 
-  const stageRect = stage.getBoundingClientRect();
-  const imgRect = img.getBoundingClientRect();
-  const line1Rect = line1El.getBoundingClientRect();
-  const line2Rect = line2El.getBoundingClientRect();
+  // Capture the exact rendered preview the customer can see on screen.
+  const canvas = await html2canvas(stage,{
+    backgroundColor:null,
+    scale:2,
+    useCORS:true,
+    logging:false
+  });
 
-  // Export the exact current preview proportions at 2x resolution.
-  const scale = 2;
-  const canvas = document.createElement('canvas');
-  canvas.width = Math.round(stageRect.width * scale);
-  canvas.height = Math.round(stageRect.height * scale);
-  const ctx = canvas.getContext('2d');
-  ctx.scale(scale, scale);
-
-  // Recreate the stage background to match the on-page preview.
-  ctx.fillStyle = '#1a1a1a';
-  ctx.fillRect(0, 0, stageRect.width, stageRect.height);
-
-  const radial = ctx.createRadialGradient(
-    stageRect.width * 0.5, stageRect.height * 0.45, 0,
-    stageRect.width * 0.5, stageRect.height * 0.45, stageRect.width * 0.42
-  );
-  radial.addColorStop(0, 'rgba(212,255,71,.035)');
-  radial.addColorStop(1, 'rgba(0,0,0,0)');
-  ctx.fillStyle = radial;
-  ctx.fillRect(0, 0, stageRect.width, stageRect.height);
-
-  // Base shadow taken from the bracelet position.
-  const shadowCx = (imgRect.left - stageRect.left) + imgRect.width / 2;
-  const shadowCy = (imgRect.top - stageRect.top) + imgRect.height * 0.86;
-  ctx.save();
-  ctx.filter = 'blur(22px)';
-  ctx.fillStyle = 'rgba(0,0,0,.40)';
-  ctx.beginPath();
-  ctx.ellipse(shadowCx, shadowCy, imgRect.width * 0.33, imgRect.height * 0.08, 0, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.restore();
-
-  // Draw the bracelet exactly where it appears in the preview.
-  const dx = imgRect.left - stageRect.left;
-  const dy = imgRect.top - stageRect.top;
-  const dw = imgRect.width;
-  const dh = imgRect.height;
-
-  ctx.save();
-  ctx.shadowColor = 'rgba(0,0,0,.55)';
-  ctx.shadowBlur = 16;
-  ctx.shadowOffsetY = 12;
-  ctx.drawImage(img, dx, dy, dw, dh);
-  ctx.restore();
-
-  // Draw the text using the actual rendered font styles/positions from the preview.
-  function drawTextFromElement(el, rect){
-    const txt = (el.textContent || '').trim();
-    if(!txt) return;
-
-    const style = getComputedStyle(el);
-    const centerX = (rect.left - stageRect.left) + rect.width / 2;
-    const centerY = (rect.top - stageRect.top) + rect.height / 2;
-
-    const fontStyle = style.fontStyle && style.fontStyle !== 'normal' ? style.fontStyle + ' ' : '';
-    const fontWeight = style.fontWeight ? style.fontWeight + ' ' : '';
-    const fontSize = style.fontSize || '32px';
-    const fontFamily = style.fontFamily || 'Arial, sans-serif';
-
-    ctx.save();
-    ctx.fillStyle = style.color || '#090909';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.font = `${fontStyle}${fontWeight}${fontSize} ${fontFamily}`;
-    ctx.fillText(txt, centerX, centerY);
-    ctx.restore();
-  }
-
-  const designType = document.querySelector('input[name="designType"]:checked')?.value || 'Customised';
-  if(designType === 'Customised'){
-    drawTextFromElement(line1El, line1Rect);
-    drawTextFromElement(line2El, line2Rect);
-  }
-
-  // Footer label to match the preview.
-  ctx.save();
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'alphabetic';
-  ctx.font = '500 9px "DM Sans", Arial, sans-serif';
-  ctx.fillStyle = 'rgba(245,240,235,.28)';
-  ctx.fillText('LIVE DESIGN PREVIEW', 16, stageRect.height - 18);
-  ctx.restore();
-
-  generatedMockupDataUrl = canvas.toDataURL('image/png', 1);
+  generatedMockupDataUrl = canvas.toDataURL('image/png',1);
 
   const preview = document.getElementById('generatedMockupImg');
   preview.src = generatedMockupDataUrl;
@@ -1401,7 +1310,7 @@ async function generateMockupPng(){
   const safeName = (document.getElementById('quoteName')?.value || line1in.value || 'wedwow')
     .trim().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') || 'wedwow';
   download.href = generatedMockupDataUrl;
-  download.download = `wedwow-${safeName}-mockup-lights-off.png`;
+  download.download = `wedwow-${safeName}-mockup.png`;
 
   document.getElementById('mockupExportActions').style.display = 'flex';
   return generatedMockupDataUrl;
@@ -1440,7 +1349,13 @@ document.getElementById('randomBtn').addEventListener('click',()=>{
 
 updateText();
 syncQuoteProductAndSubject();
+document.getElementById('quoteBox')?.classList.add('open');
+document.getElementById('singleColourPicker').style.display = 'none';
+document.getElementById('swatches').style.display = 'flex';
 applyLedColor(document.querySelector('.swatch.active'));
+bandWrap.classList.add('on');
+document.getElementById('lightToggle')?.classList.add('on');
+updateQuoteSummary();
 </script>
 </body>
 </html>
