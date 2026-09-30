@@ -141,36 +141,36 @@ input:focus,select:focus{border-color:var(--neon);box-shadow:0 0 0 1px rgba(212,
 .band-wrap{position:relative;width:min(90%,900px);isolation:isolate;transition:.35s}
 .band-img{display:block;width:100%;position:relative;z-index:2;filter:drop-shadow(0 20px 28px rgba(0,0,0,.55));}
 .glow{
- position:absolute;z-index:3;left:11%;right:11%;top:25%;height:51%;
+ position:absolute;z-index:3;left:11%;right:11%;top:27%;height:47%;
  border-radius:48%;
  background:
    radial-gradient(ellipse at center,
      var(--led-strong) 0%,
-     var(--led-strong) 24%,
-     var(--led-soft) 54%,
-     rgba(0,0,0,0) 80%);
+     var(--led-strong) 20%,
+     var(--led-soft) 50%,
+     rgba(0,0,0,0) 78%);
  opacity:0;
- filter:blur(7px) saturate(1.28);
+ filter:blur(5px) saturate(1.08);
  transition:.35s;
  pointer-events:none;
 }
 .hotspot{display:none!important}
 .underglow{
- position:absolute;z-index:1;left:23%;right:23%;bottom:7%;
- height:18%;
+ position:absolute;z-index:1;left:28%;right:28%;bottom:8%;
+ height:13%;
  border-radius:50%;
  background:radial-gradient(ellipse at center, var(--led-soft) 0%, rgba(0,0,0,0) 72%);
- filter:blur(18px);
+ filter:blur(14px);
  opacity:0;transition:.35s;
 }
 .band-wrap.on .glow,
 .band-wrap.on .underglow{opacity:1}
 .band-wrap.on .band-img{
  filter:
-   brightness(1.03)
-   drop-shadow(0 0 18px var(--led-shadow))
+   brightness(1.015)
+   drop-shadow(0 0 10px var(--led-shadow))
+   drop-shadow(0 0 24px var(--led-shadow))
    drop-shadow(0 0 42px var(--led-shadow))
-   drop-shadow(0 0 82px var(--led-shadow))
    drop-shadow(0 14px 17px rgba(30,30,25,.11));
 }
 
@@ -433,13 +433,13 @@ input:focus,select:focus{border-color:var(--neon);box-shadow:0 0 0 1px rgba(212,
 .wrap{padding-top:110px}
 .band-wrap.multicolor .glow{
   background:linear-gradient(90deg,
-    rgba(255,50,92,.88) 0%,
-    rgba(255,180,40,.88) 18%,
-    rgba(183,255,57,.88) 36%,
-    rgba(67,215,255,.88) 56%,
-    rgba(157,103,255,.88) 76%,
-    rgba(255,255,255,.88) 100%) !important;
-  filter:blur(8px) saturate(1.25) !important;
+    rgba(255,50,92,.60) 0%,
+    rgba(255,180,40,.60) 18%,
+    rgba(183,255,57,.60) 36%,
+    rgba(67,215,255,.60) 56%,
+    rgba(157,103,255,.60) 76%,
+    rgba(255,255,255,.60) 100%) !important;
+  filter:blur(6px) saturate(1.05) !important;
 }
 .white-only-indicator{display:flex;align-items:center;gap:9px}
 .white-only-indicator .white-dot{
@@ -598,13 +598,13 @@ input:focus,select:focus{border-color:var(--neon);box-shadow:0 0 0 1px rgba(212,
 
           <div class="swatches" id="swatches">
             <span>Preview colour</span>
-            <button class="swatch" data-color="#ff214f" data-soft="rgba(255,33,79,.82)" data-strong="rgba(255,33,79,1)" data-shadow="rgba(255,33,79,1)" style="background:#ff214f" aria-label="Red"></button>
-            <button class="swatch" data-color="#ff9f1a" data-soft="rgba(255,159,26,.82)" data-strong="rgba(255,159,26,1)" data-shadow="rgba(255,159,26,1)" style="background:#ff9f1a" aria-label="Orange"></button>
-            <button class="swatch active" data-color="#baff24" data-soft="rgba(186,255,36,.86)" data-strong="rgba(186,255,36,1)" data-shadow="rgba(186,255,36,1)" style="background:#baff24" aria-label="Lime"></button>
-            <button class="swatch" data-color="#26d9ff" data-soft="rgba(38,217,255,.84)" data-strong="rgba(38,217,255,1)" data-shadow="rgba(38,217,255,1)" style="background:#26d9ff" aria-label="Blue"></button>
-            <button class="swatch" data-color="#8e5cff" data-soft="rgba(142,92,255,.84)" data-strong="rgba(142,92,255,1)" data-shadow="rgba(142,92,255,1)" style="background:#8e5cff" aria-label="Purple"></button>
-            <button class="swatch" data-color="#ff4fd8" data-soft="rgba(255,79,216,.84)" data-strong="rgba(255,79,216,1)" data-shadow="rgba(255,79,216,1)" style="background:#ff4fd8" aria-label="Pink"></button>
-            <button class="swatch" data-color="#ffffff" data-soft="rgba(255,255,255,.78)" data-strong="rgba(255,255,255,1)" data-shadow="rgba(255,255,255,1)" style="background:#ffffff" aria-label="White"></button>
+            <button class="swatch" data-color="#ff214f" data-soft="rgba(255,33,79,.42)" data-strong="rgba(255,33,79,.68)" data-shadow="rgba(255,33,79,.58)" style="background:#ff214f" aria-label="Red"></button>
+            <button class="swatch" data-color="#ff9f1a" data-soft="rgba(255,159,26,.42)" data-strong="rgba(255,159,26,.68)" data-shadow="rgba(255,159,26,.58)" style="background:#ff9f1a" aria-label="Orange"></button>
+            <button class="swatch active" data-color="#baff24" data-soft="rgba(186,255,36,.46)" data-strong="rgba(186,255,36,.70)" data-shadow="rgba(186,255,36,.60)" style="background:#baff24" aria-label="Lime"></button>
+            <button class="swatch" data-color="#26d9ff" data-soft="rgba(38,217,255,.42)" data-strong="rgba(38,217,255,.68)" data-shadow="rgba(38,217,255,.58)" style="background:#26d9ff" aria-label="Blue"></button>
+            <button class="swatch" data-color="#8e5cff" data-soft="rgba(142,92,255,.42)" data-strong="rgba(142,92,255,.68)" data-shadow="rgba(142,92,255,.58)" style="background:#8e5cff" aria-label="Purple"></button>
+            <button class="swatch" data-color="#ff4fd8" data-soft="rgba(255,79,216,.42)" data-strong="rgba(255,79,216,.68)" data-shadow="rgba(255,79,216,.58)" style="background:#ff4fd8" aria-label="Pink"></button>
+            <button class="swatch" data-color="#ffffff" data-soft="rgba(255,255,255,.38)" data-strong="rgba(255,255,255,.62)" data-shadow="rgba(255,255,255,.52)" style="background:#ffffff" aria-label="White"></button>
           </div>
         </div>
 
