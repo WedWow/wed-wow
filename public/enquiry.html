@@ -543,28 +543,6 @@ input:focus,select:focus{border-color:var(--neon);box-shadow:0 0 0 1px rgba(212,
         <div class="helper">You can now change the second line font independently.</div>
       </div>
 
-      <div class="ai-box">
-        <button id="aiOpen" class="ai-btn">✨ Help me design it — FREE</button>
-        <p class="ai-note">Free personalised wording ideas. No account needed.</p>
-        <div class="ai-panel" id="aiPanel">
-          <div class="grid2">
-            <div class="field" style="margin-top:0">
-              <label>Occasion</label>
-              <select id="occasion">
-                <option>Wedding</option><option>Birthday</option><option>Corporate Event</option><option>Party</option>
-              </select>
-            </div>
-            <div class="field" style="margin-top:0">
-              <label>Feel</label>
-              <select id="mood">
-                <option>Romantic</option><option>Elegant</option><option>Fun</option><option>Minimal</option>
-              </select>
-            </div>
-          </div>
-          <button id="generateIdeas" class="secondary" style="width:100%;margin-top:10px;padding:11px">Generate 6 ideas ✨</button>
-          <div class="ai-ideas" id="ideas"></div>
-        </div>
-      </div>
     </section>
 
     <section class="preview-pane">
@@ -602,7 +580,6 @@ input:focus,select:focus{border-color:var(--neon);box-shadow:0 0 0 1px rgba(212,
 
         <div class="cta-row">
           <button class="primary" id="quoteBtn">Get my quote with this design →</button>
-          <button class="secondary" id="randomBtn">Surprise me</button>
         </div>
 
         
@@ -905,79 +882,7 @@ document.querySelectorAll('.chip').forEach(btn=>{
   })
 });
 
-document.getElementById('aiOpen').addEventListener('click',()=>{
-  document.getElementById('aiPanel').classList.toggle('open');
-});
 
-function namesFromText(){
-  let s=line1in.value.trim();
-  if(!s) return ['Your','Names'];
-  let parts=s.split(/\s*&\s*|\s+and\s+|\s*\+\s*/i);
-  if(parts.length>=2) return [parts[0].trim(),parts[1].trim()];
-  let ws=s.split(/\s+/);
-  return [ws[0]||'Your',ws[1]||'Love'];
-}
-function initials(a,b){return (a[0]||'A').toUpperCase()+' + '+(b[0]||'B').toUpperCase()}
-function dateShort(){
-  const d=line2in.value.trim() || '27.09.26';
-  return d.replace(/20(\d{2})/,'$1');
-}
-function ideas(){
-  const [a,b]=namesFromText();
-  const occ=document.getElementById('occasion').value;
-  const mood=document.getElementById('mood').value;
-  const d=dateShort();
-  let list;
-  if(occ==='Wedding'){
-    list=[
-      [a+' & '+b,d,'signature','modern'],
-      ['#'+a+'And'+b,'','signature','signature'],
-      [initials(a,b),d,'elegant','modern'],
-      [a+' ♡ '+b,d,'elegant','elegant'],
-      ['THE NEWLYWEDS',d,'modern','modern'],
-      [a+' + '+b+' FOREVER',d,'modern','modern']
-    ];
-  } else if(occ==='Birthday'){
-    list=[
-      ['HAPPY BIRTHDAY '+a.toUpperCase(),'','bold','modern'],
-      [a+"'s Celebration",'','signature','signature'],
-      ['CHEERS TO '+a.toUpperCase(),'','modern','modern'],
-      [a+' • '+d,'','elegant','elegant'],
-      ['PARTY WITH '+a.toUpperCase(),'','bold','modern'],
-      ['#'+a+'Celebrates','','signature','signature']
-    ];
-  } else {
-    list=[
-      [a+' & '+b,d,'signature','modern'],
-      [a.toUpperCase()+' '+b.toUpperCase(),'','modern','modern'],
-      ['#'+a+b,'','signature','signature'],
-      [initials(a,b),d,'elegant','modern'],
-      ['LIGHT UP THE NIGHT','','bold','modern'],
-      [a+' • '+b,d,'classic','classic']
-    ];
-  }
-  if(mood==='Minimal') list=list.map((x,i)=>[i%2?initials(a,b):a+' & '+b, i%2?'':d, 'modern','modern']);
-  if(mood==='Elegant') list=list.map((x,i)=>[x[0],x[1], i%2?'elegant':'classic', 'elegant']);
-  if(mood==='Fun') list=list.map((x,i)=>[i%2?'#'+a+'And'+b:'PARTY WITH '+a.toUpperCase(), i%2?'':d, i%2?'signature':'bold', i%2?'signature':'modern']);
-  return list;
-}
-function renderIdeas(){
-  const box=document.getElementById('ideas'); box.innerHTML='';
-  ideas().forEach(([a,b,f1,f2])=>{
-    const el=document.createElement('button');
-    el.className='idea';
-    el.innerHTML='<strong>'+escapeHtml(a)+'</strong><span>'+escapeHtml(b || 'Single line design')+'</span>';
-    el.onclick=()=>{
-      line1in.value=a; line2in.value=b; currentFont1=f1; currentFont2=f2;
-      font1.value = currentFont1;
-      font2.value = currentFont2;
-      updateText();
-    };
-    box.appendChild(el);
-  })
-}
-function escapeHtml(str){return String(str).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-document.getElementById('generateIdeas').addEventListener('click',renderIdeas);
 
 document.getElementById('lightToggle').addEventListener('click',e=>{
   e.currentTarget.classList.toggle('on');
@@ -1417,21 +1322,6 @@ document.getElementById('generateMockupBtn')?.addEventListener('click', async ()
   }finally{
     btn.disabled = false;
   }
-});
-
-const samples=[
- ['Brandon & Holly','27/09/2026','signature','modern'],
- ["The Luker's",'10/9/2026','signature','bold'],
- ["#Sahil'dWithKrina",'','signature','signature'],
- ['THE PATELS','27 • 09 • 26','modern','modern'],
- ['Vishal ♥ Elicia','2026','signature','classic']
-];
-document.getElementById('randomBtn').addEventListener('click',()=>{
- const s=samples[Math.floor(Math.random()*samples.length)];
- line1in.value=s[0];line2in.value=s[1];currentFont1=s[2]; currentFont2=s[3];
- font1.value = currentFont1;
- font2.value = currentFont2;
- updateText();
 });
 
 updateText();
