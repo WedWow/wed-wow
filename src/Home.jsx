@@ -293,10 +293,6 @@
                   <span><strong>Live design preview</strong></span>
                 </div>
                 <div className="contact-line">
-                  <span className="contact-icon">✨</span>
-                  <span><strong>Free design assistant</strong></span>
-                </div>
-                <div className="contact-line">
                   <span className="contact-icon">✉</span>
                   <span>Your mockup is sent directly to <strong>sales@wedwow.co.uk</strong></span>
                 </div>
