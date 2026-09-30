@@ -1833,3 +1833,142 @@ footer {
   }
 
 }
+
+/* =========================================================
+   HOMEPAGE HERO IMAGE
+   Visual-only override inspired by the supplied reference.
+   Existing text, links and button behaviour remain unchanged.
+   ========================================================= */
+.hero {
+  min-height: 100vh;
+  display: block;
+  padding-top: 74px;
+  position: relative;
+  overflow: hidden;
+  background: #050505;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 74px 0 0;
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.96) 0%,
+      rgba(0,0,0,.88) 18%,
+      rgba(0,0,0,.68) 36%,
+      rgba(0,0,0,.30) 56%,
+      rgba(0,0,0,.08) 76%,
+      rgba(0,0,0,.02) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.10) 0%,
+      rgba(0,0,0,.00) 58%,
+      rgba(0,0,0,.25) 100%
+    ),
+    url('/hero-wedwow.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.hero-left {
+  min-height: calc(100vh - 74px);
+  width: min(620px, 48vw);
+  padding: 3.5rem 2rem 3.5rem 4.25rem;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-right {
+  display: none;
+}
+
+.hero-eyebrow {
+  text-shadow: 0 1px 18px rgba(0,0,0,.75);
+}
+
+.hero h1,
+.hero-sub,
+.hero-actions {
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 {
+  text-shadow: 0 2px 24px rgba(0,0,0,.72);
+}
+
+.hero-sub {
+  color: rgba(245,240,235,.82);
+  text-shadow: 0 1px 16px rgba(0,0,0,.75);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: 100svh;
+    padding: 64px 0 0 !important;
+  }
+
+  .hero-bg {
+    inset: 64px 0 0;
+    background-image:
+      linear-gradient(
+        90deg,
+        rgba(0,0,0,.94) 0%,
+        rgba(0,0,0,.82) 38%,
+        rgba(0,0,0,.48) 62%,
+        rgba(0,0,0,.16) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(0,0,0,.16) 0%,
+        rgba(0,0,0,.02) 48%,
+        rgba(0,0,0,.40) 100%
+      ),
+      url('/hero-wedwow.jpg');
+    background-size: cover;
+    background-position: 67% center;
+  }
+
+  .hero-left {
+    min-height: calc(100svh - 64px);
+    width: 100%;
+    max-width: 560px;
+    padding: 3.5rem 1.5rem 2.5rem;
+    justify-content: center;
+  }
+
+  .hero-right {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-left {
+    max-width: 100%;
+    padding: 3rem 1.1rem 2.25rem;
+  }
+
+  .hero-bg {
+    background-position: 70% center;
+  }
+
+  .hero-sub {
+    max-width: 340px;
+    font-size: .95rem;
+    line-height: 1.55;
+  }
+
+  .hero-actions {
+    gap: .7rem;
+  }
+
+  .btn-primary,
+  .btn-outline {
+    padding: .8rem 1.3rem;
+    font-size: .78rem;
+  }
+}
