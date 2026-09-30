@@ -1,12 +1,8 @@
 {
-  "rewrites": [
-    {
-      "source": "/enquiry",
-      "destination": "/enquiry.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/"
-    }
-  ]
-}
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "/"
+      }
+    ]
+  }
