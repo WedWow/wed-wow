@@ -465,6 +465,11 @@ input:focus,select:focus{border-color:var(--neon);box-shadow:0 0 0 1px rgba(212,
 /* Preview-only requested removals. Underlying designer logic is intentionally untouched. */
 .ai-box { display: none !important; }
 #randomBtn { display: none !important; }
+
+/* Plain wristband: remove all printed text from the live preview. */
+.band-wrap.plain-mode .print-area{
+  display:none !important;
+}
 </style>
 </head>
 <body>
@@ -1036,6 +1041,11 @@ document.querySelectorAll('.choice-card').forEach(card=>{
     document.querySelectorAll('.choice-card[data-choice-group="'+group+'"]').forEach(x=>x.classList.remove('active'));
     card.classList.add('active');
 
+    if(group === 'design'){
+      const plain = input?.value === 'Plain';
+      bandWrap.classList.toggle('plain-mode', plain);
+    }
+
     if(group === 'light'){
       const selected = input?.value || '';
       const single = selected.includes('Single Colour');
@@ -1349,6 +1359,10 @@ document.getElementById('randomBtn').addEventListener('click',()=>{
 
 updateText();
 syncQuoteProductAndSubject();
+bandWrap.classList.toggle(
+  'plain-mode',
+  document.querySelector('input[name="designType"]:checked')?.value === 'Plain'
+);
 document.getElementById('quoteBox')?.classList.add('open');
 document.getElementById('singleColourPicker').style.display = 'none';
 document.getElementById('swatches').style.display = 'flex';
