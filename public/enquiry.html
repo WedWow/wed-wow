@@ -1879,9 +1879,10 @@ function updatePersonalisationPreview(){
 
 function fitUploadedLogo(){
   const scale = Number(logoSize.value) / 100;
-  logoPreviewImage.style.width = (scale * 100) + '%';
-  logoPreviewImage.style.height = 'auto';
-  logoPreviewImage.style.transform = 'translate(' + logoX + 'px,' + logoY + 'px)';
+  logoPreviewImage.style.width = '100%';
+  logoPreviewImage.style.height = '100%';
+  logoPreviewImage.style.objectFit = 'contain';
+  logoPreviewImage.style.transform = 'translate(' + logoX + 'px,' + logoY + 'px) scale(' + scale + ')';
   logoSizeValue.textContent = logoSize.value + '%';
   logoPositionValue.textContent =
     (logoX === 0 && logoY === 0) ? 'Centred' : (logoX + 'px, ' + logoY + 'px');
