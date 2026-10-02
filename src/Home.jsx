@@ -100,7 +100,7 @@
     {
       num: '01',
       title: 'Submit Your Enquiry',
-      desc: 'Fill in the form below with your event type, quantity needed and any branding requirements.',
+      desc: 'Fill in the form on the Enquiry Form page with your event type, quantity needed and any branding requirements.',
     },
     {
       num: '02',
