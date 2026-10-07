@@ -189,7 +189,7 @@ export default function PrivacyPolicy() {
               </a>
               .
             </p>
-            <a href="/#enquiry" className="btn-primary" style={{ display: 'inline-block', marginTop: '1rem' }}>
+            <a href="/enquiry" className="btn-primary" style={{ display: 'inline-block', marginTop: '1rem' }}>
               Contact Us
             </a>
           </div>
