@@ -39,7 +39,7 @@ function Nav() {
   <Link to="/products">Products</Link>
 </div>
 
-      <a href="/#enquiry" className="site-nav-cta">
+      <a href="/enquiry" className="site-nav-cta">
         Get a Quote
       </a>
 

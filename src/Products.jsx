@@ -92,7 +92,7 @@ const products = [
               <a href="#product-catalogue" className="btn-primary">
                 View Products
               </a>
-              <a href="/#enquiry" className="btn-outline">
+              <a href="/enquiry" className="btn-outline">
                 Enquiry Form
               </a>
             </div>
@@ -157,7 +157,7 @@ const products = [
   
                   <a
                     className="product-detail-link"
-                    href={`/#enquiry?product=${encodeURIComponent(product.enquiryProduct)}`}
+                    href={`/enquiry?product=${encodeURIComponent(product.enquiryProduct)}`}
                   >
                     Enquire for pricing →
                   </a>
@@ -179,7 +179,7 @@ const products = [
             the best option for your event and budget.
           </p>
   
-          <a href="/#enquiry" className="btn-primary">
+          <a href="/enquiry" className="btn-primary">
             Start an Enquiry
           </a>
         </section>

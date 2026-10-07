@@ -158,7 +158,7 @@ export default function TermsAndConditions() {
               If you have any questions about these Terms and Conditions, please get in touch
               via our enquiry form or email us directly.
             </p>
-            <a href="/#enquiry" className="btn-primary" style={{ display: 'inline-block', marginTop: '1rem' }}>
+            <a href="/enquiry" className="btn-primary" style={{ display: 'inline-block', marginTop: '1rem' }}>
               Contact Us
             </a>
           </div>

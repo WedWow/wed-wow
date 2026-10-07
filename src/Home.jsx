@@ -272,7 +272,7 @@ const submitForm = async (event) => {
               <a href="#products" className="btn-primary">
                 See Products
               </a>
-              <a href="#enquiry" className="btn-outline">
+              <a href="/enquiry" className="btn-outline">
                 Bulk Enquiry
               </a>
             </div>
@@ -347,7 +347,7 @@ const submitForm = async (event) => {
                   <span className="card-tag">{product.tag}</span>
                   <div className="card-title">{product.title}</div>
                   <p className="card-desc">{product.description}</p>
-                  {product.arrow && <span className="card-arrow">{product.arrow}</span>}
+                  {product.arrow && <a href="/enquiry" className="card-arrow">{product.arrow}</a>}
                 </div>
               </div>
             ))}
