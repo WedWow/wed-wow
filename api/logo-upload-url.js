@@ -49,20 +49,11 @@ export default async function handler(req, res) {
     const pathname = `enquiries/${randomUUID()}.${extension}`;
     const expiry = Date.now() + 10 * 60 * 1000;
     const signedToken = await issueSignedToken({
-      pathname,
       operations: ["put"],
-      allowedContentTypes: [contentType],
-      maximumSizeInBytes: MAX_LOGO_BYTES,
-      validUntil: expiry,
     });
     const { presignedUrl } = await presignUrl(signedToken, {
       operation: "put",
       pathname,
-      access: "private",
-      allowedContentTypes: [contentType],
-      maximumSizeInBytes: MAX_LOGO_BYTES,
-      addRandomSuffix: false,
-      allowOverwrite: false,
       validUntil: expiry,
     });
 
