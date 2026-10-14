@@ -70,12 +70,13 @@ async function loadOriginalLogo(receipt) {
   if (!result || result.statusCode !== 200 || !result.stream) {
     throw new Error("The uploaded logo could not be found. Please submit again.");
   }
-  if (result.blob.size !== ref.b || result.blob.contentType !== ref.t) {
-    throw new Error("The uploaded logo did not match its original file.");
-  }
+  // Some blob GET responses omit Content-Length (reported size = 0) or
+  // normalize Content-Type, even though the stored content is intact.
+  // Compare the actual downloaded bytes against the signed original size.
+  // The upload receipt already validates the MIME type and file extension.
   const bytes = Buffer.from(await new Response(result.stream).arrayBuffer());
   if (bytes.length !== ref.b || bytes.length > MAX_LOGO_BYTES) {
-    throw new Error("The original logo was incomplete or too large.");
+    throw new Error("The original logo upload was incomplete. Please upload it again.");
   }
   return { filename: ref.n, content: bytes.toString("base64"), pathname: ref.p };
 }
@@ -265,19 +266,20 @@ export default async function handler(req, res) {
 
     const resendResult = await resendResponse.json();
 
-    if (originalLogo?.pathname) {
-      // No need to retain personal artwork once the email service accepted it.
-      // Also clean up after an email error; retries upload the original again.
-      try { await del(originalLogo.pathname); }
-      catch (error) { console.error("Temporary uploaded artwork cleanup failed:", error); }
-    }
-
     if (!resendResponse.ok) {
       console.error("Resend error:", resendResult);
       return res.status(502).json({
         success: false,
         error: resendResult?.message || "Email could not be sent"
       });
+    }
+
+    // A successful provider response is the only time we immediately remove
+    // uploaded artwork. Failed deliveries retain it temporarily for a retry;
+    // the scheduled cleanup deletes abandoned files after 24 hours.
+    if (originalLogo?.pathname) {
+      try { await del(originalLogo.pathname); }
+      catch (error) { console.error("Temporary uploaded artwork cleanup failed:", error); }
     }
 
     return res.status(200).json({
