@@ -1446,7 +1446,7 @@ button,
       <div class="logo-upload-panel" id="logoUploadPanel">
         <div class="logo-dropzone" id="logoDropzone">
           <strong>Drop your logo here</strong>
-          <p>or choose a PNG, JPG, WebP or SVG file up to 5 MB</p>
+          <p>or choose a PNG, JPG, WebP or SVG file up to 20 MB</p>
           <label class="logo-upload-button">Choose logo
             <input id="logoInput" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml">
           </label>
@@ -1842,6 +1842,7 @@ let currentFont2 = 'modern';
 let personalisationMethod = 'text';
 let uploadedLogoDataUrl = '';
 let uploadedLogoFileName = '';
+let uploadedLogoFile = null;
 let logoX = 0;
 let logoY = 0;
 
@@ -1920,6 +1921,7 @@ window.addEventListener('resize', fitUploadedLogo);
 function clearUploadedLogo(){
   uploadedLogoDataUrl = '';
   uploadedLogoFileName = '';
+  uploadedLogoFile = null;
   logoPreviewImage.removeAttribute('src');
   logoPreviewImage.classList.remove('show');
   logoPreviewEmpty.classList.remove('has-logo');
@@ -1940,8 +1942,8 @@ function loadUploadedLogo(file){
     alert('Please upload a PNG, JPG, WebP or SVG logo.');
     return;
   }
-  if(file.size > 5 * 1024 * 1024){
-    alert('Please upload a logo under 5 MB.');
+  if(file.size > 20 * 1024 * 1024){
+    alert('Please upload a logo up to 20 MB.');
     return;
   }
 
@@ -1954,6 +1956,7 @@ function loadUploadedLogo(file){
     }
     uploadedLogoDataUrl = dataUrl;
     uploadedLogoFileName = file.name;
+    uploadedLogoFile = file;
     logoX = 0;
     logoY = 0;
     logoSize.value = 70;
@@ -2330,7 +2333,7 @@ document.getElementById('demoSubmit').addEventListener('click',async ()=>{
   }
 
   const currentDesignType = document.querySelector('input[name="designType"]:checked')?.value || 'Customised';
-  if(currentDesignType === 'Customised' && personalisationMethod === 'logo' && !uploadedLogoDataUrl){
+  if(currentDesignType === 'Customised' && personalisationMethod === 'logo' && (!uploadedLogoDataUrl || !uploadedLogoFile)){
     msg.textContent = 'Please upload your logo, or switch back to Type your design.';
     msg.classList.add('show');
     msg.scrollIntoView({behavior:'smooth',block:'nearest'});
@@ -2354,7 +2357,8 @@ document.getElementById('demoSubmit').addEventListener('click',async ()=>{
       designType,
       personalisationMethod: designType === 'Customised' ? personalisationMethod : '',
       logoFileName: designType === 'Customised' && personalisationMethod === 'logo' ? uploadedLogoFileName : '',
-      logoDataUrl: designType === 'Customised' && personalisationMethod === 'logo' ? uploadedLogoDataUrl : '',
+      // Keep the original logo outside the small quote JSON payload.
+      logoUploadReceipt: '',
       line1: designType === 'Customised' && personalisationMethod === 'text' ? line1in.value.trim() : '',
       line2: designType === 'Customised' && personalisationMethod === 'text' ? line2in.value.trim() : '',
       font1: designType === 'Customised' && personalisationMethod === 'text' ? currentFont1 : '',
@@ -2363,10 +2367,39 @@ document.getElementById('demoSubmit').addEventListener('click',async ()=>{
       mockupDataUrl
     };
 
+    if(designType === 'Customised' && personalisationMethod === 'logo'){
+      submitBtn.textContent = 'Uploading your original logo…';
+      // A private presigned URL lets the browser send the original file
+      // straight to storage, avoiding the serverless body-size restriction.
+      const authorisation = await fetch('/api/logo-upload-url',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          fileName:uploadedLogoFile.name,
+          contentType:uploadedLogoFile.type,
+          size:uploadedLogoFile.size
+        })
+      });
+      const uploadDetails = await authorisation.json().catch(()=>({}));
+      if(!authorisation.ok || !uploadDetails.uploadUrl || !uploadDetails.receipt){
+        throw new Error(uploadDetails.error || 'Unable to prepare your logo upload. Please try again.');
+      }
+      const uploadResponse = await fetch(uploadDetails.uploadUrl,{
+        method:'PUT',
+        headers:{'Content-Type':uploadedLogoFile.type},
+        body:uploadedLogoFile
+      });
+      if(!uploadResponse.ok){
+        throw new Error('Your original logo could not be uploaded. Please try again.');
+      }
+      payload.logoUploadReceipt = uploadDetails.receipt;
+      submitBtn.textContent = 'Sending your design…';
+    }
+
     const requestBody = JSON.stringify(payload);
-    // Limit combined logo and preview size to the serverless request allowance.
-    if(designType === 'Customised' && personalisationMethod === 'logo' && new Blob([requestBody]).size > 3800000){
-      throw new Error('The logo and preview are too large to send together. Please upload a smaller logo file and try again.');
+    // Only the rendered preview and the short upload receipt reach our API.
+    if(new Blob([requestBody]).size > 3800000){
+      throw new Error('The generated preview is too large to email. Please try again.');
     }
     const response = await fetch('/api/wristband-quote',{
       method:'POST',
@@ -2384,9 +2417,7 @@ document.getElementById('demoSubmit').addEventListener('click',async ()=>{
     msg.scrollIntoView({behavior:'smooth',block:'nearest'});
   }catch(err){
     console.error(err);
-    msg.textContent = err?.message?.startsWith('The logo and preview are too large')
-      ? err.message
-      : 'Sorry, something went wrong. Please try again or email sales@wedwow.co.uk.';
+    msg.textContent = err?.message || 'Sorry, something went wrong. Please try again or email sales@wedwow.co.uk.';
     msg.classList.add('show');
     msg.scrollIntoView({behavior:'smooth',block:'nearest'});
   }finally{
