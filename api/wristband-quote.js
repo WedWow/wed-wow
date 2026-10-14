@@ -1,5 +1,5 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
-import { get, del } from "@vercel/blob";
+import { get, list, del } from "@vercel/blob";
 
 const MAX_MOCKUP_BYTES = 5 * 1024 * 1024;
 const MAX_LOGO_BYTES = 20 * 1024 * 1024;
@@ -64,21 +64,53 @@ function verifyLogoReceipt(receipt) {
   return value;
 }
 
-async function loadOriginalLogo(receipt) {
+function isMatchingArtworkPath(expected, candidate) {
+  if (typeof candidate !== "string" || candidate.length > 180) return false;
+  if (candidate === expected) return true;
+  const dot = expected.lastIndexOf(".");
+  const stem = expected.slice(0, dot);
+  const ext = expected.slice(dot);
+  // An older upload may have been given a random suffix by Blob. A match
+  // must share the unpredictable signed UUID, extension and expected folder.
+  return candidate.startsWith(stem + "-") &&
+    candidate.endsWith(ext) &&
+    /^[A-Za-z0-9]{8,40}$/.test(candidate.slice(stem.length + 1, -ext.length));
+}
+
+async function loadOriginalLogo(receipt, uploadedPathname) {
   const ref = verifyLogoReceipt(receipt);
-  const result = await get(ref.p, { access: "private" });
-  if (!result || result.statusCode !== 200 || !result.stream) {
-    throw new Error("The uploaded logo could not be found. Please submit again.");
+  let actualPath = isMatchingArtworkPath(ref.p, uploadedPathname)
+    ? uploadedPathname : ref.p;
+  let result = null;
+
+  for (let attempt = 0; attempt < 3; attempt++) {
+    // Bypass private CDN caching so a newly uploaded logo is visible.
+    result = await get(actualPath, { access: "private", useCache: false });
+    if (result?.statusCode === 200 && result.stream) break;
+
+    // If a previous presigned PUT added a random suffix, find the exact
+    // actual path using only this receipt's UUID. Never match another upload.
+    if (attempt === 0) {
+      const prefix = ref.p.slice(0, ref.p.lastIndexOf("."));
+      const found = await list({ prefix, limit: 10 });
+      const match = found.blobs.find(blob =>
+        isMatchingArtworkPath(ref.p, blob.pathname) && blob.size === ref.b
+      );
+      if (match) actualPath = match.pathname;
+    }
+    if (attempt < 2) await new Promise(resolve => setTimeout(resolve, 350 * (attempt + 1)));
   }
-  // Some blob GET responses omit Content-Length (reported size = 0) or
-  // normalize Content-Type, even though the stored content is intact.
-  // Compare the actual downloaded bytes against the signed original size.
-  // The upload receipt already validates the MIME type and file extension.
+
+  if (!result || result.statusCode !== 200 || !result.stream) {
+    throw new Error("Your logo was uploaded but could not be retrieved. Please upload it again or contact WedWow.");
+  }
+  // Validate the exact original bytes against the signed receipt, not
+  // Content-Length or normalized Content-Type response headers.
   const bytes = Buffer.from(await new Response(result.stream).arrayBuffer());
   if (bytes.length !== ref.b || bytes.length > MAX_LOGO_BYTES) {
     throw new Error("The original logo upload was incomplete. Please upload it again.");
   }
-  return { filename: ref.n, content: bytes.toString("base64"), pathname: ref.p };
+  return { filename: ref.n, content: bytes.toString("base64"), pathname: actualPath };
 }
 
 // Backward-compatible parser for older small-logo submissions during rollout.
@@ -135,6 +167,7 @@ export default async function handler(req, res) {
       logoFileName,
       logoDataUrl,
       logoUploadReceipt,
+      logoStoredPathname,
       line1,
       line2,
       font1,
@@ -158,7 +191,7 @@ export default async function handler(req, res) {
         // 20 MB files are uploaded directly from the browser to private Blob
         // storage. The original byte-for-byte artwork is read server-side.
         originalLogo = logoUploadReceipt
-          ? await loadOriginalLogo(logoUploadReceipt)
+          ? await loadOriginalLogo(logoUploadReceipt, logoStoredPathname)
           : cleanOriginalLogo(logoDataUrl, logoFileName);
       } catch (error) {
         return res.status(400).json({ success: false, error: error.message });
