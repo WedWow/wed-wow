@@ -1282,10 +1282,12 @@ button,
 }
 .logo-design-preview img{
   display:none;
-  max-width:100%;
-  max-height:100%;
-  object-fit:contain;
-  transform-origin:center center;
+  /* Explicit aspect-correct pixel sizing is set by fitUploadedLogo().
+     html2canvas ignores object-fit:contain on full-size images. */
+  max-width:none;
+  max-height:none;
+  object-fit:fill;
+  flex-shrink:0;
   filter:none;
 }
 .logo-design-preview img.show{
@@ -1886,19 +1888,34 @@ function updatePersonalisationPreview(){
   logoUploadPanel.classList.toggle('open', logoMode);
   textDesignPreview.style.display = logoMode ? 'none' : 'block';
   logoDesignPreview.classList.toggle('show', logoMode);
+  if(logoMode && logoPreviewImage.naturalWidth) fitUploadedLogo();
   updateQuoteSummary();
 }
 
 function fitUploadedLogo(){
   const scale = Number(logoSize.value) / 100;
-  logoPreviewImage.style.width = '100%';
-  logoPreviewImage.style.height = '100%';
-  logoPreviewImage.style.objectFit = 'contain';
-  logoPreviewImage.style.transform = 'translate(' + logoX + 'px,' + logoY + 'px) scale(' + scale + ')';
+  const naturalWidth = logoPreviewImage.naturalWidth;
+  const naturalHeight = logoPreviewImage.naturalHeight;
+  const availableWidth = logoDesignPreview.clientWidth;
+  const availableHeight = logoDesignPreview.clientHeight;
+
+  // Use the actual image's aspect ratio instead of object-fit or a CSS
+  // scale. Those aren't reproduced reliably by html2canvas PNG exports.
+  if(naturalWidth > 0 && naturalHeight > 0 && availableWidth > 0 && availableHeight > 0){
+    const fittedScale = Math.min(availableWidth / naturalWidth, availableHeight / naturalHeight) * scale;
+    logoPreviewImage.style.width = (naturalWidth * fittedScale) + 'px';
+    logoPreviewImage.style.height = (naturalHeight * fittedScale) + 'px';
+  }
+  // Relative offsets keep the nudge controls consistent in browser and PNG.
+  logoPreviewImage.style.transform = 'none';
+  logoPreviewImage.style.position = 'relative';
+  logoPreviewImage.style.left = logoX + 'px';
+  logoPreviewImage.style.top = logoY + 'px';
   logoSizeValue.textContent = logoSize.value + '%';
   logoPositionValue.textContent =
     (logoX === 0 && logoY === 0) ? 'Centred' : (logoX + 'px, ' + logoY + 'px');
 }
+window.addEventListener('resize', fitUploadedLogo);
 
 function clearUploadedLogo(){
   uploadedLogoDataUrl = '';
@@ -2499,6 +2516,16 @@ async function generateMockupPng(){
 
   if(document.fonts?.ready){
     try{ await document.fonts.ready; }catch(e){}
+  }
+
+  // Ensure an uploaded logo has decoded and its aspect-correct dimensions
+  // are applied before the preview is captured for email/download.
+  if(personalisationMethod === 'logo' && !bandWrap.classList.contains('plain-mode')){
+    if(typeof logoPreviewImage.decode === 'function') await logoPreviewImage.decode();
+    if(!logoPreviewImage.naturalWidth || !logoPreviewImage.naturalHeight){
+      throw new Error('The uploaded logo could not be rendered. Please upload it again.');
+    }
+    fitUploadedLogo();
   }
 
   // Capture the exact rendered preview the customer can see on screen.
