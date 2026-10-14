@@ -1480,7 +1480,7 @@ button,
         </div>
 
         <div class="logo-disclaimer">
-          <b>Illustrative preview only.</b> The actual production design may need to change slightly to suit print dimensions or artwork requirements. If any change is required, WedWow will definitely contact you before proceeding.
+          <b>Illustrative preview only.</b> Your uploaded logo may look a little rough or distorted in this instant preview. The proper artwork mockup will be more polished and accurate. <b>We will send you a proper mockup to review before production.</b> The final design may need to change to suit printing, and if any changes are needed, WedWow will definitely contact you first.
         </div>
       </div>
 
@@ -2313,6 +2313,7 @@ document.getElementById('demoSubmit').addEventListener('click',async ()=>{
       designType,
       personalisationMethod: designType === 'Customised' ? personalisationMethod : '',
       logoFileName: designType === 'Customised' && personalisationMethod === 'logo' ? uploadedLogoFileName : '',
+      logoDataUrl: designType === 'Customised' && personalisationMethod === 'logo' ? uploadedLogoDataUrl : '',
       line1: designType === 'Customised' && personalisationMethod === 'text' ? line1in.value.trim() : '',
       line2: designType === 'Customised' && personalisationMethod === 'text' ? line2in.value.trim() : '',
       font1: designType === 'Customised' && personalisationMethod === 'text' ? currentFont1 : '',
@@ -2321,21 +2322,30 @@ document.getElementById('demoSubmit').addEventListener('click',async ()=>{
       mockupDataUrl
     };
 
+    const requestBody = JSON.stringify(payload);
+    // Limit combined logo and preview size to the serverless request allowance.
+    if(designType === 'Customised' && personalisationMethod === 'logo' && new Blob([requestBody]).size > 3800000){
+      throw new Error('The logo and preview are too large to send together. Please upload a smaller logo file and try again.');
+    }
     const response = await fetch('/api/wristband-quote',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(payload)
+      body:requestBody
     });
 
     const result = await response.json().catch(()=>({}));
     if(!response.ok) throw new Error(result.error || 'The enquiry could not be sent.');
 
-    msg.innerHTML = '<b>✓ Your WedWow quote request has been sent.</b><br>We received your details and your wristband mockup. We’ll be in touch shortly.';
+    msg.innerHTML = designType === 'Customised' && personalisationMethod === 'logo'
+      ? '<b>✓ Your WedWow quote request has been sent.</b><br>We received your details, your wristband preview and your original logo file. We’ll send you a proper artwork mockup to review.'
+      : '<b>✓ Your WedWow quote request has been sent.</b><br>We received your details and your wristband mockup. We’ll be in touch shortly.';
     msg.classList.add('show');
     msg.scrollIntoView({behavior:'smooth',block:'nearest'});
   }catch(err){
     console.error(err);
-    msg.textContent = 'Sorry, something went wrong. Please try again or email sales@wedwow.co.uk.';
+    msg.textContent = err?.message?.startsWith('The logo and preview are too large')
+      ? err.message
+      : 'Sorry, something went wrong. Please try again or email sales@wedwow.co.uk.';
     msg.classList.add('show');
     msg.scrollIntoView({behavior:'smooth',block:'nearest'});
   }finally{
