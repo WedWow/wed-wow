@@ -1,4 +1,6 @@
 const MAX_MOCKUP_BYTES = 5 * 1024 * 1024;
+const MAX_LOGO_BYTES = 5 * 1024 * 1024;
+const LOGO_EXTENSIONS = { "image/png":"png", "image/jpeg":"jpg", "image/webp":"webp", "image/svg+xml":"svg" };
 
 function escapeHtml(value = "") {
   return String(value)
@@ -31,6 +33,29 @@ function cleanBase64DataUrl(dataUrl) {
   return content;
 }
 
+function cleanOriginalLogo(dataUrl, originalFilename) {
+  if (!dataUrl || typeof dataUrl !== "string") {
+    throw new Error("The original logo file is missing. Please upload it again.");
+  }
+  const match = dataUrl.match(/^data:(image\/(?:png|jpeg|webp|svg\+xml));base64,([A-Za-z0-9+/]+={0,2})$/);
+  if (!match || match[2].length % 4 !== 0) {
+    throw new Error("The logo file is invalid. Please upload a PNG, JPG, WebP or SVG.");
+  }
+  const mime = match[1];
+  const content = match[2];
+  const bytes = Buffer.from(content, "base64");
+  if (!bytes.length || bytes.length > MAX_LOGO_BYTES) {
+    throw new Error("The logo must be a nonempty image file smaller than 5 MB.");
+  }
+  const ext = LOGO_EXTENSIONS[mime];
+  const originalName = String(originalFilename || "").split(/[\\/]/).pop()
+    .replace(/[^a-zA-Z0-9 ._()-]/g, "_").slice(0, 100).trim();
+  const filename = originalName && originalName.toLowerCase().endsWith("." + ext)
+    ? originalName
+    : "customer-logo." + ext;
+  return { filename, content };
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
@@ -59,6 +84,7 @@ export default async function handler(req, res) {
       designType,
       personalisationMethod,
       logoFileName,
+      logoDataUrl,
       line1,
       line2,
       font1,
@@ -76,6 +102,14 @@ export default async function handler(req, res) {
     }
 
     const mockupBase64 = cleanBase64DataUrl(mockupDataUrl);
+    let originalLogo = null;
+    if (designType === "Customised" && personalisationMethod === "logo") {
+      try {
+        originalLogo = cleanOriginalLogo(logoDataUrl, logoFileName);
+      } catch (error) {
+        return res.status(400).json({ success: false, error: error.message });
+      }
+    }
 
     const safe = {
       name: escapeHtml(name),
@@ -150,19 +184,20 @@ export default async function handler(req, res) {
             </div>
           </div>
 
-          ${mockupBase64 ? '<p style="margin-top:20px;"><strong>Mockup:</strong> attached as a PNG.</p>' : ""}
+          ${mockupBase64 ? '<p style="margin-top:20px;"><strong>Instant preview:</strong> attached as a PNG.</p>' : ""}
+          ${originalLogo ? '<p><strong>Original customer logo:</strong> attached as a separate file (unmodified). A proper artwork mockup will be prepared for customer review.</p>' : ""}
         </div>
       `
     };
 
+    const attachments = [];
     if (mockupBase64) {
-      emailPayload.attachments = [
-        {
-          filename: "wedwow-wristband-mockup.png",
-          content: mockupBase64
-        }
-      ];
+      attachments.push({ filename: "wedwow-wristband-mockup.png", content: mockupBase64 });
     }
+    if (originalLogo) {
+      attachments.push({ filename: originalLogo.filename, content: originalLogo.content });
+    }
+    if (attachments.length) emailPayload.attachments = attachments;
 
     const resendResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
