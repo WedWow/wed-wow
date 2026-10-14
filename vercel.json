@@ -8,5 +8,11 @@
       "source": "/(.*)",
       "destination": "/"
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/cleanup-enquiry-uploads",
+      "schedule": "0 3 * * *"
+    }
   ]
 }
