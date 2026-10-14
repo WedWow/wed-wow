@@ -1,5 +1,8 @@
+import { createHmac, timingSafeEqual } from "node:crypto";
+import { get, del } from "@vercel/blob";
+
 const MAX_MOCKUP_BYTES = 5 * 1024 * 1024;
-const MAX_LOGO_BYTES = 5 * 1024 * 1024;
+const MAX_LOGO_BYTES = 20 * 1024 * 1024;
 const LOGO_EXTENSIONS = { "image/png":"png", "image/jpeg":"jpg", "image/webp":"webp", "image/svg+xml":"svg" };
 
 function escapeHtml(value = "") {
@@ -33,6 +36,51 @@ function cleanBase64DataUrl(dataUrl) {
   return content;
 }
 
+function verifyLogoReceipt(receipt) {
+  if (typeof receipt !== "string" || receipt.length > 1024 || !receipt.includes(".")) {
+    throw new Error("Your logo upload is missing. Please try again.");
+  }
+  const [encoded, signature, extra] = receipt.split(".");
+  if (extra !== undefined || !encoded || !signature || !process.env.BLOB_READ_WRITE_TOKEN) {
+    throw new Error("Invalid logo upload receipt.");
+  }
+  const expected = createHmac("sha256", process.env.BLOB_READ_WRITE_TOKEN)
+    .update(encoded).digest("base64url");
+  const a = Buffer.from(signature);
+  const b = Buffer.from(expected);
+  if (a.length !== b.length || !timingSafeEqual(a, b)) {
+    throw new Error("Invalid logo upload receipt.");
+  }
+  let value;
+  try { value = JSON.parse(Buffer.from(encoded, "base64url").toString("utf8")); }
+  catch { throw new Error("Invalid logo upload receipt."); }
+  if (!Number.isFinite(value.e) || value.e < Date.now() ||
+      typeof value.p !== "string" || !/^enquiries\/[a-f0-9-]{36}\.(?:png|jpg|webp|svg)$/.test(value.p) ||
+      typeof value.n !== "string" || value.n.length > 100 ||
+      !LOGO_EXTENSIONS[value.t] || !Number.isInteger(value.b) ||
+      value.b < 1 || value.b > MAX_LOGO_BYTES) {
+    throw new Error("Your logo upload has expired or is invalid. Please upload it again.");
+  }
+  return value;
+}
+
+async function loadOriginalLogo(receipt) {
+  const ref = verifyLogoReceipt(receipt);
+  const result = await get(ref.p, { access: "private" });
+  if (!result || result.statusCode !== 200 || !result.stream) {
+    throw new Error("The uploaded logo could not be found. Please submit again.");
+  }
+  if (result.blob.size !== ref.b || result.blob.contentType !== ref.t) {
+    throw new Error("The uploaded logo did not match its original file.");
+  }
+  const bytes = Buffer.from(await new Response(result.stream).arrayBuffer());
+  if (bytes.length !== ref.b || bytes.length > MAX_LOGO_BYTES) {
+    throw new Error("The original logo was incomplete or too large.");
+  }
+  return { filename: ref.n, content: bytes.toString("base64"), pathname: ref.p };
+}
+
+// Backward-compatible parser for older small-logo submissions during rollout.
 function cleanOriginalLogo(dataUrl, originalFilename) {
   if (!dataUrl || typeof dataUrl !== "string") {
     throw new Error("The original logo file is missing. Please upload it again.");
@@ -45,7 +93,7 @@ function cleanOriginalLogo(dataUrl, originalFilename) {
   const content = match[2];
   const bytes = Buffer.from(content, "base64");
   if (!bytes.length || bytes.length > MAX_LOGO_BYTES) {
-    throw new Error("The logo must be a nonempty image file smaller than 5 MB.");
+    throw new Error("The logo must be a nonempty image file no larger than 20 MB.");
   }
   const ext = LOGO_EXTENSIONS[mime];
   const originalName = String(originalFilename || "").split(/[\\/]/).pop()
@@ -85,6 +133,7 @@ export default async function handler(req, res) {
       personalisationMethod,
       logoFileName,
       logoDataUrl,
+      logoUploadReceipt,
       line1,
       line2,
       font1,
@@ -105,7 +154,11 @@ export default async function handler(req, res) {
     let originalLogo = null;
     if (designType === "Customised" && personalisationMethod === "logo") {
       try {
-        originalLogo = cleanOriginalLogo(logoDataUrl, logoFileName);
+        // 20 MB files are uploaded directly from the browser to private Blob
+        // storage. The original byte-for-byte artwork is read server-side.
+        originalLogo = logoUploadReceipt
+          ? await loadOriginalLogo(logoUploadReceipt)
+          : cleanOriginalLogo(logoDataUrl, logoFileName);
       } catch (error) {
         return res.status(400).json({ success: false, error: error.message });
       }
@@ -125,7 +178,7 @@ export default async function handler(req, res) {
       message: escapeHtml(message || "").replaceAll("\n", "<br>"),
       designType: escapeHtml(designType || ""),
       personalisationMethod: escapeHtml(personalisationMethod || ""),
-      logoFileName: escapeHtml(logoFileName || ""),
+      logoFileName: escapeHtml(originalLogo?.filename || logoFileName || ""),
       line1: escapeHtml(line1 || ""),
       line2: escapeHtml(line2 || ""),
       font1: escapeHtml(font1 || ""),
@@ -199,6 +252,8 @@ export default async function handler(req, res) {
     }
     if (attachments.length) emailPayload.attachments = attachments;
 
+    // Resend allows up to 40 MB per email, including base64 encoding.
+    // Original 20 MB artwork plus the capped 5 MB PNG stays below that limit.
     const resendResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -209,6 +264,13 @@ export default async function handler(req, res) {
     });
 
     const resendResult = await resendResponse.json();
+
+    if (originalLogo?.pathname) {
+      // No need to retain personal artwork once the email service accepted it.
+      // Also clean up after an email error; retries upload the original again.
+      try { await del(originalLogo.pathname); }
+      catch (error) { console.error("Temporary uploaded artwork cleanup failed:", error); }
+    }
 
     if (!resendResponse.ok) {
       console.error("Resend error:", resendResult);
