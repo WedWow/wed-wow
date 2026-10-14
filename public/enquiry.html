@@ -1868,6 +1868,18 @@ window.addEventListener('resize', updateText);
 
 function updatePersonalisationPreview(){
   const logoMode = personalisationMethod === 'logo';
+  // An uploaded logo is a customised design: Plain must not hide the preview.
+  if(logoMode && document.querySelector('input[name="designType"]:checked')?.value === 'Plain'){
+    const customised = document.querySelector('input[name="designType"][value="Customised"]');
+    if(customised){
+      customised.checked = true;
+      document.querySelectorAll('.choice-card[data-choice-group="design"]').forEach(card=>{
+        card.classList.toggle('active', card.dataset.value === 'Customised');
+      });
+      bandWrap.classList.remove('plain-mode');
+      syncQuoteProductAndSubject();
+    }
+  }
   textPersonalisationMethod.classList.toggle('active', !logoMode);
   logoPersonalisationMethod.classList.toggle('active', logoMode);
   textPersonalisationPanel.classList.toggle('hidden', logoMode);
@@ -1918,22 +1930,34 @@ function loadUploadedLogo(file){
 
   const reader = new FileReader();
   reader.onload = ()=>{
-    uploadedLogoDataUrl = String(reader.result || '');
+    const dataUrl = String(reader.result || '');
+    if(!dataUrl.startsWith('data:image/')){
+      alert('This logo could not be read. Please choose another image.');
+      return;
+    }
+    uploadedLogoDataUrl = dataUrl;
     uploadedLogoFileName = file.name;
-    logoPreviewImage.onload = ()=>{
-      logoPreviewImage.classList.add('show');
-      logoPreviewEmpty.classList.add('has-logo');
-      logoFileName.textContent = file.name;
-      logoFileRow.classList.add('show');
-      logoAdjustments.classList.add('open');
-      logoX = 0;
-      logoY = 0;
-      logoSize.value = 70;
-      fitUploadedLogo();
-      updateQuoteSummary();
+    logoX = 0;
+    logoY = 0;
+    logoSize.value = 70;
+
+    // Show the uploaded artwork as soon as the file is read. Do not depend
+    // on the image load event to reveal the preview (it can be missed).
+    logoPreviewImage.classList.add('show');
+    logoPreviewEmpty.classList.add('has-logo');
+    logoFileName.textContent = file.name;
+    logoFileRow.classList.add('show');
+    logoAdjustments.classList.add('open');
+    logoPreviewImage.onload = fitUploadedLogo;
+    logoPreviewImage.onerror = ()=>{
+      clearUploadedLogo();
+      alert('This logo could not be displayed. Please choose another PNG, JPG, WebP or SVG file.');
     };
-    logoPreviewImage.src = uploadedLogoDataUrl;
+    logoPreviewImage.src = dataUrl;
+    fitUploadedLogo();
+    updateQuoteSummary();
   };
+  reader.onerror = ()=>alert('This logo could not be read. Please choose another image.');
   reader.readAsDataURL(file);
 }
 
