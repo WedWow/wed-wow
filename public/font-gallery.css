@@ -1,0 +1,93 @@
+/* Font gallery addition: scoped so the original designer stays unchanged. */
+.font-browse-button{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  margin-top:9px;padding:9px 12px;width:100%;
+  border:1px solid rgba(212,255,71,.45);background:rgba(212,255,71,.055);
+  color:var(--neon);border-radius:3px;font:600 12px 'DM Sans',sans-serif;
+  cursor:pointer;transition:background .2s,border-color .2s;
+}
+.font-browse-button:hover,.font-browse-button:focus-visible{
+  background:rgba(212,255,71,.15);border-color:var(--neon);
+}
+.font-request-note{
+  display:none;font-size:10px;line-height:1.5;margin-top:7px;
+  color:var(--cream);border-left:2px solid var(--neon);padding:7px 9px;
+  background:rgba(212,255,71,.06);
+}
+.font-request-note.show{display:block}
+.font-gallery-overlay[hidden]{display:none!important}
+.font-gallery-overlay{
+  position:fixed;inset:0;z-index:100000;
+  background:rgba(0,0,0,.82);display:flex;align-items:center;
+  justify-content:center;padding:18px;
+}
+.font-gallery-dialog{
+  width:min(740px,100%);max-height:min(810px,94dvh);overflow:hidden;
+  background:#111;border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 20px 80px rgba(0,0,0,.75);color:var(--white);
+  display:flex;flex-direction:column;border-radius:6px;
+}
+.font-gallery-header{
+  display:flex;justify-content:space-between;gap:16px;
+  align-items:flex-start;padding:21px 22px 12px;
+}
+.font-gallery-kicker{color:var(--neon);font-weight:800;letter-spacing:.13em;font-size:10px}
+.font-gallery-header h2{font-family:'Bebas Neue',sans-serif!important;font-size:32px!important;line-height:1.1!important;margin:5px 0!important;color:var(--white)!important}
+.font-gallery-header p{font-size:12px;line-height:1.5;color:#bbb;margin:0}
+.font-gallery-close{background:transparent;border:1px solid rgba(255,255,255,.24);color:white;border-radius:4px;font-size:23px;width:40px;height:40px;flex-shrink:0;cursor:pointer}
+.font-gallery-tools{padding:0 22px 14px;display:grid;gap:12px}
+.font-gallery-search{
+  display:block;width:100%;min-height:43px;padding:10px 13px;border-radius:3px;
+  border:1px solid rgba(255,255,255,.25);background:#1b1b1b;
+  color:white;font:13px 'DM Sans',sans-serif;
+}
+.font-gallery-search:focus-visible,.font-gallery-custom-input:focus-visible{
+  outline:2px solid var(--neon);outline-offset:2px;
+}
+.font-gallery-categories{display:flex;gap:7px;flex-wrap:wrap}
+.font-gallery-category{
+  padding:7px 11px;border:1px solid rgba(255,255,255,.18);
+  border-radius:20px;background:#1b1b1b;color:#ccc;font:600 11px 'DM Sans',sans-serif;cursor:pointer;
+}
+.font-gallery-category.active{background:var(--neon);border-color:var(--neon);color:#121212}
+.font-gallery-scroll{padding:0 22px 16px;overflow-y:auto;min-height:130px;flex:1;overscroll-behavior:contain}
+.font-gallery-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.font-gallery-option{
+  display:block;text-align:left;background:#1a1a1a;color:white;
+  padding:14px 13px;min-width:0;border:1px solid rgba(255,255,255,.12);
+  border-radius:5px;cursor:pointer;transition:border-color .2s,background .2s;
+}
+.font-gallery-option:hover,.font-gallery-option:focus-visible{border-color:var(--neon);background:#23281c}
+.font-gallery-option.selected{border-color:var(--neon);box-shadow:inset 0 0 0 1px var(--neon)}
+.font-gallery-option-name{display:block;font:600 10px 'DM Sans',sans-serif;color:#aaa;margin-bottom:8px}
+.font-gallery-option-sample{display:block;font-size:25px;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff}
+.font-gallery-empty{padding:25px 10px;text-align:center;font-size:13px;color:#ccc}
+.font-gallery-custom{
+  border-top:1px solid rgba(255,255,255,.14);padding:16px 22px 20px;
+  background:#171717;
+}
+.font-gallery-custom-title{font:700 13px 'DM Sans',sans-serif;margin:0 0 5px}
+.font-gallery-custom-help{color:#bbb;font-size:11px;line-height:1.5;margin:0 0 10px}
+.font-gallery-custom-row{display:flex;gap:9px}
+.font-gallery-custom-input{
+  flex:1;min-width:0;background:#222;color:white;
+  border:1px solid rgba(255,255,255,.24);border-radius:3px;
+  padding:10px 12px;font:12px 'DM Sans',sans-serif;
+}
+.font-gallery-request{
+  border:1px solid var(--neon);border-radius:3px;background:var(--neon);
+  color:#111;font:700 12px 'DM Sans',sans-serif;padding:10px 14px;cursor:pointer;
+}
+.font-gallery-custom-status{font:11px 'DM Sans',sans-serif;color:#ffc5c5;margin-top:8px;min-height:0}
+@media(max-width:550px){
+  .font-gallery-overlay{padding:7px;align-items:flex-end}
+  .font-gallery-dialog{max-height:96dvh;border-radius:7px 7px 0 0}
+  .font-gallery-header{padding:16px 14px 11px}
+  .font-gallery-tools{padding:0 14px 12px}
+  .font-gallery-scroll{padding:0 14px 13px}
+  .font-gallery-grid{grid-template-columns:1fr;gap:8px}
+  .font-gallery-option{padding:11px}
+  .font-gallery-custom{padding:14px}
+  .font-gallery-custom-row{flex-direction:column}
+  .font-gallery-request{min-height:42px}
+}
