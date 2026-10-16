@@ -1328,6 +1328,7 @@ button,
   }
 }
 </style>
+<link rel="stylesheet" href="/font-gallery.css">
 </head>
 <body>
 <div class="wrap">
@@ -1417,6 +1418,8 @@ button,
               <option value="classic">Classic</option>
               <option value="bold">Bold</option>
             </select>
+            <button type="button" class="font-browse-button" data-font-line="1" aria-haspopup="dialog" aria-controls="fontGalleryModal">Browse 30 fonts or request another →</button>
+            <div class="font-request-note" id="fontRequestNote1" role="status" aria-live="polite"></div>
           </div>
           <div class="field">
             <label>Second line font</label>
@@ -1427,6 +1430,8 @@ button,
               <option value="classic">Classic</option>
               <option value="bold">Bold</option>
             </select>
+            <button type="button" class="font-browse-button" data-font-line="2" aria-haspopup="dialog" aria-controls="fontGalleryModal">Browse 30 fonts or request another →</button>
+            <div class="font-request-note" id="fontRequestNote2" role="status" aria-live="polite"></div>
           </div>
         </div>
 
@@ -1849,8 +1854,10 @@ let logoY = 0;
 function updateText(){
   line1.textContent = line1in.value || 'Your text';
   line2.textContent = line2in.value || '';
-  line1.className = 'line1 ' + currentFont1;
-  line2.className = 'line2 ' + currentFont2;
+  line1.className = 'line1 ' + (currentFont1.startsWith('gf:') ? '' : (currentFont1.startsWith('custom:') ? 'modern' : currentFont1));
+  line2.className = 'line2 ' + (currentFont2.startsWith('gf:') ? '' : (currentFont2.startsWith('custom:') ? 'modern' : currentFont2));
+  line1.style.fontFamily = currentFont1.startsWith('gf:') ? '"' + currentFont1.slice(3) + '",cursive' : '';
+  line2.style.fontFamily = currentFont2.startsWith('gf:') ? '"' + currentFont2.slice(3) + '",cursive' : '';
   fitText(line1, 61, 18);
   fitText(line2, 34, 14);
 }
@@ -2151,6 +2158,12 @@ document.querySelectorAll('.swatch').forEach(s=>s.addEventListener('click',()=>{
 
 let selectedQuoteColour = 'White';
 
+function describeFontSelection(value){
+  if(value.startsWith('custom:')) return 'Custom font requested: ' + value.slice(7);
+  if(value.startsWith('gf:')) return value.slice(3);
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
 function updateQuoteSummary(){
   const designType = document.querySelector('input[name="designType"]:checked')?.value || 'Customised';
   const lightFunction = document.querySelector('input[name="lightFunction"]:checked')?.value || 'Option 1 — Single Colour';
@@ -2166,8 +2179,8 @@ function updateQuoteSummary(){
     const designLine = escapeHtml(line1in.value) + (line2in.value ? ' / ' + escapeHtml(line2in.value) : '');
     designHtml =
       '<b>Design:</b> ' + designLine +
-      '<br><b>First line font:</b> ' + currentFont1[0].toUpperCase()+currentFont1.slice(1) +
-      '<br><b>Second line font:</b> ' + currentFont2[0].toUpperCase()+currentFont2.slice(1);
+      '<br><b>First line font:</b> ' + escapeHtml(describeFontSelection(currentFont1)) +
+      '<br><b>Second line font:</b> ' + escapeHtml(describeFontSelection(currentFont2));
   }
 
   let lightText = escapeHtml(lightFunction);
@@ -2361,8 +2374,8 @@ document.getElementById('demoSubmit').addEventListener('click',async ()=>{
       logoUploadReceipt: '',
       line1: designType === 'Customised' && personalisationMethod === 'text' ? line1in.value.trim() : '',
       line2: designType === 'Customised' && personalisationMethod === 'text' ? line2in.value.trim() : '',
-      font1: designType === 'Customised' && personalisationMethod === 'text' ? currentFont1 : '',
-      font2: designType === 'Customised' && personalisationMethod === 'text' ? currentFont2 : '',
+      font1: designType === 'Customised' && personalisationMethod === 'text' ? describeFontSelection(currentFont1) : '',
+      font2: designType === 'Customised' && personalisationMethod === 'text' ? describeFontSelection(currentFont2) : '',
       lightFunction,
       mockupDataUrl
     };
@@ -2548,6 +2561,7 @@ async function generateMockupPng(){
   if(document.fonts?.ready){
     try{ await document.fonts.ready; }catch(e){}
   }
+  if(typeof window.wedwowEnsureFonts === 'function') await window.wedwowEnsureFonts();
 
   // Ensure an uploaded logo has decoded and its aspect-correct dimensions
   // are applied before the preview is captured for email/download.
@@ -2660,5 +2674,6 @@ updateQuoteSummary();
   });
 })();
 </script>
+<script src="/font-gallery.js" defer></script>
 </body>
 </html>
