@@ -1,0 +1,102 @@
+[
+  {
+    "order": 1,
+    "original_file": "5.mp4",
+    "title": "Dance Floor Highlights",
+    "video": "videos/01_WedWow_from_5.mp4",
+    "poster": "posters/01_WedWow_from_5.webp",
+    "description": "Illuminated wristbands across a lively dance floor",
+    "ai_generated": null,
+    "ai_generated_note": "Must confirm which 2 original clips are AI-generated before publication; never guess."
+  },
+  {
+    "order": 2,
+    "original_file": "8.mp4",
+    "title": "Personalised Wedding Wristbands",
+    "video": "videos/02_WedWow_from_8.mp4",
+    "poster": "posters/02_WedWow_from_8.webp",
+    "description": "A closer look at customised wedding wristbands",
+    "ai_generated": null,
+    "ai_generated_note": "Must confirm which 2 original clips are AI-generated before publication; never guess."
+  },
+  {
+    "order": 3,
+    "original_file": "9.mp4",
+    "title": "Wedding Celebration",
+    "video": "videos/03_WedWow_from_9.mp4",
+    "poster": "posters/03_WedWow_from_9.webp",
+    "description": "A celebration featuring illuminated LED wristbands",
+    "ai_generated": null,
+    "ai_generated_note": "Must confirm which 2 original clips are AI-generated before publication; never guess."
+  },
+  {
+    "order": 4,
+    "original_file": "3.mp4",
+    "title": "Lighting Up Together",
+    "video": "videos/04_WedWow_from_3.mp4",
+    "poster": "posters/04_WedWow_from_3.webp",
+    "description": "Coordinated wristband lighting during a celebration",
+    "ai_generated": null,
+    "ai_generated_note": "Must confirm which 2 original clips are AI-generated before publication; never guess."
+  },
+  {
+    "order": 5,
+    "original_file": "2.mp4",
+    "title": "Celebration Highlights",
+    "video": "videos/05_WedWow_from_2.mp4",
+    "poster": "posters/05_WedWow_from_2.webp",
+    "description": "Wristbands adding colour to a shared moment",
+    "ai_generated": null,
+    "ai_generated_note": "Must confirm which 2 original clips are AI-generated before publication; never guess."
+  },
+  {
+    "order": 6,
+    "original_file": "10.mp4",
+    "title": "Colour Changing Wristbands",
+    "video": "videos/06_WedWow_from_10.mp4",
+    "poster": "posters/06_WedWow_from_10.webp",
+    "description": "LED wristbands displaying colourful lighting",
+    "ai_generated": null,
+    "ai_generated_note": "Must confirm which 2 original clips are AI-generated before publication; never guess."
+  },
+  {
+    "order": 7,
+    "original_file": "6.mp4",
+    "title": "Wristbands at the Party",
+    "video": "videos/07_WedWow_from_6.mp4",
+    "poster": "posters/07_WedWow_from_6.webp",
+    "description": "Close-up moments featuring glowing wristbands",
+    "ai_generated": null,
+    "ai_generated_note": "Must confirm which 2 original clips are AI-generated before publication; never guess."
+  },
+  {
+    "order": 8,
+    "original_file": "7.mp4",
+    "title": "Celebration Details",
+    "video": "videos/08_WedWow_from_7.mp4",
+    "poster": "posters/08_WedWow_from_7.webp",
+    "description": "Personalised LED wristbands in a celebration setting",
+    "ai_generated": null,
+    "ai_generated_note": "Must confirm which 2 original clips are AI-generated before publication; never guess."
+  },
+  {
+    "order": 9,
+    "original_file": "4.mp4",
+    "title": "Wristbands Up Close",
+    "video": "videos/09_WedWow_from_4.mp4",
+    "poster": "posters/09_WedWow_from_4.webp",
+    "description": "A closer view of illuminated wristbands",
+    "ai_generated": null,
+    "ai_generated_note": "Must confirm which 2 original clips are AI-generated before publication; never guess."
+  },
+  {
+    "order": 10,
+    "original_file": "1.mp4",
+    "title": "More WedWow Moments",
+    "video": "videos/10_WedWow_from_1.mp4",
+    "poster": "posters/10_WedWow_from_1.webp",
+    "description": "Another look at personalised LED wristbands",
+    "ai_generated": null,
+    "ai_generated_note": "Must confirm which 2 original clips are AI-generated before publication; never guess."
+  }
+]
