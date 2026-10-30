@@ -1,0 +1,59 @@
+.wedwow-gallery-page { padding-top: 74px; }
+.wedwow-gallery-section { max-width: 1480px; margin: 0 auto; padding: 4rem 3rem 4.5rem; }
+.wedwow-gallery-intro { max-width: 850px; margin-bottom: 2.5rem; }
+.wedwow-gallery-intro h1 { font-size: clamp(3.3rem, 6.5vw, 6rem); line-height: 1; margin-bottom: 1.25rem; }
+.wedwow-gallery-description { max-width: 690px; color: rgba(245, 240, 235, 0.78); font-size: 1.05rem; line-height: 1.7; }
+.wedwow-gallery-disclosure { max-width: 760px; margin-top: 1.15rem; padding-left: 1rem; border-left: 2px solid rgba(212, 255, 71, 0.55); color: #aaa7a3; font-size: 0.8rem; line-height: 1.65; }
+.wedwow-gallery-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.75rem 1rem; list-style: none; }
+.wedwow-gallery-item { min-width: 0; }
+.wedwow-gallery-card { display: block; width: 100%; border: 0; background: transparent; color: var(--white); text-align: left; font: inherit; cursor: pointer; }
+.wedwow-gallery-thumbnail { position: relative; display: block; aspect-ratio: 9 / 16; overflow: hidden; border: 1px solid rgba(245, 240, 235, 0.15); border-radius: 4px; background: #141414; transition: border-color 0.2s; }
+.wedwow-gallery-thumbnail img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.wedwow-gallery-play { position: absolute; inset: auto auto 0.8rem 0.8rem; display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid rgba(255, 255, 255, 0.55); border-radius: 50%; background: rgba(10, 10, 10, 0.72); color: #fff; transition: background 0.2s, color 0.2s; }
+.wedwow-gallery-play svg { width: 24px; height: 24px; }
+.wedwow-gallery-card:hover .wedwow-gallery-thumbnail { border-color: var(--neon); }
+.wedwow-gallery-card:hover .wedwow-gallery-play { background: var(--neon); color: var(--black); }
+.wedwow-gallery-card:focus-visible, .wedwow-gallery-view-all:focus-visible, .wedwow-gallery-cta a:focus-visible, .wedwow-gallery-dialog button:focus-visible { outline: 2px solid var(--neon); outline-offset: 5px; }
+.wedwow-gallery-caption { display: block; margin-top: 0.7rem; font-size: 0.88rem; line-height: 1.5; font-weight: 500; }
+.wedwow-gallery-ai-label { position: absolute; top: 0.65rem; left: 0.65rem; right: 0.65rem; width: fit-content; padding: 0.35rem 0.5rem; border-radius: 2px; font-size: 0.7rem; line-height: 1.4; background: rgba(10, 10, 10, 0.88); color: var(--white); }
+.wedwow-gallery-page .wedwow-gallery-view-all { display: none; }
+.wedwow-gallery-cta { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(245, 240, 235, 0.12); text-align: center; }
+
+.wedwow-gallery-dialog { position: fixed; inset: 0; margin: auto; padding: 0; width: min(540px, calc(100% - 32px)); max-width: none; max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); overflow: auto; overscroll-behavior: contain; border: 1px solid #3c3c3c; border-radius: 8px; background: #121212; color: var(--white); box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5); }
+.wedwow-gallery-dialog::backdrop { background: rgba(0, 0, 0, 0.88); }
+.wedwow-gallery-player-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.5rem 0.75rem 0.5rem 1.1rem; }
+.wedwow-gallery-player-header p { font-size: 0.95rem; font-weight: 500; line-height: 1.4; }
+.wedwow-gallery-icon-button { display: inline-grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; padding: 0; border: 1px solid #414141; border-radius: 50%; background: transparent; color: var(--white); cursor: pointer; }
+.wedwow-gallery-icon-button:hover, .wedwow-gallery-sound:hover { border-color: var(--neon); color: var(--neon); }
+.wedwow-gallery-icon-button svg { width: 24px; height: 24px; }
+.wedwow-gallery-player-stage { position: relative; width: 100%; height: min(680px, calc(100vh - 210px)); height: min(680px, calc(100dvh - 210px)); min-height: 120px; background: #000; touch-action: pan-y; }
+.wedwow-gallery-player-stage video { display: block; width: 100%; height: 100%; object-fit: contain; }
+.wedwow-gallery-player-controls { display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 0.75rem 1rem 0.5rem; }
+.wedwow-gallery-player-count { min-width: 3rem; text-align: center; font-size: 0.85rem; color: #b8b5b1; font-variant-numeric: tabular-nums; }
+.wedwow-gallery-sound, .wedwow-gallery-player-error button { min-height: 44px; padding: 0.5rem 0.75rem; border: 1px solid #414141; border-radius: 4px; background: transparent; color: var(--white); font: inherit; font-size: 0.8rem; cursor: pointer; }
+.wedwow-gallery-player-description { padding: 0 1rem 1rem; font-size: 0.78rem; line-height: 1.5; text-align: center; color: #b8b5b1; }
+.wedwow-gallery-swipe-hint { display: none; }
+.wedwow-gallery-player-error { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem; padding: 1.5rem; background: rgba(10, 10, 10, 0.92); text-align: center; line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .wedwow-gallery-section { padding: 2.5rem 1.25rem 3rem; }
+  .wedwow-gallery-intro { margin-bottom: 1.75rem; }
+  .wedwow-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 0.8rem; }
+  .wedwow-gallery-grid:not(.is-expanded) .wedwow-gallery-item:nth-child(n + 7) { display: none; }
+  .wedwow-gallery-page .wedwow-gallery-view-all { display: block; margin: 1.75rem auto 0; min-height: 48px; padding: 0.8rem 1.3rem; background: transparent; font-family: inherit; cursor: pointer; }
+  .wedwow-gallery-description { font-size: 0.98rem; }
+  .wedwow-gallery-caption { font-size: 0.8rem; }
+  .wedwow-gallery-intro .section-label { font-size: 0.65rem; letter-spacing: 0.2em; }
+}
+@media (pointer: coarse) {
+  .wedwow-gallery-swipe-hint { display: block; padding: 0 1rem 0.85rem; color: #aaa7a3; font-size: 0.7rem; text-align: center; }
+  .wedwow-gallery-player-stage { height: min(680px, calc(100vh - 240px)); height: min(680px, calc(100dvh - 240px)); }
+  .wedwow-gallery-player-description { padding-bottom: 0.5rem; }
+}
+@media (max-width: 380px) {
+  .wedwow-gallery-section { padding-left: 1rem; padding-right: 1rem; }
+  .wedwow-gallery-player-controls { gap: 0.65rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wedwow-gallery-card *, .wedwow-gallery-view-all, .wedwow-gallery-cta a { transition: none; }
+}
