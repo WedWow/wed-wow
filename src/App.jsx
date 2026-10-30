@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/react';
 import Home from './Home.jsx';
 import Gallery from './Gallery.jsx';
 import Products from './Products.jsx';
+import PartnerProgramme from './PartnerProgramme.jsx';
 import TermsAndConditions from './TermsAndConditions.jsx';
 import PrivacyPolicy from './PrivacyPolicy.jsx';
 import Footer from './Footer.jsx';
@@ -37,6 +38,7 @@ function Nav() {
   <span className="nav-divider">|</span>
   <Link to="/gallery">Gallery</Link>
   <Link to="/products">Products</Link>
+  <Link to="/partner-programme">Partners</Link>
 </div>
 
       <a href="/enquiry" className="site-nav-cta">
@@ -72,6 +74,9 @@ function Nav() {
           <Link to="/products" onClick={closeMenu}>
             Products
           </Link>
+          <Link to="/partner-programme" onClick={closeMenu}>
+            Partners
+          </Link>
         </div>
       )}
     </header>
@@ -88,6 +93,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/partner-programme" element={<PartnerProgramme />} />
         <Route path="/terms" element={<TermsAndConditions />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
       </Routes>

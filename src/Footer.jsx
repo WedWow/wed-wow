@@ -10,6 +10,7 @@ export default function Footer() {
         <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Home</Link>
         <Link to="/gallery">Gallery</Link>
         <Link to="/products">Products</Link>
+        <Link to="/partner-programme">Partner Programme</Link>
         <Link to="/terms">Terms &amp; Conditions</Link>
         <Link to="/privacy">Privacy Policy</Link>
       </div>
