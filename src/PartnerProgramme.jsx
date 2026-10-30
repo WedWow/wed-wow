@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import braceletPhoto from '../Asset/bracelet.png';
-import glassesPhoto from '../Asset/mendhiglasses.png';
-import weddingBandsPhoto from '../Asset/groombride.png';
-import clubBandsPhoto from '../Asset/wristbands.png';
 import './PartnerProgramme.css';
 
 const initialForm = {
@@ -32,6 +29,33 @@ const businessTypes = [
   'Promotional products or merchandise',
   'Festival, concert or nightclub',
   'Other event business',
+];
+
+const audiences = [
+  {
+    title: 'Wedding planners & coordinators',
+    description: 'Bring a shared burst of colour to an entrance, first dance or evening celebration.'
+  },
+  {
+    title: 'Event & corporate agencies',
+    description: 'Offer a distinctive lighting moment for client parties, launches and company events.'
+  },
+  {
+    title: 'Production, lighting & AV teams',
+    description: 'Add wearable lighting as a creative element alongside your production plan.'
+  },
+  {
+    title: 'DJs & entertainment providers',
+    description: 'Give the dance floor another way to feel connected during a memorable set.'
+  },
+  {
+    title: 'Venues & hospitality teams',
+    description: 'Explore custom-branded experiences for receptions, private events and celebrations.'
+  },
+  {
+    title: 'Festival & live-event organisers',
+    description: 'Bring people together with customised wearable light and group moments.'
+  },
 ];
 
 function Field({ label, id, required = false, help, children }) {
@@ -144,31 +168,29 @@ export default function PartnerProgramme() {
         </div>
       </section>
 
-      <section className="partner-section partner-who">
-        <div className="partner-section-heading">
-          <p className="partner-eyebrow">Who it's for</p>
-          <h2>MADE FOR PEOPLE WHO MAKE EVENTS HAPPEN.</h2>
-          <p>We welcome enquiries from established businesses and independent professionals. A company website is helpful but not essential; a relevant social profile or portfolio works too.</p>
-        </div>
-        <div className="partner-who-grid">
-          {['Wedding planners and coordinators', 'Event agencies and corporate organisers', 'Production, lighting and AV teams', 'DJs and entertainment providers', 'Venues, hotels and hospitality groups', 'Festivals, concerts and brand activations'].map((name) => (
-            <div className="partner-who-item" key={name}>{name}</div>
-          ))}
+      <section className="partner-section partner-who" aria-labelledby="partner-audience-title">
+        <div className="partner-audience-layout">
+          <div className="partner-audience-intro">
+            <p className="partner-eyebrow">Who we work with</p>
+            <h2 id="partner-audience-title">MADE FOR PEOPLE WHO MAKE EVENTS HAPPEN.</h2>
+            <p>From intimate celebrations to large-scale productions, the best partnerships start with people who understand what makes an event special.</p>
+            <p>We welcome applications from experienced teams and independent professionals. A relevant social profile or portfolio is welcome if you don't have a business website.</p>
+            <div className="partner-audience-detail" aria-hidden="true"><span></span>EVENTS / PEOPLE / EXPERIENCES</div>
+          </div>
+          <div className="partner-audience-list">
+            {audiences.map(({title, description}) => (
+              <div className="partner-audience-item" key={title}>
+                <span className="partner-audience-indicator" aria-hidden="true"></span>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </div>
+                <span className="partner-audience-arrow" aria-hidden="true">↗</span>
+              </div>
+            ))}
+          </div>
         </div>
         <p className="partner-note">Applications are welcome worldwide. Any collaboration depends on suitability, product availability and delivery feasibility for the destination.</p>
-      </section>
-
-      <section className="partner-section partner-range">
-        <div className="partner-section-heading">
-          <p className="partner-eyebrow">Beyond the wristband</p>
-          <h2>MORE WAYS TO COMPLETE THE EXPERIENCE.</h2>
-          <p>LED wristbands are at the heart of WedWow. Depending on the event, our wider accessories range may also be worth considering.</p>
-        </div>
-        <div className="partner-range-grid">
-          <div><img src={glassesPhoto} loading="lazy" alt="Yellow festival sunglasses in the WedWow range" /><h3>Festival sunglasses</h3><p>Bright accessories for celebrations and group moments.</p></div>
-          <div><img src={weddingBandsPhoto} loading="lazy" alt="Team Bride and Team Groom wristbands" /><h3>Wedding wristbands</h3><p>Personal touches for wedding parties and guest groups.</p></div>
-          <div><img src={clubBandsPhoto} loading="lazy" alt="Red and green event entry wristbands" /><h3>Event access wristbands</h3><p>Clear, wearable accessories for entry and event management.</p></div>
-        </div>
       </section>
 
       <section className="partner-section partner-process">
