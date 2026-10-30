@@ -36,14 +36,17 @@ export default function PrivacyPolicy() {
           <div className="terms-section">
             <h2>2. WHAT DATA WE COLLECT</h2>
             <p>
-              When you submit an enquiry through our website, we collect the following
-              information you provide:
+              When you submit a product enquiry or a Partner Programme application
+              through our website, we collect the relevant information you provide:
             </p>
             <p>
               <strong>Contact details</strong> — your first name, last name, and email address.<br />
               <strong>Business details</strong> — company or event name (if provided).<br />
               <strong>Enquiry details</strong> — the product you're interested in, estimated
-              quantity, occasion type, and any additional message or branding requirements.
+              quantity, occasion type, and any additional message or branding requirements.<br />
+              <strong>Partner application details</strong> — the type of partnership you're interested
+              in, business type, country, website or professional portfolio link, event volume,
+              estimated wristband quantities, and any optional message.
             </p>
             <p>
               We do not collect payment card details through our website. Payments are
@@ -59,6 +62,9 @@ export default function PrivacyPolicy() {
             <p>
               <strong>To respond to your enquiry</strong> — we use your name, email, and
               enquiry details to get back to you with a custom quote or to answer your questions.<br />
+              <strong>To review a partner application</strong> — we assess suitability,
+              acknowledge receipt, and contact you about a possible partnership. Applying does not
+              mean you are automatically accepted.<br />
               <strong>To process your order</strong> — if you proceed with an order, your
               details are used to manage and fulfil it.<br />
               <strong>To improve our service</strong> — we may use anonymised information
@@ -92,10 +98,12 @@ export default function PrivacyPolicy() {
               marketing purposes.
             </p>
             <p>
-              Your enquiry data is processed via{' '}
-              <strong>StaticForms</strong>, a third-party form submission service, solely
-              for the purpose of securely routing your message to us. StaticForms acts as
-              a data processor on our behalf and does not use your data for any other purpose.
+              Some general website enquiries are routed through <strong>StaticForms</strong>.
+              Wristband design enquiries and Partner Programme applications use
+              <strong> Resend</strong> to send the submission to our business inbox, and,
+              for partner applications, to send an acknowledgement to the applicant.
+              These services process submitted information on our behalf to support
+              enquiry handling and responses.
             </p>
             <p>
               We may also share your data where required by law or to protect our legal rights.
@@ -175,7 +183,7 @@ export default function PrivacyPolicy() {
               website following any update constitutes your acceptance of the revised policy.
             </p>
             <p>
-              This policy was last updated in June 2026.
+              This policy was last updated in October 2026.
             </p>
           </div>
 
