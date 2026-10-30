@@ -88,7 +88,7 @@ export default async function handler(req, res) {
         !QUANTITIES.has(application.typicalQuantity) ||
         !application.company || !application.contactName ||
         !application.country || !validEmail(application.email || '') ||
-        !validWebsite(application.websiteOrProfile || '') ||
+        (application.websiteOrProfile !== '' && !validWebsite(application.websiteOrProfile || '')) ||
         application.message === null || application.phone === null ||
         data.consent !== true) {
       return res.status(400).json({ success: false, error: 'Please check all required fields and try again.' });
