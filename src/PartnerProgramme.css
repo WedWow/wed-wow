@@ -12,7 +12,7 @@
 .partner-hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); width: 100%; min-width: 0; min-height: min(760px, calc(100svh - 74px)); background: #0a0a0a; padding: 0; }
 .partner-hero-copy { min-width: 0; max-width: 100%; padding: clamp(3rem, 7.5vw, 7.5rem) clamp(1.4rem, 3vw, 4rem) clamp(4rem, 7vw, 6rem) var(--partner-gutter); display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 1; }
 .partner-eyebrow { color: var(--neon); text-transform: uppercase; letter-spacing: .22em; font-size: .72rem; font-weight: 500; line-height: 1.6; margin-bottom: 1.1rem; }
-.partner-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.45rem, 5.8vw, 6.4rem); line-height: .94; letter-spacing: .02em; margin-bottom: 1.6rem; max-width: 100%; overflow-wrap: normal; }
+.partner-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.25rem, 5.5vw, 5.45rem); line-height: .94; letter-spacing: .02em; margin-bottom: 1.6rem; max-width: 100%; overflow-wrap: normal; }
 .partner-hero h1 span { display: block; color: var(--neon); }
 .partner-lead { font-size: clamp(1.4rem, 2.2vw, 2rem); letter-spacing: -.02em; font-weight: 500; line-height: 1.25; margin-bottom: 1rem; }
 .partner-muted { color: #b8b8b4; line-height: 1.8; font-size: clamp(.94rem, 1.2vw, 1.05rem); max-width: 530px; }
@@ -112,7 +112,7 @@
 @media (max-width: 1000px) {
   .partner-hero { min-height: auto; grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
   .partner-hero-copy { padding: 4rem 1.4rem 4rem var(--partner-gutter); }
-  .partner-hero h1 { font-size: clamp(3rem, 5.5vw, 5.3rem); }
+  .partner-hero h1 { font-size: clamp(2.75rem, 5.1vw, 5rem); }
   .partner-process-grid { grid-template-columns: repeat(2,1fr); }
   .partner-audience-layout { grid-template-columns: 1fr; gap: 2.5rem; }
   .partner-audience-intro { position: static; }
@@ -124,7 +124,7 @@
   .partner-page .partner-section { padding: 3.8rem 1.35rem; }
   .partner-hero { display:flex; flex-direction:column; }
   .partner-hero-copy { padding: 3.3rem 1.35rem 2.5rem; }
-  .partner-hero h1 { font-size: clamp(3.3rem, 12vw, 5.4rem); }
+  .partner-hero h1 { font-size: clamp(2.85rem, 10.4vw, 4.8rem); }
   .partner-hero-image { min-height: 280px; height: 48vw; }
   .partner-hero-image:after { background: linear-gradient(0deg,rgba(0,0,0,.45),transparent 55%); }
   .partner-introduction,.partner-apply { grid-template-columns:1fr; gap: 2rem; }
