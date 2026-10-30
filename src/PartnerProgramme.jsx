@@ -256,8 +256,8 @@ export default function PartnerProgramme() {
                   <select id="businessType" name="businessType" value={form.businessType} onChange={update} required><option value="">Select your business type</option>{businessTypes.map((type) => <option key={type} value={type}>{type}</option>)}</select>
                 </Field>
               </div>
-              <Field label="Website, professional social profile or portfolio" id="websiteOrProfile" required help="A company website isn't required. A relevant Instagram, LinkedIn or portfolio link is fine.">
-                <input id="websiteOrProfile" name="websiteOrProfile" type="url" placeholder="https://" maxLength={300} value={form.websiteOrProfile} onChange={update} required />
+              <Field label="Website, professional social profile or portfolio (optional)" id="websiteOrProfile" help="You can leave this blank. If provided, enter a website, Instagram, LinkedIn or portfolio URL.">
+                <input id="websiteOrProfile" name="websiteOrProfile" type="url" placeholder="https://" maxLength={300} value={form.websiteOrProfile} onChange={update} />
               </Field>
               <div className="partner-field-row">
                 <Field label="Events you work on per year" id="eventVolume" required>
