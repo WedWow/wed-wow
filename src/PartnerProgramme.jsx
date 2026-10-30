@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import braceletPhoto from '../Asset/bracelet.png';
 import './PartnerProgramme.css';
 
 const initialForm = {
@@ -128,9 +127,8 @@ export default function PartnerProgramme() {
           <p>Our flagship custom LED wristbands turn a crowd into part of the moment. Guests wear the bracelets while colour and light bring a shared sense of energy to the room, from a wedding entrance or first dance to an event countdown or company celebration.</p>
           <p>Custom branding, quantities, specifications and delivery requirements are discussed for each project, so you can find an approach that makes sense for your event.</p>
         </div>
-        <div className="partner-photo-panel">
-          <img src={braceletPhoto} alt="Custom LED wristband from the WedWow product range" loading="lazy" />
-          <div><strong>Our signature product</strong><span>Custom LED silicone bracelets</span></div>
+        <div className="partner-photo-panel partner-photo-panel--supplied">
+          <img src="/partner-programme-wristbands.webp" alt="Two illuminated custom LED wristbands printed with Make It Unforgettable, above the WedWow brand message" loading="lazy" />
         </div>
       </section>
 

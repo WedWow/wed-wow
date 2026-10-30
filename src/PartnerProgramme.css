@@ -145,3 +145,17 @@
   .partner-form-panel { padding: 1.3rem; }
 }
 @media (prefers-reduced-motion: reduce) { .partner-button { transition:none; } }
+
+/* Show the complete, supplied branded photograph without cutting off its lettering. */
+.partner-introduction .partner-photo-panel--supplied {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 1122 / 890;
+  background: #090909;
+}
+.partner-introduction .partner-photo-panel--supplied img {
+  object-fit: contain;
+}
+.partner-introduction .partner-photo-panel--supplied::after {
+  content: none;
+}
